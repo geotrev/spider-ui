@@ -1,5 +1,5 @@
 import { UpgradedElement, register } from "upgraded-element"
-import style from "./tooltip"
+import style from "./styles"
 
 /**
  * <spider-tooltip position"(inline-start|inline-end|block-start|block-end)">
@@ -96,6 +96,7 @@ class SpiderTooltip extends UpgradedElement {
   render() {
     const position = this.getAttribute("position") || "block-start"
     const isVisible = this.isVisible ? "is-visible" : ""
+
     return `
       <span class="tooltip ${isVisible} ${position}">
         <slot name="trigger"></slot>
