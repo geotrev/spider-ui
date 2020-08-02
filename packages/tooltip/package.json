@@ -1,0 +1,41 @@
+{
+  "name": "@spider-ui/tooltip",
+  "version": "0.1.0",
+  "description": "Bare tooltip web component.",
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "author": "george <hello@geotrev.com>",
+  "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/tooltip#readme",
+  "license": "MIT",
+  "main": "src/index.js",
+  "keywords": [
+    "style",
+    "styles",
+    "css",
+    "sass",
+    "component",
+    "web component",
+    "html",
+    "web",
+    "spider-ui",
+    "tooltip"
+  ],
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geotrev/spider-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/geotrev/spider-ui/issues"
+  }
+}
