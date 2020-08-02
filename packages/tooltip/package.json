@@ -8,7 +8,10 @@
   "author": "george <hello@geotrev.com>",
   "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/tooltip#readme",
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "lib/index.js",
+  "dependencies": {
+    "upgraded-element": "^0.2.0"
+  },
   "keywords": [
     "style",
     "styles",
