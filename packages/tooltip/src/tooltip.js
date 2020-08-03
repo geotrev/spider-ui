@@ -1,12 +1,5 @@
 import { UpgradedElement, register } from "upgraded-element"
-import style from "./styles"
-
-/**
- * <spider-tooltip position"(inline-start|inline-end|block-start|block-end)">
- *  <button slot="trigger">Try me!</button>
- *  <div slot="content">I'm a little tooltip, short and stout.</div>
- * </spider-tooltip>
- */
+import styles from "./styles"
 
 class SpiderTooltip extends UpgradedElement {
   get properties() {
@@ -19,7 +12,7 @@ class SpiderTooltip extends UpgradedElement {
   }
 
   get styles() {
-    return style
+    return styles
   }
 
   constructor() {

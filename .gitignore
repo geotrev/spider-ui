@@ -1,3 +1,4 @@
 node_modules/
 lib/
 lerna-debug.log
+packages/**/public/bundle.js

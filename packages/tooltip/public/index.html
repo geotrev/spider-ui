@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>web-tails components</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <!-- BEGIN TEST CASES -->
+
+    <h2>@spider-ui/tooltip</h2>
+
+    <h3>position</h3>
+    <spider-tooltip>
+      <button slot="trigger">Try me!</button>
+      <div slot="content">
+        Oak's words echoed... "There's a time and place for everything, but not now."
+      </div>
+    </spider-tooltip>
+    <spider-tooltip position="inline-end">
+      <button slot="trigger">Try me!</button>
+      <div slot="content">
+        Oak's words echoed... "There's a time and place for everything, but not now."
+      </div>
+    </spider-tooltip>
+    <spider-tooltip position="block-end">
+      <button slot="trigger">Try me!</button>
+      <div slot="content">
+        Oak's words echoed... "There's a time and place for everything, but not now."
+      </div>
+    </spider-tooltip>
+    <spider-tooltip position="block-start">
+      <button slot="trigger">Try me!</button>
+      <div slot="content">
+        Oak's words echoed... "There's a time and place for everything, but not now."
+      </div>
+    </spider-tooltip>
+
+    <h3>mode</h3>
+    <spider-tooltip>
+      <button slot="trigger">Try me!</button>
+      <div slot="content">
+        Default mode: "light"
+      </div>
+    </spider-tooltip>
+    <spider-tooltip mode="dark">
+      <button slot="trigger">Try me!</button>
+      <div slot="content">
+        Alternate mode: "dark"
+      </div>
+    </spider-tooltip>
+
+    <!-- END TEST CASES -->
+    <script src="bundle.js"></script>
+  </body>
+</html>

@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "description": "Bare tooltip web component.",
   "scripts": {
+    "build": "rm -rf lib && rollup -c",
+    "watch": "rollup -c rollup.config.demo.js -w",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "author": "george <hello@geotrev.com>",
