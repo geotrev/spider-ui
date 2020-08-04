@@ -11,7 +11,7 @@ import postcss from "rollup-plugin-postcss"
 const sass = require("@csstools/postcss-sass")
 const autoprefixer = require("autoprefixer")
 
-export default (packagePath) => {
+export const createDemoConfigFactory = (packagePath) => {
   const PUBLIC_PATH = path.resolve(packagePath, "public")
 
   return {

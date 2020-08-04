@@ -2,7 +2,7 @@
   "name": "@spider-ui/sass",
   "version": "0.1.0",
   "description": "Base styles for Spider UI components.",
-  "author": "george <hello@geotrev.com>",
+  "author": "George Treviranus <hello@geotrev.com>",
   "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/sass#readme",
   "license": "MIT",
   "main": "index.js",
@@ -16,13 +16,6 @@
     "html",
     "web",
     "spider-ui"
-  ],
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
-  "files": [
-    "lib"
   ],
   "repository": {
     "type": "git",

@@ -1,5 +1,5 @@
 import { UpgradedElement, register } from "upgraded-element"
-import styles from "./styles"
+import styles from "./styles.scss"
 
 class SpiderTooltip extends UpgradedElement {
   get properties() {
