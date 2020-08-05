@@ -1,2 +1,2 @@
-import { createBuildConfigFactory } from "../../build/create-rollup-build-factory"
-export default createBuildConfigFactory(__dirname)
+import { rollupBuildConfigFactory } from "../../build/rollup-build-factory"
+export default rollupBuildConfigFactory(__dirname)

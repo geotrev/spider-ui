@@ -1,2 +1,2 @@
-import { createDemoConfigFactory } from "../../build/create-rollup-demo-factory"
-export default createDemoConfigFactory(__dirname)
+import { rollupDemoConfigFactory } from "../../build/rollup-demo-factory"
+export default rollupDemoConfigFactory(__dirname)

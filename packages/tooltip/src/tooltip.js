@@ -1,4 +1,5 @@
 import { UpgradedElement, register } from "upgraded-element"
+import baseStyles from "@spider-ui/sass/index.scss"
 import styles from "./styles.scss"
 
 class SpiderTooltip extends UpgradedElement {
@@ -12,7 +13,7 @@ class SpiderTooltip extends UpgradedElement {
   }
 
   get styles() {
-    return styles
+    return `${baseStyles}${styles}`
   }
 
   constructor() {
@@ -20,8 +21,8 @@ class SpiderTooltip extends UpgradedElement {
     this.rootNode = null
     this.trigger = null
     this.content = null
-    this.handleShow = this.handleShow.bind(this)
-    this.handleHide = this.handleHide.bind(this)
+    this.setVisible = this.setVisible.bind(this)
+    this.setHidden = this.setHidden.bind(this)
     this.handleKeydown = this.handleKeydown.bind(this)
   }
 
@@ -36,25 +37,14 @@ class SpiderTooltip extends UpgradedElement {
     this.content.id = this.elementId
     this.content.setAttribute("role", "tooltip")
 
-    // if initialized as visible, show tooltip
-    if (this.getAttribute("is-visible") === "true") {
-      this.handleShow()
-    }
+    this.setOpenListeners()
   }
 
   elementDidUpdate() {
     if (this.isVisible) {
-      this.trigger.removeEventListener("focus", this.handleShow)
-      this.trigger.removeEventListener("mouseover", this.handleShow)
-      this.trigger.addEventListener("blur", this.handleHide)
-      this.trigger.addEventListener("mouseout", this.handleHide)
-      this.trigger.addEventListener("keydown", this.handleKeydown)
+      this.setCloseListeners()
     } else {
-      this.trigger.removeEventListener("blur", this.handleHide)
-      this.trigger.removeEventListener("mouseout", this.handleHide)
-      this.trigger.addEventListener("focus", this.handleShow)
-      this.trigger.addEventListener("mouseover", this.handleShow)
-      this.trigger.removeEventListener("keydown", this.handleKeydown)
+      this.setOpenListeners()
     }
   }
 
@@ -64,37 +54,54 @@ class SpiderTooltip extends UpgradedElement {
     this.content = null
 
     if (this.isVisible) {
-      this.trigger.removeEventListener("blur", this.handleHide)
-      this.trigger.removeEventListener("mouseout", this.handleHide)
+      this.trigger.removeEventListener("blur", this.setHidden)
+      this.trigger.removeEventListener("mouseout", this.setHidden)
     } else {
-      this.trigger.removeEventListener("focus", this.handleShow)
-      this.trigger.removeEventListener("mouseover", this.handleShow)
+      this.trigger.removeEventListener("focus", this.setVisible)
+      this.trigger.removeEventListener("mouseover", this.setVisible)
     }
+  }
+
+  setOpenListeners() {
+    this.trigger.removeEventListener("blur", this.setHidden)
+    this.trigger.removeEventListener("mouseout", this.setHidden)
+    this.trigger.addEventListener("focus", this.setVisible)
+    this.trigger.addEventListener("mouseover", this.setVisible)
+    this.trigger.removeEventListener("keydown", this.handleKeydown)
+  }
+
+  setCloseListeners() {
+    this.trigger.removeEventListener("focus", this.setVisible)
+    this.trigger.removeEventListener("mouseover", this.setVisible)
+    this.trigger.addEventListener("blur", this.setHidden)
+    this.trigger.addEventListener("mouseout", this.setHidden)
+    this.trigger.addEventListener("keydown", this.handleKeydown)
   }
 
   handleKeydown(event) {
     if (this.isVisible && event.key === "Escape") {
-      this.handleHide()
+      this.setHidden()
     }
   }
 
-  handleShow() {
+  setVisible() {
     this.isVisible = true
   }
 
-  handleHide() {
+  setHidden() {
     this.isVisible = false
   }
 
   render() {
-    const position = this.getAttribute("position") || "block-start"
-    const isVisible = this.isVisible ? "is-visible" : ""
+    const positionValue = this.getAttribute("position")
+    const position = positionValue ? " " + positionValue : " block-start"
+    const isVisible = this.isVisible ? " is-visible" : ""
 
     return `
-      <span class="tooltip ${isVisible} ${position}">
+      <div class="tooltip${isVisible}${position}">
         <slot name="trigger"></slot>
         <slot name="content"></slot>
-      </span>
+      </div>
     `
   }
 }

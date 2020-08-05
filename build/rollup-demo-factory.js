@@ -11,11 +11,11 @@ import postcss from "rollup-plugin-postcss"
 const sass = require("@csstools/postcss-sass")
 const autoprefixer = require("autoprefixer")
 
-export const createDemoConfigFactory = (packagePath) => {
+export const rollupDemoConfigFactory = (packagePath) => {
   const PUBLIC_PATH = path.resolve(packagePath, "public")
 
   return {
-    input: path.resolve(packagePath, "src/components/index.js"),
+    input: path.resolve(packagePath, "src/index.js"),
     output: {
       file: path.resolve(packagePath, "public/bundle.js"),
       format: "iife",
@@ -34,11 +34,11 @@ export const createDemoConfigFactory = (packagePath) => {
         watch: PUBLIC_PATH,
       }),
       postcss({
-        plugins: [sass, autoprefixer],
+        plugins: [autoprefixer],
         modules: false,
         extract: false,
         inject: false,
-        minimize: true,
+        minimize: false,
       }),
     ],
   }
