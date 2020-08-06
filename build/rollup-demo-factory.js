@@ -12,12 +12,14 @@ const sass = require("@csstools/postcss-sass")
 const autoprefixer = require("autoprefixer")
 
 export const rollupDemoConfigFactory = (packagePath) => {
-  const PUBLIC_PATH = path.resolve(packagePath, "public")
+  const getPath = (target) => path.resolve(packagePath, target || "")
+
+  const PUBLIC_PATH = getPath("public")
 
   return {
-    input: path.resolve(packagePath, "src/index.js"),
+    input: getPath("src/index.js"),
     output: {
-      file: path.resolve(packagePath, "public/bundle.js"),
+      file: getPath("public/bundle.js"),
       format: "iife",
     },
     plugins: [

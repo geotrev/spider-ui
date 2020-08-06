@@ -2,3 +2,32 @@
   position: relative;
   display: inline-block;
 }
+
+::slotted([slot="content"]) {
+  padding: 4px 6px;
+  border-radius: 4px;
+  border: 1px solid #cccccc;
+  background: #ffffff;
+  position: absolute;
+  display: block;
+  opacity: 0;
+  transition: opacity ease-out 0.3s;
+  pointer-events: none;
+  word-wrap: break-word;
+  white-space: nowrap;
+  text-align: center;
+  z-index: 1500;
+  color: #333333;
+  font-size: 14px;
+
+  .is-dark & {
+    border: none;
+    background: #333333;
+    color: #efefef;
+  }
+
+  .is-visible & {
+    pointer-events: auto;
+    opacity: 1;
+  }
+}

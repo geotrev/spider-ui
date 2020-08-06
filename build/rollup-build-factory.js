@@ -12,8 +12,10 @@ const autoprefixer = require("autoprefixer")
 const MODULE_TYPES = ["esm", "cjs"]
 
 export const rollupBuildConfigFactory = (packagePath) => {
+  const getPath = (target) => path.resolve(packagePath, target || "")
+
   // Get license banner
-  const banner = require(path.resolve(packagePath, "../../bin/banner"))
+  const banner = require(getPath("../../bin/banner"))
 
   // Get the folder name, e.g. "tooltip"
   const pathParts = packagePath.split("/")
@@ -34,7 +36,7 @@ export const rollupBuildConfigFactory = (packagePath) => {
   ]
 
   // Input
-  const input = path.resolve(packagePath, "src/index.js")
+  const input = getPath("src/index.js")
   const external = ["upgraded-element"]
 
   // Plugins
@@ -54,7 +56,7 @@ export const rollupBuildConfigFactory = (packagePath) => {
   // Outputs
   const output = MODULE_TYPES.map((format) => ({
     format,
-    file: path.resolve(packagePath, `lib/index.${format}.js`),
+    file: getPath(`lib/index.${format}.js`),
     sourcemap: true,
     banner: banner(__dirname, COMPONENT_NAME),
     name: PACKAGE_NAME,

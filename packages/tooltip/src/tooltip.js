@@ -97,11 +97,13 @@ class SpiderTooltip extends UpgradedElement {
 
   render() {
     const positionValue = this.getAttribute("position")
-    const position = positionValue ? " " + positionValue : " block-start"
+    const modeValue = this.getAttribute("mode")
+    const position = positionValue ? " is-" + positionValue : " is-block-start"
+    const mode = modeValue ? " is-" + modeValue : " is-light"
     const isVisible = this.isVisible ? " is-visible" : ""
 
     return `
-      <div class="tooltip${isVisible}${position}">
+      <div class="tooltip${isVisible}${position}${mode}">
         <slot name="trigger"></slot>
         <slot name="content"></slot>
       </div>
