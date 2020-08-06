@@ -4,8 +4,7 @@
   "description": "Bare tooltip web component.",
   "scripts": {
     "build": "rm -rf lib && rollup -c rollup.config.build.js",
-    "watch": "rollup -c rollup.config.demo.js -w",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "watch": "rollup -c rollup.config.demo.js -w"
   },
   "author": "George Treviranus <hello@geotrev.com>",
   "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/tooltip#readme",
@@ -13,7 +12,7 @@
   "main": "lib/index.cjs.js",
   "module": "lib/index.esm.js",
   "dependencies": {
-    "upgraded-element": "^0.2.0",
+    "upgraded-element": "^0.2.1",
     "@spider-ui/sass": "^0.1.0"
   },
   "devDependencies": {
@@ -52,7 +51,7 @@
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "lib/*.{js,map}"
   ],
   "publishConfig": {
     "access": "public"
