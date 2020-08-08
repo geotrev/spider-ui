@@ -31,8 +31,16 @@
   pointer-events: none;
 }
 
+@mixin pointer--auto {
+  pointer-events: auto;
+}
+
 @mixin opacity--0 {
   opacity: 0;
+}
+
+@mixin opacity--1 {
+  opacity: 1;
 }
 
 // Arrows for tooltips and dropdowns
