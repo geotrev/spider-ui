@@ -43,14 +43,7 @@
   opacity: 1;
 }
 
-// Arrows for tooltips and dropdowns
-
-// this mixin is used for arrow mixins/CSS below and in src/scss/components/_dropdown.scss
-@mixin with-arrow-enabled {
-  &:not(.has-no-arrow) {
-    @content;
-  }
-}
+// Arrows for popover elements
 
 // These values calculate a consistent arrow fill (inner) and arrow border (outer),
 // given any value of $global-arrow-size from _config.scss
@@ -68,90 +61,82 @@ $arrow-border-position: $global-arrow-size * -2;
 }
 
 @mixin create-up-arrow($edge-offset, $fill-color, $border-color) {
-  @include with-arrow-enabled {
-    &::after {
-      @include create-arrow-base-styles;
-      @include create-flow-property("left", $edge-offset);
-      @include create-flow-property("right", auto);
-      top: $arrow-fill-position;
-      bottom: auto;
-      border-bottom: $global-arrow-size solid $fill-color;
-    }
+  &::after {
+    @include create-arrow-base-styles;
+    left: $edge-offset;
+    right: auto;
+    top: $arrow-fill-position;
+    bottom: auto;
+    border-bottom: $global-arrow-size solid $fill-color;
+  }
 
-    &::before {
-      @include create-arrow-base-styles;
-      @include create-flow-property("left", $edge-offset);
-      @include create-flow-property("right", auto);
-      top: $arrow-border-position;
-      bottom: auto;
-      border-bottom: $global-arrow-size solid $border-color;
-    }
+  &::before {
+    @include create-arrow-base-styles;
+    left: $edge-offset;
+    right: auto;
+    top: $arrow-border-position;
+    bottom: auto;
+    border-bottom: $global-arrow-size solid $border-color;
   }
 }
 
 @mixin create-down-arrow($edge-offset, $fill-color, $border-color) {
-  @include with-arrow-enabled {
-    &::after {
-      @include create-arrow-base-styles;
-      @include create-flow-property("left", $edge-offset);
-      @include create-flow-property("right", auto);
-      bottom: $arrow-fill-position;
-      top: auto;
-      border-top: $global-arrow-size solid $fill-color;
-    }
+  &::after {
+    @include create-arrow-base-styles;
+    left: $edge-offset;
+    right: auto;
+    bottom: $arrow-fill-position;
+    top: auto;
+    border-top: $global-arrow-size solid $fill-color;
+  }
 
-    &::before {
-      @include create-arrow-base-styles;
-      @include create-flow-property("left", $edge-offset);
-      @include create-flow-property("right", auto);
-      bottom: $arrow-border-position;
-      top: auto;
-      border-top: $global-arrow-size solid $border-color;
-    }
+  &::before {
+    @include create-arrow-base-styles;
+    left: $edge-offset;
+    right: auto;
+    bottom: $arrow-border-position;
+    top: auto;
+    border-top: $global-arrow-size solid $border-color;
   }
 }
 
 @mixin create-right-arrow($edge-offset, $fill-color, $border-color) {
-  @include with-arrow-enabled {
-    &::after {
-      @include create-arrow-base-styles;
-      @include create-flow-property("border-left", $global-arrow-size solid $fill-color);
-      @include create-flow-property("right", $arrow-fill-position);
-      @include create-flow-property("left", auto);
-      top: $edge-offset;
-      bottom: auto;
-    }
+  &::after {
+    @include create-arrow-base-styles;
+    border-left: $global-arrow-size solid $fill-color;
+    right: $arrow-fill-position;
+    left: auto;
+    top: $edge-offset;
+    bottom: auto;
+  }
 
-    &::before {
-      @include create-arrow-base-styles;
-      @include create-flow-property("border-left", $global-arrow-size solid $border-color);
-      @include create-flow-property("right", $arrow-border-position);
-      @include create-flow-property("left", auto);
-      top: $edge-offset;
-      bottom: auto;
-    }
+  &::before {
+    @include create-arrow-base-styles;
+    border-left: $global-arrow-size solid $border-color;
+    right: $arrow-border-position;
+    left: auto;
+    top: $edge-offset;
+    bottom: auto;
   }
 }
 
 @mixin create-left-arrow($edge-offset, $fill-color, $border-color) {
-  @include with-arrow-enabled {
-    &::after {
-      @include create-arrow-base-styles;
-      @include create-flow-property("border-right", $global-arrow-size solid $fill-color);
-      @include create-flow-property("left", $arrow-fill-position);
-      @include create-flow-property("right", auto);
-      top: $edge-offset;
-      bottom: auto;
-    }
+  &::after {
+    @include create-arrow-base-styles;
+    border-right: $global-arrow-size solid $fill-color;
+    left: $arrow-fill-position;
+    right: auto;
+    top: $edge-offset;
+    bottom: auto;
+  }
 
-    &::before {
-      @include create-arrow-base-styles;
-      @include create-flow-property("border-right", $global-arrow-size solid $border-color);
-      @include create-flow-property("left", $arrow-border-position);
-      @include create-flow-property("right", auto);
-      top: $edge-offset;
-      bottom: auto;
-    }
+  &::before {
+    @include create-arrow-base-styles;
+    border-right: $global-arrow-size solid $border-color;
+    left: $arrow-border-position;
+    right: auto;
+    top: $edge-offset;
+    bottom: auto;
   }
 }
 
