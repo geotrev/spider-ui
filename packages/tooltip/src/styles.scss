@@ -1,5 +1,4 @@
-@use "@spider-ui/sass/variables" as *;
-@use "@spider-ui/sass/mixins" as *;
+@use "@spider-ui/sass/helpers" as *;
 @use "@spider-ui/sass";
 
 .tooltip {
@@ -8,19 +7,17 @@
 }
 
 ::slotted([slot="content"]) {
-  @include pointer--none;
-  @include opacity--0;
-
-  padding: 4px 6px;
-  border-radius: 4px;
+  font-size: $tooltip-font-size;
+  padding: $tooltip-padding;
+  margin: $tooltip-margin;
+  border-radius: $tooltip-border-radius;
   position: absolute;
   display: block;
-  transition: opacity ease-out 0.3s;
+  transition: opacity $tooltip-transition;
   word-wrap: break-word;
   white-space: nowrap;
   text-align: center;
-  z-index: 1500;
-  font-size: 14px;
+  z-index: $z-index-tooltip;
 
   // modes
 
@@ -38,9 +35,12 @@
 
   // visibility
 
+  .hidden & {
+    @include overlay--hidden;
+  }
+
   .visible & {
-    @include pointer--auto;
-    @include opacity--1;
+    @include overlay--visible;
   }
 
   // position

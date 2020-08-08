@@ -18,7 +18,7 @@
 
     <h2>@spider-ui/tooltip</h2>
 
-    <h3>position</h3>
+    <h3>dark</h3>
     <spider-tooltip>
       <button slot="trigger">block-start (default)</button>
       <div slot="content">Oak's words echoed...</div>
@@ -36,23 +36,57 @@
       <div slot="content">Oak's words echoed...</div>
     </spider-tooltip>
 
-    <h3>mode</h3>
-    <spider-tooltip>
-      <button slot="trigger">dark (default)</button>
+    <h3>light</h3>
+    <spider-tooltip mode="light">
+      <button slot="trigger">block-start (default)</button>
       <div slot="content">Oak's words echoed...</div>
     </spider-tooltip>
-    <spider-tooltip mode="light">
-      <button slot="trigger">light</button>
+    <spider-tooltip mode="light" position="block-end">
+      <button slot="trigger">block-end</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip mode="light" position="inline-start">
+      <button slot="trigger">inline-start</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip mode="light" position="inline-end">
+      <button slot="trigger">inline-end</button>
       <div slot="content">Oak's words echoed...</div>
     </spider-tooltip>
 
-    <h3>arrow</h3>
-    <spider-tooltip>
-      <button slot="trigger">show arrow (default)</button>
+    <h3>hide arrow (dark)</h3>
+    <spider-tooltip hide-arrow="true">
+      <button slot="trigger">block-start (default)</button>
       <div slot="content">Oak's words echoed...</div>
     </spider-tooltip>
-    <spider-tooltip hide-arrow="true">
-      <button slot="trigger">hide arrow</button>
+    <spider-tooltip hide-arrow="true" position="block-end">
+      <button slot="trigger">block-end</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip hide-arrow="true" position="inline-start">
+      <button slot="trigger">inline-start</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip hide-arrow="true" position="inline-end">
+      <button slot="trigger">inline-end</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+
+    <h3>hide arrow (light)</h3>
+    <spider-tooltip mode="light" hide-arrow="true">
+      <button slot="trigger">block-start (default)</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip mode="light" hide-arrow="true" position="block-end">
+      <button slot="trigger">block-end</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip mode="light" hide-arrow="true" position="inline-start">
+      <button slot="trigger">inline-start</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip mode="light" hide-arrow="true" position="inline-end">
+      <button slot="trigger">inline-end</button>
       <div slot="content">Oak's words echoed...</div>
     </spider-tooltip>
 

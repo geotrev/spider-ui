@@ -22,6 +22,7 @@ const Modes = {
 const ClassNames = {
   ARROW: "arrow",
   VISIBLE: "visible",
+  HIDDEN: "hidden",
 }
 
 class SpiderTooltip extends UpgradedElement {
@@ -48,7 +49,7 @@ class SpiderTooltip extends UpgradedElement {
       : Positions.BLOCK_START
     const mode = Object.values(Modes).includes(modeValue) ? modeValue : Modes.DARK
     const hasArrow = hideArrowValue !== "true" ? ClassNames.ARROW : ""
-    const isVisible = this.isVisible ? ClassNames.VISIBLE : ""
+    const isVisible = this.isVisible ? ClassNames.VISIBLE : ClassNames.HIDDEN
 
     return { position, mode, hasArrow, isVisible }
   }

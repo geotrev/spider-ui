@@ -1,0 +1,5 @@
+@use "variables" as *;
+
+@function px-to-em($numerator, $divisor: $global-font-size) {
+  @return #{$numerator / $divisor}em;
+}
