@@ -5,10 +5,9 @@ import path from "path"
 import commonjs from "@rollup/plugin-commonjs"
 import resolve from "@rollup/plugin-node-resolve"
 import babel from "@rollup/plugin-babel"
-import postcss from "rollup-plugin-postcss"
 import { terser } from "rollup-plugin-terser"
+import scss from "rollup-plugin-scss"
 
-const autoprefixer = require("autoprefixer")
 const MODULE_TYPES = ["esm", "cjs"]
 
 export const rollupBuildConfigFactory = (packagePath) => {
@@ -22,18 +21,22 @@ export const rollupBuildConfigFactory = (packagePath) => {
   const COMPONENT_NAME = pathParts[pathParts.length - 1]
   const PACKAGE_NAME = `@spider-ui/${COMPONENT_NAME}`
 
-  const outputPlugins = [
-    terser({
-      output: {
-        comments: (_, comment) => {
-          const { value, type } = comment
-          if (type === "comment2") {
-            return /@preserve|@license|@cc_on/i.test(value)
-          }
+  let outputPlugins = []
+
+  if (process.env.NODE_ENV === "publish") {
+    outputPlugins.push(
+      terser({
+        output: {
+          comments: (_, comment) => {
+            const { value, type } = comment
+            if (type === "comment2") {
+              return /@preserve|@license|@cc_on/i.test(value)
+            }
+          },
         },
-      },
-    }),
-  ]
+      })
+    )
+  }
 
   // Input
   const input = getPath("src/index.js")
@@ -41,15 +44,18 @@ export const rollupBuildConfigFactory = (packagePath) => {
 
   // Plugins
   const plugins = [
-    babel({ babelHelpers: "bundled", presets: ["@babel/preset-env"] }),
     resolve(),
     commonjs(),
-    postcss({
-      plugins: [autoprefixer],
-      modules: false,
-      extract: false,
-      inject: false,
-      minimize: true,
+    babel({
+      babelHelpers: "bundled",
+      presets: ["@babel/preset-env"],
+    }),
+    scss({
+      output: false,
+      sass: require("sass"),
+      outputStyle: "compressed",
+      includePaths: ["node_modules/"],
+      watch: "src/",
     }),
   ]
 

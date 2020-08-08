@@ -1,7 +1,66 @@
+// @use "../../sass/variables" as *;
+@use "@spider-ui/sass/mixins" as *;
+@use "@spider-ui/sass";
+
 .tooltip {
   position: relative;
   display: inline-block;
 }
+
+// .block-start {
+//   @include mixins.create-flow-property("left", 0); // This is a fallback.
+//   bottom: 100%;
+
+//   @include mixins.create-down-arrow(
+//     vars.$tooltip-arrow-offset,
+//     vars.$tooltip-arrow-fill-color,
+//     vars.$tooltip-arrow-border-color
+//   );
+// }
+
+// .inline-end {
+//   @include mixins.create-flow-property("left", 100%);
+//   @include mixins.create-flow-property("margin-left", vars.$global-arrow-size);
+//   margin-top: 0;
+//   margin-bottom: 0;
+//   bottom: auto;
+//   top: 0; // This is a fallback.
+
+//   @include mixins.create-left-arrow(
+//     vars.$tooltip-arrow-offset,
+//     vars.$tooltip-arrow-fill-color,
+//     vars.$tooltip-arrow-border-color
+//   );
+// }
+
+// .inline-start {
+//   @include mixins.create-flow-property("right", 100%);
+//   @include mixins.create-flow-property("left", auto);
+//   @include mixins.create-flow-property("margin-right", vars.$global-arrow-size);
+//   margin-top: 0;
+//   margin-bottom: 0;
+//   bottom: auto;
+//   top: 0; // This is a fallback.
+
+//   @include mixins.create-right-arrow(
+//     vars.$tooltip-arrow-offset,
+//     vars.$tooltip-arrow-fill-color,
+//     vars.$tooltip-arrow-border-color
+//   );
+// }
+
+// .block-end {
+//   @include mixins.create-flow-property("left", 0); // This is a fallback.
+//   top: 100%;
+//   margin: -#{vars.$global-arrow-size} 0 0 0;
+//   bottom: auto;
+
+//   @include mixins.create-up-arrow(
+//     vars.$tooltip-arrow-offset,
+//     vars.$tooltip-arrow-fill-color,
+//     vars.$tooltip-arrow-border-color
+//   );
+// }
 
 ::slotted([slot="content"]) {
   padding: 4px 6px;
@@ -27,7 +86,7 @@
   }
 
   .is-visible & {
-    pointer-events: auto;
-    opacity: 1;
+    @include pointer--none;
+    @include opacity--0;
   }
 }

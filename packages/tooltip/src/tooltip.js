@@ -1,5 +1,4 @@
 import { UpgradedElement, register } from "upgraded-element"
-import baseStyles from "@spider-ui/sass/index.scss"
 import styles from "./styles.scss"
 
 class SpiderTooltip extends UpgradedElement {
@@ -13,7 +12,7 @@ class SpiderTooltip extends UpgradedElement {
   }
 
   static get styles() {
-    return `${baseStyles}${styles}`
+    return styles
   }
 
   constructor() {
@@ -94,6 +93,35 @@ class SpiderTooltip extends UpgradedElement {
   handleClose() {
     this.isVisible = false
   }
+
+  // _alignTooltip(property) {
+  //   const triggerSize = this._getSize(this._activeTrigger, property)
+  //   const tooltipSize = this._getSize(this._activeTooltipBox, property)
+  //   const triggerIsBigger = triggerSize > tooltipSize
+
+  //   const offset = triggerIsBigger
+  //     ? (triggerSize - tooltipSize) / 2
+  //     : (tooltipSize - triggerSize) / -2
+
+  //   if (property === CssProperties.HEIGHT) {
+  //     this._activeTooltipBox.style[CssProperties.TOP] = `${offset}px`
+  //   } else {
+  //     this._activeTooltipBox.style[CssProperties.LEFT] = `${offset}px`
+  //   }
+  // }
+
+  // _getSize(element, property) {
+  //   return Math.floor(element.getBoundingClientRect()[property])
+  // }
+
+  // _hasInlineClass() {
+  //   const classList = this._activeTooltipBox.classList
+
+  //   return (
+  //     classList.contains(Selectors.DROP_INLINE_START_CLASS) ||
+  //     classList.contains(Selectors.DROP_INLINE_END_CLASS)
+  //   )
+  // }
 
   render() {
     const positionValue = this.getAttribute("position")
