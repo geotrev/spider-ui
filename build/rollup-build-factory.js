@@ -55,7 +55,6 @@ export const rollupBuildConfigFactory = (packagePath) => {
       sass: require("sass"),
       outputStyle: "compressed",
       includePaths: [getPath("node_modules/")],
-      watch: getPath("src"),
     }),
   ]
 

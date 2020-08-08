@@ -1,6 +1,29 @@
 import { UpgradedElement, register } from "upgraded-element"
 import styles from "./styles.scss"
 
+const Attributes = {
+  POSITION: "position",
+  MODE: "mode",
+  HIDE_ARROW: "hide-arrow",
+}
+
+const Positions = {
+  BLOCK_START: "block-start",
+  BLOCK_END: "block-end",
+  INLINE_START: "inline-start",
+  INLINE_END: "inline-end",
+}
+
+const Modes = {
+  DARK: "dark",
+  LIGHT: "light",
+}
+
+const ClassNames = {
+  ARROW: "arrow",
+  VISIBLE: "visible",
+}
+
 class SpiderTooltip extends UpgradedElement {
   static get properties() {
     return {
@@ -13,6 +36,21 @@ class SpiderTooltip extends UpgradedElement {
 
   static get styles() {
     return styles
+  }
+
+  get classNames() {
+    const hideArrowValue = this.getAttribute(Attributes.HIDE_ARROW)
+    const positionValue = this.getAttribute(Attributes.POSITION)
+    const modeValue = this.getAttribute(Attributes.MODE)
+
+    const position = Object.values(Positions).includes(positionValue)
+      ? positionValue
+      : Positions.BLOCK_START
+    const mode = Object.values(Modes).includes(modeValue) ? modeValue : Modes.DARK
+    const hasArrow = hideArrowValue !== "true" ? ClassNames.ARROW : ""
+    const isVisible = this.isVisible ? ClassNames.VISIBLE : ""
+
+    return { position, mode, hasArrow, isVisible }
   }
 
   constructor() {
@@ -50,6 +88,12 @@ class SpiderTooltip extends UpgradedElement {
 
   elementDidUpdate() {
     if (this.isVisible) {
+      if (this.isInlineTooltip()) {
+        this.alignTooltip("height")
+      } else {
+        this.alignTooltip("width")
+      }
+
       this.setCloseListeners()
       this.removeOpenListeners()
     } else {
@@ -94,44 +138,36 @@ class SpiderTooltip extends UpgradedElement {
     this.isVisible = false
   }
 
-  // _alignTooltip(property) {
-  //   const triggerSize = this._getSize(this._activeTrigger, property)
-  //   const tooltipSize = this._getSize(this._activeTooltipBox, property)
-  //   const triggerIsBigger = triggerSize > tooltipSize
+  alignTooltip(dimension) {
+    const triggerSize = this.getSize(this.trigger, dimension)
+    const tooltipSize = this.getSize(this.content, dimension)
+    const triggerIsBigger = triggerSize > tooltipSize
 
-  //   const offset = triggerIsBigger
-  //     ? (triggerSize - tooltipSize) / 2
-  //     : (tooltipSize - triggerSize) / -2
+    const offset = triggerIsBigger
+      ? (triggerSize - tooltipSize) / 2
+      : (tooltipSize - triggerSize) / -2
 
-  //   if (property === CssProperties.HEIGHT) {
-  //     this._activeTooltipBox.style[CssProperties.TOP] = `${offset}px`
-  //   } else {
-  //     this._activeTooltipBox.style[CssProperties.LEFT] = `${offset}px`
-  //   }
-  // }
+    if (dimension === "height") {
+      this.content.style.top = `${offset}px`
+    } else {
+      this.content.style.left = `${offset}px`
+    }
+  }
 
-  // _getSize(element, property) {
-  //   return Math.floor(element.getBoundingClientRect()[property])
-  // }
+  getSize(element, property) {
+    return Math.floor(element.getBoundingClientRect()[property])
+  }
 
-  // _hasInlineClass() {
-  //   const classList = this._activeTooltipBox.classList
-
-  //   return (
-  //     classList.contains(Selectors.DROP_INLINE_START_CLASS) ||
-  //     classList.contains(Selectors.DROP_INLINE_END_CLASS)
-  //   )
-  // }
+  isInlineTooltip() {
+    const position = this.getAttribute(Attributes.POSITION)
+    return [Positions.INLINE_START, Positions.INLINE_END].includes(position)
+  }
 
   render() {
-    const positionValue = this.getAttribute("position")
-    const modeValue = this.getAttribute("mode")
-    const position = positionValue ? " is-" + positionValue : " is-block-start"
-    const mode = modeValue ? " is-" + modeValue : " is-light"
-    const isVisible = this.isVisible ? " is-visible" : ""
+    const { position, mode, hasArrow, isVisible } = this.classNames
 
     return `
-      <div class="tooltip${isVisible}${position}${mode}">
+      <div class="tooltip ${isVisible} ${position} ${mode} ${hasArrow}">
         <slot name="trigger"></slot>
         <slot name="content"></slot>
       </div>

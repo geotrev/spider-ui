@@ -3,7 +3,8 @@
   "author": "George Treviranus <hello@geotrev.com>",
   "private": true,
   "scripts": {
-    "lbs": "lerna bootstrap --hoist"
+    "lbs": "lerna bootstrap --hoist",
+    "watch:tooltip": "cd packages/tooltip && npm run watch"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

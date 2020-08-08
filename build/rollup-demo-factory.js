@@ -37,7 +37,7 @@ export const rollupDemoConfigFactory = (packagePath) => {
         sass: require("sass"),
         outputStyle: "compressed",
         includePaths: [getPath("node_modules/")],
-        watch: getPath("src"),
+        watch: [getPath("src"), getPath("../sass")],
       }),
     ],
   }

@@ -13,8 +13,7 @@
   "main": "lib/index.cjs.js",
   "module": "lib/index.esm.js",
   "dependencies": {
-    "upgraded-element": "^0.2.1",
-    "@spider-ui/sass": "^0.1.0"
+    "upgraded-element": "^0.2.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.11.0",
@@ -22,6 +21,7 @@
     "@rollup/plugin-babel": "^5.1.0",
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-node-resolve": "^8.4.0",
+    "@spider-ui/sass": "^0.1.0",
     "autoprefixer": "^9.8.6",
     "babel-jest": "^26.2.2",
     "enzyme": "^3.11.0",
