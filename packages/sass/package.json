@@ -7,6 +7,10 @@
   "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/sass#readme",
   "license": "MIT",
   "main": "index.js",
+  "scripts": {
+    "test": "exit 0",
+    "build": "exit 0"
+  },
   "keywords": [
     "style",
     "styles",

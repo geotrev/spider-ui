@@ -5,7 +5,7 @@ A simple tooltip component.
 TODO:
 
 - [ ] Add mouseover/mouseout delay to tooltip content.
-- [ ] Add custom stylesheet support
+- [ ] Add custom stylesheet support.
 
 ## Usage
 
@@ -54,6 +54,14 @@ Then use it:
 
 ## Slots
 
+### trigger
+
+The trigger element for the tooltip. This can be any element, but it's recommended to use a focusable element (e.g., a `button`) for better accessibility.
+
+### content
+
+The content of the tooltip. It's recommended to use a basic `div` or `span` as the slotted element.
+
 ## Support
 
 It's recommended to use Spider UI web components in a modern browser stack matrix. Out of the box, IE 11 is not supported.
@@ -62,7 +70,10 @@ There will likely be a polyfilled version in the future.
 
 `@spider-ui/tooltip` relies on these JavaScript features:
 
-- `Object.values`
 - Symbols
 - Custom Elements
 - Shadow DOM
+
+## Contribute
+
+[Learn how to contribute.](https://github.com/geotrev/spider-ui/blob/master/README.md#contribute)

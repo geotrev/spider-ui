@@ -3,9 +3,11 @@
   "author": "George Treviranus <hello@geotrev.com>",
   "private": true,
   "scripts": {
-    "lbs": "lerna bootstrap --hoist",
-    "watch:tooltip": "cd packages/tooltip && npm run watch",
-    "build:tooltip": "cd packages/tooltip && npm run build"
+    "test:all": "lerna exec -- npm test",
+    "build:all": "lerna exec -- npm run build",
+    "build": "cd packages/$P && npm run build",
+    "watch": "cd packages/$P && npm run watch",
+    "test": "cd packages/$P && npm test"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
