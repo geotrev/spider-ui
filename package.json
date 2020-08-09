@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "lbs": "lerna bootstrap --hoist",
-    "watch:tooltip": "cd packages/tooltip && npm run watch"
+    "watch:tooltip": "cd packages/tooltip && npm run watch",
+    "build:tooltip": "cd packages/tooltip && npm run build"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

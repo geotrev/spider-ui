@@ -5,7 +5,8 @@
   "scripts": {
     "build": "rollup -c rollup.config.build.js",
     "build:publish": "NODE_ENV=publish rollup -c rollup.config.build.js",
-    "watch": "rollup -c rollup.config.demo.js -w"
+    "watch": "rollup -c rollup.config.demo.js -w",
+    "prepublishOnly": "rm -rf lib && npm run build:publish"
   },
   "author": "George Treviranus <hello@geotrev.com>",
   "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/tooltip#readme",

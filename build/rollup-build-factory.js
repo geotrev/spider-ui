@@ -10,14 +10,14 @@ import scss from "rollup-plugin-scss"
 
 const MODULE_TYPES = ["esm", "cjs"]
 
-export const rollupBuildConfigFactory = (packagePath) => {
-  const getPath = (target) => path.resolve(packagePath, target || "")
+export const rollupBuildConfigFactory = () => {
+  const getPath = (target) => path.resolve(__dirname, target || "")
 
   // Get license banner
   const banner = require(getPath("../../bin/banner"))
 
   // Get the folder name, e.g. "tooltip"
-  const pathParts = packagePath.split("/")
+  const pathParts = getPath().split("/")
   const COMPONENT_NAME = pathParts[pathParts.length - 1]
   const PACKAGE_NAME = `@spider-ui/${COMPONENT_NAME}`
 
