@@ -1,2 +1,3 @@
 node_modules/ 
-lib/
+packages/**/lib/
+packages/**/public/bundle.js

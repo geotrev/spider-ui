@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Spider UI Demo</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <style>
+      html {
+        font-family: sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- BEGIN TEST CASES -->
+
+    <h2>@spider-ui/tooltip</h2>
+
+    <h3>dark</h3>
+    <spider-tooltip>
+      <button slot="trigger">block-start (default)</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip position="block-end">
+      <button slot="trigger">block-end</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip position="inline-start">
+      <button slot="trigger">inline-start</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip position="inline-end">
+      <button slot="trigger">inline-end</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+
+    <h3>light</h3>
+    <spider-tooltip mode="light">
+      <button slot="trigger">block-start (default)</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip mode="light" position="block-end">
+      <button slot="trigger">block-end</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip mode="light" position="inline-start">
+      <button slot="trigger">inline-start</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip mode="light" position="inline-end">
+      <button slot="trigger">inline-end</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+
+    <h3>hide arrow (dark)</h3>
+    <spider-tooltip hide-arrow="true">
+      <button slot="trigger">block-start (default)</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip hide-arrow="true" position="block-end">
+      <button slot="trigger">block-end</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip hide-arrow="true" position="inline-start">
+      <button slot="trigger">inline-start</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip hide-arrow="true" position="inline-end">
+      <button slot="trigger">inline-end</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+
+    <h3>hide arrow (light)</h3>
+    <spider-tooltip mode="light" hide-arrow="true">
+      <button slot="trigger">block-start (default)</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip mode="light" hide-arrow="true" position="block-end">
+      <button slot="trigger">block-end</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip mode="light" hide-arrow="true" position="inline-start">
+      <button slot="trigger">inline-start</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip mode="light" hide-arrow="true" position="inline-end">
+      <button slot="trigger">inline-end</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+
+    <!-- END TEST CASES -->
+    <script src="bundle.js"></script>
+  </body>
+</html>

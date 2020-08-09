@@ -1,0 +1,32 @@
+$global-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,
+  Cantarell, "Helvetica Neue", sans-serif !default;
+$global-font-serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida,
+  "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif !default;
+$global-font-monospace: Consolas, "Lucida Console", Monaco, "Courier New", Courier, monospace !default;
+$global-font-weight-normal: normal !default;
+$global-font-weight-bold: bold !default;
+$global-font-style-normal: normal !default;
+$global-font-style-italic: italic !default;
+$global-font-size: 1rem !default;
+
+$global-arrow-size: 7px !default;
+$global-line-height: 1.3 !default;
+$global-ease: cubic-bezier(0.12, 0.72, 0.58, 1.03) !default;
+$global-transition: $global-ease 100ms !default;
+$global-border-radius: 4px !default;
+$global-border-width: 2px !default;
+
+$color-black: #000111 !default;
+$color-gray100: #111111 !default;
+$color-gray200: #222222 !default;
+$color-gray400: #444444 !default;
+$color-gray600: #666666 !default;
+$color-gray800: #888888 !default;
+$color-gray900: #dedede !default;
+$color-white: white !default;
+
+$z-index-modal: 2000 !default;
+$z-index-dropdown-menu: 1998 !default;
+$z-index-dropdown-menu-in-modal: 2001 !default;
+$z-index-tooltip: 1999 !default;
+$z-index-tooltip-in-modal: 2002 !default;
