@@ -10,8 +10,8 @@ import scss from "rollup-plugin-scss"
 
 const MODULE_TYPES = ["esm", "cjs"]
 
-export const rollupBuildConfigFactory = () => {
-  const getPath = (target) => path.resolve(__dirname, target || "")
+export const rollupBuildConfigFactory = (packagePath) => {
+  const getPath = (target) => path.resolve(packagePath, target || "")
 
   // Get license banner
   const banner = require(getPath("../../bin/banner"))
