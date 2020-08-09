@@ -1,4 +1,4 @@
-const path = require("path")
+import path from "path"
 
 const READONLY = "readonly"
 
@@ -6,7 +6,7 @@ const packagesPath = path.resolve(__dirname, "packages")
 const utilsPath = path.resolve(__dirname, "utilities")
 const modulesPath = path.resolve(__dirname, "node_modules")
 
-module.exports = {
+export default {
   env: {
     browser: true,
     node: true,

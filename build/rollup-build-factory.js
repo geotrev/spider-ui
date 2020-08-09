@@ -7,14 +7,13 @@ import resolve from "@rollup/plugin-node-resolve"
 import babel from "@rollup/plugin-babel"
 import { terser } from "rollup-plugin-terser"
 import scss from "rollup-plugin-scss"
+import sass from "sass"
+import { banner } from "./banner"
 
 const MODULE_TYPES = ["esm", "cjs"]
 
 export const rollupBuildConfigFactory = (packagePath) => {
   const getPath = (target) => path.resolve(packagePath, target || "")
-
-  // Get license banner
-  const banner = require(getPath("../../bin/banner"))
 
   // Get the folder name, e.g. "tooltip"
   const pathParts = getPath().split("/")
@@ -52,7 +51,7 @@ export const rollupBuildConfigFactory = (packagePath) => {
     }),
     scss({
       output: false,
-      sass: require("sass"),
+      sass,
       outputStyle: "compressed",
       includePaths: [getPath("node_modules/")],
     }),
