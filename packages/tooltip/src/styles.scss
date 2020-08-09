@@ -1,5 +1,5 @@
-@use "@spider-ui/sass/helpers" as *;
 @use "@spider-ui/sass";
+@use "variables" as *;
 
 .tooltip {
   position: relative;
@@ -9,7 +9,6 @@
 ::slotted([slot="content"]) {
   font-size: $tooltip-font-size;
   padding: $tooltip-padding;
-  margin: $tooltip-margin;
   border-radius: $tooltip-border-radius;
   position: absolute;
   display: block;

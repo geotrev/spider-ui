@@ -1,0 +1,26 @@
+@forward "@spider-ui/sass/helpers";
+@use "@spider-ui/sass/helpers" as *;
+
+$tooltip-arrow-offset: calc(50% - #{$global-arrow-size});
+$tooltip-padding: 4px 8px;
+$tooltip-transition: $global-transition;
+$tooltip-font-size: 14px;
+$tooltip-border-radius: $global-border-radius;
+
+// Light mode
+
+$tooltip-color--dark: $color-white;
+$tooltip-background-color--dark: $color-gray100;
+$tooltip-border-color--dark: $color-gray100;
+$tooltip-arrow-background-color--dark: $tooltip-background-color--dark;
+$tooltip-arrow-border-color--dark: $tooltip-border-color--dark;
+$tooltip-border--dark: 1px solid $tooltip-border-color--dark;
+
+// Dark mode
+
+$tooltip-color--light: $color-gray100;
+$tooltip-background-color--light: $color-white;
+$tooltip-border-color--light: $color-gray900;
+$tooltip-arrow-background-color--light: $tooltip-background-color--light;
+$tooltip-arrow-border-color--light: $tooltip-border-color--light;
+$tooltip-border--light: 1px solid $tooltip-border-color--light;
