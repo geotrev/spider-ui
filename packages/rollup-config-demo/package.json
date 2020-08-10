@@ -1,0 +1,26 @@
+{
+  "name": "@spider-ui/rollup-config-demo",
+  "version": "0.1.0",
+  "description": "Rollup config for demoing a Spider UI component",
+  "author": "george <hello@geotrev.com>",
+  "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/rollup-config-demo#readme",
+  "license": "MIT",
+  "main": "rollup.config.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geotrev/spider-ui.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/geotrev/spider-ui/issues"
+  }
+}

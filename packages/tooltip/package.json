@@ -5,9 +5,9 @@
   "scripts": {
     "test": "BABEL_ENV=test jest",
     "test:watch": "BABEL_ENV=test jest --watch",
-    "build": "BABEL_ENV=build rollup -c rollup.config.build.js",
-    "build:publish": "BABEL_ENV=build NODE_ENV=publish rollup -c rollup.config.build.js",
-    "watch": "BABEL_ENV=build rollup -c rollup.config.demo.js -w",
+    "build": "BABEL_ENV=build rollup -c node:@spider-ui/rollup-config-build",
+    "build:publish": "BABEL_ENV=publish rollup -c node:@spider-ui/rollup-config-build",
+    "watch": "BABEL_ENV=build rollup -c node:@spider-ui/rollup-config-demo -w",
     "preversion": "npm test",
     "postversion": "rm -rf lib && npm run build:publish"
   },
@@ -28,6 +28,8 @@
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-node-resolve": "^8.4.0",
     "@spider-ui/sass": "^0.1.0",
+    "@spider-ui/rollup-config-build": "^0.1.0",
+    "@spider-ui/rollup-config-demo": "^0.1.0",
     "autoprefixer": "^9.8.6",
     "babel-jest": "^26.2.2",
     "enzyme": "^3.11.0",

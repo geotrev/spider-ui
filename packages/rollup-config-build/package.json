@@ -1,0 +1,16 @@
+{
+  "name": "@spider-ui/rollup-config-build",
+  "version": "0.1.0",
+  "description": "Rollup config for building a Spider UI component",
+  "author": "george <hello@geotrev.com>",
+  "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/utils#readme",
+  "license": "MIT",
+  "main": "rollup.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geotrev/spider-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/geotrev/spider-ui/issues"
+  }
+}
