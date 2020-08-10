@@ -1,23 +1,15 @@
 // Base rollup config which is imported by all
 // packages to build the published package.
 
-import path from "path"
-import commonjs from "@rollup/plugin-commonjs"
-import resolve from "@rollup/plugin-node-resolve"
-import babel from "@rollup/plugin-babel"
 import { terser } from "rollup-plugin-terser"
-import scss from "rollup-plugin-scss"
+import { banner } from "./banner"
+import { packagePlugins, getPath } from "./rollup-config-base"
 
 const MODULE_TYPES = ["esm", "cjs"]
 
-export const rollupBuildConfigFactory = () => {
-  const getPath = (target) => path.resolve(__dirname, target || "")
-
-  // Get license banner
-  const banner = require(getPath("../../bin/banner"))
-
+export const rollupBuildConfigFactory = (packagePath) => {
   // Get the folder name, e.g. "tooltip"
-  const pathParts = getPath().split("/")
+  const pathParts = getPath(packagePath).split("/")
   const COMPONENT_NAME = pathParts[pathParts.length - 1]
   const PACKAGE_NAME = `@spider-ui/${COMPONENT_NAME}`
 
@@ -39,35 +31,21 @@ export const rollupBuildConfigFactory = () => {
   }
 
   // Input
-  const input = getPath("src/index.js")
+  const input = getPath(packagePath, "src/index.js")
   const external = ["upgraded-element"]
 
   // Plugins
-  const plugins = [
-    resolve(),
-    commonjs(),
-    babel({
-      babelHelpers: "bundled",
-      presets: ["@babel/preset-env"],
-    }),
-    scss({
-      output: false,
-      sass: require("sass"),
-      outputStyle: "compressed",
-      includePaths: [getPath("node_modules/")],
-    }),
-  ]
+  const plugins = packagePlugins(packagePath)
 
   // Outputs
   const output = MODULE_TYPES.map((format) => ({
     format,
-    file: getPath(`lib/index.${format}.js`),
+    file: getPath(packagePath, `lib/index.${format}.js`),
     sourcemap: true,
     banner: banner(__dirname, COMPONENT_NAME),
     name: PACKAGE_NAME,
     plugins: outputPlugins,
   }))
 
-  // return an array of configs for both esm and cjs
   return { input, external, plugins, output }
 }

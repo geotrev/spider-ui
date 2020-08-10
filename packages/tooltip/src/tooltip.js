@@ -40,7 +40,7 @@ class SpiderTooltip extends UpgradedElement {
   }
 
   get classNames() {
-    const hideArrowValue = this.getAttribute(Attributes.HIDE_ARROW)
+    const arrowIsHidden = this.hasAttribute(Attributes.HIDE_ARROW)
     const positionValue = this.getAttribute(Attributes.POSITION)
     const modeValue = this.getAttribute(Attributes.MODE)
 
@@ -48,7 +48,7 @@ class SpiderTooltip extends UpgradedElement {
       ? positionValue
       : Positions.BLOCK_START
     const mode = Object.values(Modes).includes(modeValue) ? modeValue : Modes.DARK
-    const hasArrow = hideArrowValue !== "true" ? ClassNames.ARROW : ""
+    const hasArrow = arrowIsHidden ? "" : ClassNames.ARROW
     const isVisible = this.isVisible ? ClassNames.VISIBLE : ClassNames.HIDDEN
 
     return { position, mode, hasArrow, isVisible }
