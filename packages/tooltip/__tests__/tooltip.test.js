@@ -1,4 +1,4 @@
-const tooltip = require("../src")
+import "../src"
 
 describe("@spider/tooltip", () => {
   it("needs tests")
