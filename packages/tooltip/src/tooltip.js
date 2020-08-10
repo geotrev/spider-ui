@@ -47,7 +47,9 @@ class SpiderTooltip extends UpgradedElement {
     const position = Object.values(Positions).includes(positionValue)
       ? positionValue
       : Positions.BLOCK_START
-    const mode = Object.values(Modes).includes(modeValue) ? modeValue : Modes.DARK
+    const mode = Object.values(Modes).includes(modeValue)
+      ? modeValue
+      : Modes.DARK
     const hasArrow = arrowIsHidden ? "" : ClassNames.ARROW
     const isVisible = this.isVisible ? ClassNames.VISIBLE : ClassNames.HIDDEN
 
