@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "description": "Bare tooltip web component.",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "build": "rollup -c rollup.config.build.js",
-    "build:publish": "NODE_ENV=publish rollup -c rollup.config.build.js",
-    "watch": "rollup -c rollup.config.demo.js -w",
+    "test": "BABEL_ENV=test jest",
+    "test:watch": "BABEL_ENV=test jest --watch",
+    "build": "BABEL_ENV=build rollup -c rollup.config.build.js",
+    "build:publish": "BABEL_ENV=build NODE_ENV=publish rollup -c rollup.config.build.js",
+    "watch": "BABEL_ENV=build rollup -c rollup.config.demo.js -w",
     "preversion": "npm test",
     "postversion": "rm -rf lib && npm run build:publish"
   },
