@@ -4,20 +4,14 @@
   "private": true,
   "scripts": {
     "bs": "npm i && lerna bootstrap --hoist",
-    "test": "BABEL_ENV=test jest",
-    "test:watch": "BABEL_ENV=test jest --watch",
-    "build:all": "lerna run build"
+    "test": "lerna exec -- npm test",
+    "build": "lerna exec -- npm run build",
+    "build:publish": "lerna exec -- npm run build:publish"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.0",
-    "@babel/preset-env": "^7.11.0",
-    "babel-jest": "^26.2.2",
     "babel-eslint": "^10.1.0",
-    "enzyme": "^3.11.0",
-    "enzyme-to-json": "^3.5.0",
     "eslint": "^7.6.0",
     "eslint-config-prettier": "^6.11.0",
-    "jest": "^26.2.2",
     "lerna": "^3.22.1",
     "prettier": "^2.0.5",
     "stylelint": "^13.6.1",

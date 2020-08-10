@@ -1,0 +1,12 @@
+{
+  "clearMocks": true,
+  "restoreMocks": true,
+  "moduleNameMapper": {
+    "\\.(css|scss)$": "<rootDir>/.jest/empty-mock.js"
+  },
+  "testMatch": ["<rootDir>/__tests__/*.spec.js"],
+  "snapshotSerializers": ["enzyme-to-json/serializer"],
+  "testURL": "http://localhost/",
+  "modulePaths": ["src/"],
+  "verbose": true
+}
