@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "bs": "npm i && lerna bootstrap --hoist",
-    "test:all": "lerna run test",
+    "test": "BABEL_ENV=test jest",
+    "test:watch": "BABEL_ENV=test jest --watch",
     "build:all": "lerna run build"
   },
   "devDependencies": {
