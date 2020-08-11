@@ -3,25 +3,25 @@ import resolve from "@rollup/plugin-node-resolve"
 import babel from "@rollup/plugin-babel"
 import scss from "rollup-plugin-scss"
 import sass from "sass"
-// import postcss from "postcss"
-// import autoprefixer from "autoprefixer"
+import postcss from "postcss"
+import autoprefixer from "autoprefixer"
 import path from "path"
 
 export const getPath = (basePath, target) =>
   path.resolve(basePath, target || "")
 
-// const processor = async (css) => {
-//   // Need to specify `undefined` for the `from` property to let
-//   // postcss know sourcemaps can be ignored.
-//   const result = await postcss([autoprefixer]).process(css, {
-//     from: undefined,
-//   })
-//   return result.css
-// }
+const processor = async (css) => {
+  // Need to specify `undefined` for the `from` property to let
+  // postcss know sourcemaps can be ignored.
+  const result = await postcss([autoprefixer]).process(css, {
+    from: undefined,
+  })
+  return result.css
+}
 
 export const packagePlugins = (packagePath, watchMode) => {
   const scssOptions = {
-    // processor,
+    processor,
     sass,
     output: false,
     outputStyle: "compressed",
