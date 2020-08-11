@@ -3,7 +3,7 @@
   "author": "George Treviranus <hello@geotrev.com>",
   "private": true,
   "scripts": {
-    "bs": "npm i && lerna bootstrap --hoist",
+    "postinstall": "lerna bootstrap --hoist",
     "test": "lerna exec -- npm test",
     "build": "lerna exec -- npm run build",
     "build:publish": "lerna exec -- npm run build:publish"

@@ -15,36 +15,29 @@ Clone and install dependencies:
 ```sh
 $ git clone git@github.com:geotrev/spider-ui.git
 $ cd spider-ui
-$ npm i -g lerna
-$ lerna bootstrap --hoist
+$ npm i # this will also run `lerna bootstrap --hoist`
 ```
 
-Build all packages:
+If you plan to do dependency management, make sure you install `lerna` globally:
 
 ```sh
-$ npm run build:all
+$ npm i -g lerna
+```
+
+Build all packages for development:
+
+```sh
+$ npm run build
+```
+
+Build all packages for publishing:
+
+```sh
+$ npm run build:publish
 ```
 
 Run all tests:
 
 ```sh
-$ npm test:all
-```
-
-Demo a package:
-
-```sh
-$ $P=COMPONENT_NAME npm run watch
-```
-
-Build a package:
-
-```sh
-$ $P=COMPONENT_NAME npm run build
-```
-
-Run tests in a single package:
-
-```sh
-$ $P=COMPONENT_NAME npm test
+$ npm test
 ```
