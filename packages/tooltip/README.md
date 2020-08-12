@@ -4,7 +4,7 @@ A simple tooltip component.
 
 TODO:
 
-- [ ] Add mouseover/mouseout delay to tooltip content.
+- [x] Add mouseover/mouseout delay to tooltip content.
 - [ ] Add custom stylesheet support.
 - [ ] Tests, tests, tests
 

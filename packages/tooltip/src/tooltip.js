@@ -25,6 +25,8 @@ const ClassNames = {
   HIDDEN: "hidden",
 }
 
+const TIMEOUT_DELAY = 300
+
 class SpiderTooltip extends UpgradedElement {
   static get properties() {
     return {
@@ -60,9 +62,11 @@ class SpiderTooltip extends UpgradedElement {
     super()
     this.trigger = null
     this.content = null
+    this.timeout = null
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.handleKeydown = this.handleKeydown.bind(this)
+    this.removeTimeout = this.removeTimeout.bind(this)
   }
 
   elementDidMount() {
@@ -75,7 +79,8 @@ class SpiderTooltip extends UpgradedElement {
     this.content.id = this.elementId
     this.content.setAttribute("role", "tooltip")
 
-    this.setOpenListeners()
+    this.addOpenListeners()
+    this.addCloseListeners()
   }
 
   elementWillUnmount() {
@@ -96,49 +101,89 @@ class SpiderTooltip extends UpgradedElement {
       } else {
         this.alignTooltip("width")
       }
-
-      this.setCloseListeners()
-      this.removeOpenListeners()
-    } else {
-      this.setOpenListeners()
-      this.removeCloseListeners()
     }
   }
 
-  setOpenListeners() {
-    this.trigger.addEventListener("focus", this.handleOpen)
-    this.trigger.addEventListener("mouseover", this.handleOpen)
+  listen(type, target, handler) {
+    target.addEventListener(type, handler)
   }
 
-  removeCloseListeners() {
-    this.trigger.removeEventListener("blur", this.handleClose)
-    this.trigger.removeEventListener("mouseout", this.handleClose)
-    this.trigger.removeEventListener("keydown", this.handleKeydown)
+  sleep(type, target, handler) {
+    target.removeEventListener(type, handler)
   }
 
-  setCloseListeners() {
-    this.trigger.addEventListener("blur", this.handleClose)
-    this.trigger.addEventListener("mouseout", this.handleClose)
-    this.trigger.addEventListener("keydown", this.handleKeydown)
+  addOpenListeners() {
+    this.listen("focus", this.trigger, this.handleOpen)
+    this.listen("focus", this.content, this.handleOpen)
+    this.listen("mouseover", this.trigger, this.handleOpen)
+    this.listen("mouseover", this.content, this.handleOpen)
   }
 
-  removeOpenListeners() {
-    this.trigger.removeEventListener("focus", this.handleOpen)
-    this.trigger.removeEventListener("mouseover", this.handleOpen)
+  addCloseListeners() {
+    this.listen("blur", this.trigger, this.handleClose)
+    this.listen("blur", this.content, this.handleClose)
+    this.listen("mouseout", this.trigger, this.handleClose)
+    this.listen("mouseout", this.content, this.handleClose)
+    this.listen("keydown", window, this.handleKeydown)
+  }
+
+  removeOpenCancelListeners() {
+    this.sleep("mouseout", this.trigger, this.removeTimeout)
+    this.sleep("blur", this.trigger, this.removeTimeout)
+    this.sleep("mouseout", this.content, this.removeTimeout)
+  }
+
+  removeCloseCancelListeners() {
+    this.sleep("mouseover", this.trigger, this.removeTimeout)
+    this.sleep("focus", this.trigger, this.removeTimeout)
+    this.sleep("mouseover", this.content, this.removeTimeout)
+  }
+
+  addOpenCancelListeners() {
+    this.listen("mouseout", this.trigger, this.removeTimeout)
+    this.listen("blur", this.trigger, this.removeTimeout)
+    this.listen("mouseout", this.content, this.removeTimeout)
+  }
+
+  addCloseCancelListeners() {
+    this.listen("mouseover", this.trigger, this.removeTimeout)
+    this.listen("focus", this.trigger, this.removeTimeout)
+    this.listen("mouseover", this.content, this.removeTimeout)
   }
 
   handleKeydown(event) {
     if (this.isVisible && event.key === "Escape") {
-      this.handleClose()
+      this.removeTimeout()
+      this.isVisible = false
     }
   }
 
+  removeTimeout() {
+    if (this.timeout) clearTimeout(this.timeout)
+  }
+
   handleOpen() {
-    this.isVisible = true
+    if (this.isVisible) return
+
+    this.timeout = setTimeout(() => {
+      this.removeOpenCancelListeners()
+      this.timeout = null
+      this.isVisible = true
+    }, TIMEOUT_DELAY)
+
+    this.addOpenCancelListeners()
   }
 
   handleClose() {
-    this.isVisible = false
+    if (!this.isVisible) return
+
+    this.timeout = setTimeout(() => {
+      this.removeCloseCancelListeners()
+      this.timeout = null
+      this.isVisible = false
+    }, TIMEOUT_DELAY)
+
+    this.addCloseCancelListeners()
   }
 
   alignTooltip(dimension) {
