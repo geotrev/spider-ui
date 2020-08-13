@@ -5,7 +5,7 @@ import { terser } from "rollup-plugin-terser"
 import { banner } from "./banner"
 import { packagePlugins, getPath } from "../../build/rollup-config-base"
 
-const MODULE_TYPES = ["esm", "cjs"]
+const MODULE_TYPES = ["es", "cjs"]
 const packagePath = process.cwd()
 
 // Get the folder name, e.g. "tooltip"

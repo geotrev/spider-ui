@@ -1,33 +1,15 @@
 import { UpgradedElement, register } from "upgraded-element"
+import { ThemeMixin } from "@spider-ui/mixins"
+import {
+  Attributes,
+  Positions,
+  Modes,
+  ClassNames,
+  TIMEOUT_DELAY,
+} from "./constants"
 import styles from "./styles.scss"
 
-const Attributes = {
-  POSITION: "position",
-  MODE: "mode",
-  HIDE_ARROW: "hide-arrow",
-}
-
-const Positions = {
-  BLOCK_START: "block-start",
-  BLOCK_END: "block-end",
-  INLINE_START: "inline-start",
-  INLINE_END: "inline-end",
-}
-
-const Modes = {
-  DARK: "dark",
-  LIGHT: "light",
-}
-
-const ClassNames = {
-  ARROW: "arrow",
-  VISIBLE: "visible",
-  HIDDEN: "hidden",
-}
-
-const TIMEOUT_DELAY = 300
-
-class SpiderTooltip extends UpgradedElement {
+class SpiderTooltip extends ThemeMixin(UpgradedElement) {
   static get properties() {
     return {
       isVisible: {
@@ -215,6 +197,7 @@ class SpiderTooltip extends UpgradedElement {
     const { position, mode, hasArrow, isVisible } = this.classNames
 
     return `
+      ${this.renderTheme()}
       <div class="tooltip ${isVisible} ${position} ${mode} ${hasArrow}">
         <slot name="trigger"></slot>
         <slot name="content"></slot>

@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "postinstall": "lerna bootstrap --hoist",
-    "test": "lerna exec -- npm test",
-    "build": "lerna exec -- npm run build",
-    "build:publish": "lerna exec -- npm run build:publish"
+    "test": "lerna run --stream test",
+    "build": "lerna run --stream build",
+    "build:publish": "lerna run --stream build:publish"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

@@ -1,0 +1,40 @@
+{
+  "name": "@spider-ui/mixins",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Mixins to enhance base functionality of Spider UI components.",
+  "author": "george <hello@geotrev.com>",
+  "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/mixins#readme",
+  "license": "MIT",
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.es.js",
+  "scripts": {
+    "test": "BABEL_ENV=test jest",
+    "test:watch": "BABEL_ENV=test jest --watch",
+    "build": "BABEL_ENV=build rollup -c node:@spider-ui/rollup-config-build",
+    "build:publish": "BABEL_ENV=publish rollup -c node:@spider-ui/rollup-config-build"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "@rollup/plugin-alias": "^3.1.1",
+    "@rollup/plugin-babel": "^5.1.0",
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-node-resolve": "^8.4.0",
+    "@spider-ui/rollup-config-build": "^0.1.0",
+    "@spider-ui/utilities": "^0.1.0",
+    "babel-jest": "^26.2.2",
+    "enzyme": "^3.11.0",
+    "enzyme-to-json": "^3.5.0",
+    "jest": "^26.2.2",
+    "rollup": "^2.23.0",
+    "rollup-plugin-terser": "^6.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geotrev/spider-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/geotrev/spider-ui/issues"
+  }
+}
