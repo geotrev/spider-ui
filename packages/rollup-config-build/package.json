@@ -1,5 +1,6 @@
 {
   "name": "@spider-ui/rollup-config-build",
+  "private": true,
   "version": "0.1.0",
   "description": "Rollup config for building a Spider UI component",
   "author": "george <hello@geotrev.com>",
