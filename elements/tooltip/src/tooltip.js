@@ -86,12 +86,11 @@ class SpiderTooltip extends UpgradedElement {
   elementWillUnmount() {
     this.trigger = null
     this.content = null
-
-    if (this.isVisible) {
-      this.removeCloseListeners()
-    } else {
-      this.removeOpenListeners()
-    }
+    this.timeout = null
+    this.handleOpen = null
+    this.handleClose = null
+    this.handleKeydown = null
+    this.removeTimeout = null
   }
 
   elementDidUpdate() {
@@ -125,18 +124,6 @@ class SpiderTooltip extends UpgradedElement {
     this.listen("mouseout", this.trigger, this.handleClose)
     this.listen("mouseout", this.content, this.handleClose)
     this.listen("keydown", window, this.handleKeydown)
-  }
-
-  removeOpenCancelListeners() {
-    this.sleep("mouseout", this.trigger, this.removeTimeout)
-    this.sleep("blur", this.trigger, this.removeTimeout)
-    this.sleep("mouseout", this.content, this.removeTimeout)
-  }
-
-  removeCloseCancelListeners() {
-    this.sleep("mouseover", this.trigger, this.removeTimeout)
-    this.sleep("focus", this.trigger, this.removeTimeout)
-    this.sleep("mouseover", this.content, this.removeTimeout)
   }
 
   addOpenCancelListeners() {
