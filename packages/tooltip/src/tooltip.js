@@ -4,7 +4,7 @@ import styles from "./styles.scss"
 const Attributes = {
   POSITION: "position",
   MODE: "mode",
-  HIDE_ARROW: "hide-arrow",
+  SHOW_ARROW: "show-arrow",
 }
 
 const Positions = {
@@ -42,7 +42,7 @@ class SpiderTooltip extends UpgradedElement {
   }
 
   get classNames() {
-    const arrowIsHidden = this.hasAttribute(Attributes.HIDE_ARROW)
+    const showArrow = this.hasAttribute(Attributes.SHOW_ARROW)
     const positionValue = this.getAttribute(Attributes.POSITION)
     const modeValue = this.getAttribute(Attributes.MODE)
 
@@ -52,7 +52,7 @@ class SpiderTooltip extends UpgradedElement {
     const mode = Object.values(Modes).includes(modeValue)
       ? modeValue
       : Modes.DARK
-    const hasArrow = arrowIsHidden ? "" : ClassNames.ARROW
+    const hasArrow = showArrow ? ClassNames.ARROW : ""
     const isVisible = this.isVisible ? ClassNames.VISIBLE : ClassNames.HIDDEN
 
     return { position, mode, hasArrow, isVisible }

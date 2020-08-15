@@ -10,18 +10,9 @@ import path from "path"
 export const getPath = (basePath, target) =>
   path.resolve(basePath, target || "")
 
-const processor = async (css) => {
-  // Need to specify `undefined` for the `from` property to let
-  // postcss know sourcemaps can be ignored.
-  const result = await postcss([autoprefixer]).process(css, {
-    from: undefined,
-  })
-  return result.css
-}
-
 export const packagePlugins = (packagePath, watchMode) => {
   const scssOptions = {
-    processor,
+    processor: () => postcss([autoprefixer]),
     sass,
     output: false,
     outputStyle: "compressed",

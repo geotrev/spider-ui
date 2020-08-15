@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "description": "Rollup config for building a Spider UI component",
-  "author": "george <hello@geotrev.com>",
+  "author": "George Treviranus <hello@geotrev.com>",
   "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/utils#readme",
   "license": "MIT",
   "main": "rollup.config.js",

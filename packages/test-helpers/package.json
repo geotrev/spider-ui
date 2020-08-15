@@ -1,0 +1,35 @@
+{
+  "name": "@spider-ui/test-helpers",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Test helper utilities for Spider UI components.",
+  "author": "George Treviranus <hello@geotrev.com>",
+  "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/test#readme",
+  "license": "MIT",
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.es.js",
+  "scripts": {
+    "test:watch": "BABEL_ENV=test jest --watch",
+    "build": "BABEL_ENV=build rollup -c node:@spider-ui/rollup-config-build",
+    "build:publish": "BABEL_ENV=publish rollup -c node:@spider-ui/rollup-config-build",
+    "watch": "BABEL_ENV=build rollup -c node:@spider-ui/rollup-config-demo -w"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "@rollup/plugin-babel": "^5.1.0",
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-node-resolve": "^8.4.0",
+    "@spider-ui/rollup-config-build": "^0.1.0",
+    "@spider-ui/sass": "^0.1.0",
+    "rollup": "^2.23.0",
+    "rollup-plugin-terser": "^6.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geotrev/spider-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/geotrev/spider-ui/issues"
+  }
+}
