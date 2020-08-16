@@ -5,7 +5,6 @@
     "\\.(css|scss)$": "<rootDir>/.jest/empty-mock.js"
   },
   "testMatch": ["<rootDir>/__tests__/*.spec.js"],
-  "snapshotSerializers": ["enzyme-to-json/serializer"],
   "setupFiles": ["<rootDir>/.jest/jest.setup.js"],
   "testURL": "http://localhost/",
   "modulePaths": ["src/"],

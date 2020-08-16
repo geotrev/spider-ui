@@ -33,8 +33,6 @@
     "@spider-ui/test-helpers": "^0.1.0",
     "autoprefixer": "^9.8.6",
     "babel-jest": "^26.2.2",
-    "enzyme": "^3.11.0",
-    "enzyme-to-json": "^3.5.0",
     "jest": "^26.2.2",
     "postcss": "^7.0.32",
     "rollup": "^2.23.0",
