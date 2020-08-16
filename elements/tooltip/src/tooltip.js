@@ -1,31 +1,13 @@
 import { UpgradedElement, register } from "upgraded-element"
+import {
+  Attributes,
+  Positions,
+  Modes,
+  ClassNames,
+  Slots,
+  TIMEOUT_DELAY,
+} from "./constants"
 import styles from "./styles.scss"
-
-const Attributes = {
-  POSITION: "position",
-  MODE: "mode",
-  SHOW_ARROW: "show-arrow",
-}
-
-const Positions = {
-  BLOCK_START: "block-start",
-  BLOCK_END: "block-end",
-  INLINE_START: "inline-start",
-  INLINE_END: "inline-end",
-}
-
-const Modes = {
-  DARK: "dark",
-  LIGHT: "light",
-}
-
-const ClassNames = {
-  ARROW: "arrow",
-  VISIBLE: "visible",
-  HIDDEN: "hidden",
-}
-
-const TIMEOUT_DELAY = 300
 
 class SpiderTooltip extends UpgradedElement {
   static get properties() {
@@ -71,8 +53,8 @@ class SpiderTooltip extends UpgradedElement {
 
   elementDidMount() {
     // set nodes
-    this.trigger = this.querySelector("[slot='trigger']")
-    this.content = this.querySelector("[slot='content']")
+    this.trigger = this.querySelector(Slots.TRIGGER)
+    this.content = this.querySelector(Slots.CONTENT)
 
     // set attributes
     this.trigger.setAttribute("aria-describedby", this.elementId)
