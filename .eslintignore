@@ -1,3 +1,8 @@
-node_modules/ 
-packages/**/lib/
-packages/**/public/bundle.js
+node_modules/
+elements/**/node_modules/
+utils/**/node_modules/
+
+elements/**/lib/
+utils/**/lib/
+
+elements/**/public/bundle.js

@@ -1,19 +1,19 @@
-import { stubElementId } from "./stub-element-id"
-
-let fixture = null
+let fixtures = []
 
 export const mount = (htmlString) => {
-  const body = document.querySelector("body")
-  body.innerHTML = htmlString
-  fixture = body.querySelector(":scope > *")
-  stubElementId(fixture)
+  const temp = document.createElement("template")
+  temp.innerHTML = htmlString.trim()
+
+  const fixture = temp.content.firstElementChild
+  document.body.appendChild(fixture)
+  fixtures.push(fixture)
+
   return fixture
 }
 
 export const unmount = () => {
-  if (!fixture) return
+  if (!fixtures.length) return
 
-  const body = document.querySelector("body")
-  body.removeChild(fixture)
-  fixture = null
+  fixtures.forEach((fixture) => document.body.removeChild(fixture))
+  fixtures = []
 }

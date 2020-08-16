@@ -2,11 +2,16 @@
   "name": "spider-ui",
   "author": "George Treviranus <hello@geotrev.com>",
   "private": true,
+  "type": "module",
   "scripts": {
     "postinstall": "lerna bootstrap --hoist",
     "test": "lerna run --stream test",
     "build": "lerna run --stream build",
-    "build:publish": "lerna run --stream build:publish"
+    "build:publish": "lerna run --stream build:publish",
+    "js:lint": "eslint . --ext .js -c .eslintrc.json --ignore-path .eslintignore",
+    "scss:lint": "stylelint '**/*.scss'",
+    "scss:lint:check": "stylelint-config-prettier-check",
+    "lint": "npm run scss:lint && npm run js:lint"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
