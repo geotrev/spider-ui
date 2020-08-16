@@ -1,17 +1,26 @@
 # `@spider-ui/tooltip`
 
-A simple tooltip component.
+A tooltip web component.
 
 TODO:
 
-- [x] Add mouseover/mouseout delay to tooltip content.
 - [ ] Tests, tests, tests
+- [ ] Localization (CSS direction)
+- [ ] Create non-npm demo + release pipeline
 
 ## Usage
 
-`@spider-ui/tooltip` requires minimal set up.
+`@spider-ui/tooltip` requires minimal set up with either npm or the distribution code.
 
-Import the element in your JavaScript:
+### npm
+
+Install the package and its peer dependency:
+
+```sh
+$ npm i @spider-ui/tooltip upgraded-element
+```
+
+Then import the element in your JavaScript:
 
 ```js
 import "@spider-ui/tooltip"
@@ -26,22 +35,47 @@ Then use it:
 </spider-tooltip>
 ```
 
+### Bundle
+
+If you don't want to use npm, you can grab the source via CDN or the bundled code directly.
+
+#### CDN
+
+Add link tags to your page for `upgraded-element` and `@spider-ui/tooltip`:
+
+```html
+<script
+  type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/upgraded-element@latest/dist/bundle.js"
+  integrity=""
+  crossorigin="anonymous"
+></script>
+<script
+  type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@latest/dist/bundle.min.js"
+  integrity=""
+  crossorigin="anonymous"
+></script>
+```
+
+Then you're good to go!
+
 ## Attributes
 
 ### `position`
 
-> Configures from which side of the trigger to show the tooltip.<br/><br/>Default: `'block-start'`<br/><br/>Accepted Values: `'block-start'` | `'block-end'` | `'inline-start'` | `'inline-end'`
+> Configures which side of the trigger to show the tooltip.<br/><br/>Default: `'block-start'`<br/><br/>Accepted Values: `'block-start'` | `'block-end'` | `'inline-start'` | `'inline-end'`
 
 ```html
 <spider-tooltip position="inline-end">...</spider-tooltip>
 ```
 
-### `hide-arrow`
+### `show-arrow`
 
-> Configures the tooltip to hide its arrow pointing to the trigger.<br/><br/>Default: `null`.
+> Configures the tooltip to show an arrow pointing to the trigger.<br/><br/>Default: `false`.
 
 ```html
-<spider-tooltip hide-arrow>...</spider-tooltip>
+<spider-tooltip show-arrow>...</spider-tooltip>
 ```
 
 ### `mode`
@@ -61,18 +95,6 @@ The trigger element for the tooltip. This can be any element, but it's recommend
 ### content
 
 The content of the tooltip. It's recommended to use a basic `div` or `span` as the slotted element.
-
-## Support
-
-It's recommended to use Spider UI web components in a modern browser stack matrix. Out of the box, IE 11 is not supported.
-
-There will likely be a polyfilled version in the future.
-
-`@spider-ui/tooltip` relies on these JavaScript features:
-
-- Symbols
-- Custom Elements
-- Shadow DOM
 
 ## Contribute
 

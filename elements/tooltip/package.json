@@ -18,7 +18,10 @@
   "module": "lib/index.esm.js",
   "type": "module",
   "dependencies": {
-    "upgraded-element": "^0.2.1"
+    "upgraded-element": "^0.2.2"
+  },
+  "peerDependencies": {
+    "upgraded-element": "0.2.x"
   },
   "devDependencies": {
     "@babel/core": "^7.11.0",
@@ -41,9 +44,6 @@
     "rollup-plugin-serve": "^1.0.3",
     "rollup-plugin-terser": "^6.1.0",
     "sass": "^1.26.10"
-  },
-  "peerDependencies": {
-    "upgraded-element": "0.2.x"
   },
   "keywords": [
     "style",
