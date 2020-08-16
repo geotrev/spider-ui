@@ -37,23 +37,21 @@ Then use it:
 
 ### Bundle
 
-If you don't want to use npm, you can grab the source via CDN or the bundled code directly.
+If you don't want to use npm, you can grab the source from jsdelivr CDN.
 
-#### CDN
-
-Add link tags to your page for `upgraded-element` and `@spider-ui/tooltip`:
+NOTE: Make sure to link to `upgraded-element` before `tooltip`.
 
 ```html
 <script
   type="text/javascript"
   src="https://cdn.jsdelivr.net/npm/upgraded-element@latest/dist/bundle.js"
-  integrity=""
+  integrity="sha256-pFyWclXndc+lfjqhz0KxGYi68zYnHc6l5G8zQipvkUQ="
   crossorigin="anonymous"
 ></script>
 <script
   type="text/javascript"
   src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@latest/dist/bundle.min.js"
-  integrity=""
+  integrity="sha256-HafUi7/84L0gVq7wvtKH4U4ykv0Y3lkRnSq2WCd7MkU="
   crossorigin="anonymous"
 ></script>
 ```

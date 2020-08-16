@@ -120,6 +120,18 @@ class SpiderTooltip extends UpgradedElement {
     this.listen("mouseover", this.content, this.removeTimeout)
   }
 
+  removeOpenCancelListeners() {
+    this.sleep("mouseout", this.trigger, this.removeTimeout)
+    this.sleep("blur", this.trigger, this.removeTimeout)
+    this.sleep("mouseout", this.content, this.removeTimeout)
+  }
+
+  removeCloseCancelListeners() {
+    this.sleep("mouseover", this.trigger, this.removeTimeout)
+    this.sleep("focus", this.trigger, this.removeTimeout)
+    this.sleep("mouseover", this.content, this.removeTimeout)
+  }
+
   handleKeydown(event) {
     if (this.isVisible && event.key === "Escape") {
       this.removeTimeout()

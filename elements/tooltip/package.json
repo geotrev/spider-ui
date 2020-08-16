@@ -18,10 +18,10 @@
   "module": "lib/index.esm.js",
   "type": "module",
   "dependencies": {
-    "upgraded-element": "^0.2.2"
+    "upgraded-element": "^0.3.2"
   },
   "peerDependencies": {
-    "upgraded-element": "0.2.x"
+    "upgraded-element": ">= 0.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.11.0",
@@ -37,6 +37,7 @@
     "autoprefixer": "^9.8.6",
     "babel-jest": "^26.2.2",
     "jest": "^26.2.2",
+    "jshashes": "^1.0.8",
     "postcss": "^7.0.32",
     "rollup": "^2.23.0",
     "rollup-plugin-livereload": "^1.3.0",

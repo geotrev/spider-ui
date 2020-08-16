@@ -1,8 +1,5 @@
 node_modules/
-elements/**/node_modules/
-utils/**/node_modules/
-
-elements/**/lib/
-utils/**/lib/
+lib/
+dist/
 
 elements/**/public/bundle.js
