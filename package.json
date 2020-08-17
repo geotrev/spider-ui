@@ -1,6 +1,5 @@
 {
   "name": "spider-ui",
-  "version": "0.2.0-alpha.1",
   "author": "George Treviranus <hello@geotrev.com>",
   "private": true,
   "type": "module",
@@ -13,7 +12,9 @@
     "scss:lint": "stylelint '**/*.scss'",
     "scss:lint:check": "stylelint-config-prettier-check",
     "lint": "npm run scss:lint && npm run js:lint",
-    "postversion": "node build/integrity.js && git add -p && git commit --amend --no-edit"
+    "postversion:build-integrity": "node build/integrity.js",
+    "postversion:bump-origin": "git add -p && git commit -m 'adds new hashes' && git push && git push --tags",
+    "postversion": "npm run postversion:build-integrity && npm run postversion:bump-origin"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

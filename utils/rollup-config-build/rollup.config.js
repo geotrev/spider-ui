@@ -43,12 +43,15 @@ const baseOutput = (format) => ({
 // Module outputs
 const moduleOutputs = [FORMAT_ES, FORMAT_CJS].map((format) => ({
   ...baseOutput(format),
-  file: getPath(packagePath, `lib/index.${format}.js`),
+  file: getPath(packagePath, `lib/${COMPONENT_NAME}.${format}.js`),
   plugins: process.env.BABEL_ENV === "publish" ? [terserConfig] : undefined,
 }))
 
 // Dist outputs
-const distOutputFiles = ["dist/bundle.js", "dist/bundle.min.js"]
+const distOutputFiles = [
+  `dist/${COMPONENT_NAME}.js`,
+  `dist/${COMPONENT_NAME}.min.js`,
+]
 const distOutputs = distOutputFiles.map((filePath) => ({
   ...baseOutput(FORMAT_UMD),
   file: getPath(packagePath, filePath),
