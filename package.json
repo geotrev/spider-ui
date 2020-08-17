@@ -12,7 +12,7 @@
     "scss:lint": "stylelint '**/*.scss'",
     "scss:lint:check": "stylelint-config-prettier-check",
     "lint": "npm run scss:lint && npm run js:lint",
-    "postversion": "node build/integrity.js"
+    "postversion": "node build/integrity.js && git add -p && git commit --amend --no-edit"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
