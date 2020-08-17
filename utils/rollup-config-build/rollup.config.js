@@ -56,7 +56,7 @@ const distOutputs = distOutputFiles.map((filePath) => ({
   ...baseOutput(FORMAT_UMD),
   file: getPath(packagePath, filePath),
   plugins: filePath.includes("min.js") ? [terserConfig] : undefined,
-  globals: ["upgradedElement"],
+  globals: { "upgraded-element": "upgradedElement" },
 }))
 
 const output = [...moduleOutputs, ...distOutputs]
