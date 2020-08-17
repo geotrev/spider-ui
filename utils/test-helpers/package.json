@@ -1,7 +1,7 @@
 {
   "name": "@spider-ui/test-helpers",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Test helper utilities for Spider UI components.",
   "author": "George Treviranus <hello@geotrev.com>",
   "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/test#readme",

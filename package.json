@@ -11,7 +11,8 @@
     "js:lint": "eslint . --ext .js -c .eslintrc.json --ignore-path .eslintignore",
     "scss:lint": "stylelint '**/*.scss'",
     "scss:lint:check": "stylelint-config-prettier-check",
-    "lint": "npm run scss:lint && npm run js:lint"
+    "lint": "npm run scss:lint && npm run js:lint",
+    "postversion": "node build/integrity.js"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

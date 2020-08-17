@@ -1,6 +1,6 @@
 {
   "name": "@spider-ui/tooltip",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Bare tooltip web component.",
   "scripts": {
     "test": "BABEL_ENV=test jest",
@@ -8,8 +8,7 @@
     "build": "BABEL_ENV=build rollup -c node:@spider-ui/rollup-config-build",
     "build:publish": "BABEL_ENV=publish rollup -c node:@spider-ui/rollup-config-build",
     "watch": "BABEL_ENV=build rollup -c node:@spider-ui/rollup-config-demo -w",
-    "preversion": "npm test",
-    "postversion": "rm -rf lib && npm run build:publish"
+    "preversion": "npm test && npm run build:publish"
   },
   "author": "George Treviranus <hello@geotrev.com>",
   "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/tooltip#readme",
@@ -37,7 +36,6 @@
     "autoprefixer": "^9.8.6",
     "babel-jest": "^26.2.2",
     "jest": "^26.2.2",
-    "jshashes": "^1.0.8",
     "postcss": "^7.0.32",
     "rollup": "^2.23.0",
     "rollup-plugin-livereload": "^1.3.0",
