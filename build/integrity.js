@@ -10,7 +10,7 @@ const packages = glob.sync(path.resolve(process.cwd(), "elements/*/"))
 const updatePackageIntegrity = (packagePath) => {
   const FILE_FORMAT = "utf-8"
   const pathParts = packagePath.split("/")
-  const PACKAGE_NAME = pathParts[pathParts.length - 1]
+  const PACKAGE_SUFFIX = pathParts[pathParts.length - 1]
   const readmePath = path.resolve(packagePath, "README.md")
   const readmeFile = fs.readFileSync(readmePath, FILE_FORMAT)
 
@@ -18,8 +18,10 @@ const updatePackageIntegrity = (packagePath) => {
     fs.readFileSync(path.resolve(packagePath, filePath), FILE_FORMAT)
   const getSHA = (data) => new Hashes.SHA256().b64(data)
 
-  const nextBundleSHA = getSHA(getFileContent("dist/bundle.js"))
-  const nextBundleMinSHA = getSHA(getFileContent("dist/bundle.min.js"))
+  const nextBundleSHA = getSHA(getFileContent(`dist/${PACKAGE_SUFFIX}.js`))
+  const nextBundleMinSHA = getSHA(
+    getFileContent(`dist/${PACKAGE_SUFFIX}.min.js`)
+  )
 
   /**
    * Detect existing hashes.
@@ -33,7 +35,7 @@ const updatePackageIntegrity = (packagePath) => {
     console.log(`
 #===============================#
 
--> Detected content hashes in ${PACKAGE_NAME}/README.md. Attempting update...`)
+-> Detected content hashes in elements/${PACKAGE_SUFFIX}/README.md. Attempting update...`)
   } else {
     console.error("-> Couldn't find hashes. Something went wrong. Exiting...")
     process.exit()
@@ -76,7 +78,7 @@ const updatePackageIntegrity = (packagePath) => {
   }
 
   fs.writeFileSync(readmePath, nextReadmeFile, FILE_FORMAT)
-  console.log(`-> Content hashes updated in README.md
+  console.log(`-> Content hashes updated in elements/${PACKAGE_SUFFIX}/README.md
     - Bundle: ${formattedBundleSHA}
     - Bundle (minified): ${nextBundleMinSHA}
 `)
