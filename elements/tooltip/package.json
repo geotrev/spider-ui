@@ -8,7 +8,8 @@
     "build": "BABEL_ENV=build rollup -c node:@spider-ui/rollup-config-build",
     "build:publish": "BABEL_ENV=publish rollup -c node:@spider-ui/rollup-config-build",
     "watch": "BABEL_ENV=build rollup -c node:@spider-ui/rollup-config-demo -w",
-    "preversion": "npm test && npm run build:publish && git commit --amend --no-edit"
+    "preversion": "npm test",
+    "postversion": "npm run build:publish && git commit --amend --no-edit"
   },
   "author": "George Treviranus <hello@geotrev.com>",
   "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/tooltip#readme",
