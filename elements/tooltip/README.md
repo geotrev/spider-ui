@@ -45,13 +45,13 @@ NOTE: Make sure to link to `upgraded-element` before `tooltip`.
 <script
   type="text/javascript"
   src="https://cdn.jsdelivr.net/npm/upgraded-element@latest/dist/bundle.js"
-  integrity="sha256-Xs4zBj19mH8xuc16U6FIPhdPHWW0YDUhd6j4gQMBpig="
+  integrity="sha256-/uPOHNJq6gWFuL6Tu6eWD64nUICgzW/2oP+MJGp8rcA="
   crossorigin="anonymous"
 ></script>
 <script
   type="text/javascript"
   src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@latest/dist/bundle.min.js"
-  integrity="sha256-UehFDbwm0h+QNN0+3VFe1TTuH/lsoA/Q92iDvuCcuI0="
+  integrity="sha256-3DpCn9O7vi9QTLuVphWcqIkVTOz6Rp1Du9N83+/sCvg="
   crossorigin="anonymous"
 ></script>
 ```
