@@ -39,15 +39,16 @@ Then use it:
 
 If you don't want to use npm, you can grab the source from jsdelivr CDN.
 
-NOTE: Make sure to link to `upgraded-element` before `tooltip`.
-
 ```html
+<!-- Use the unminified bundle in development -->
 <script
   type="text/javascript"
-  src="https://cdn.jsdelivr.net/npm/upgraded-element@latest/dist/bundle.js"
+  src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@latest/dist/bundle.js"
   integrity="sha256-/uPOHNJq6gWFuL6Tu6eWD64nUICgzW/2oP+MJGp8rcA="
   crossorigin="anonymous"
 ></script>
+
+<!-- Or use the minified/uglified bundle in production -->
 <script
   type="text/javascript"
   src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@latest/dist/bundle.min.js"
@@ -55,6 +56,8 @@ NOTE: Make sure to link to `upgraded-element` before `tooltip`.
   crossorigin="anonymous"
 ></script>
 ```
+
+_NOTE: Make sure to include a script link to [`upgraded-element`]() before `tooltip`!_
 
 Then you're good to go!
 
