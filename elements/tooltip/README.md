@@ -44,7 +44,7 @@ If you don't want to use npm, you can grab the source from jsdelivr CDN.
 <script
   type="text/javascript"
   src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@latest/dist/tooltip.js"
-  integrity="sha256-90tQSYp6ktXmtSQJWD8F4LBJJBsdMpMfGHXC3b/OiZo="
+  integrity="sha256-z8imUy7z/lW0MfWtZvRFGWKbaJViIM+9iqic8RNPXSI="
   crossorigin="anonymous"
 ></script>
 
@@ -52,7 +52,7 @@ If you don't want to use npm, you can grab the source from jsdelivr CDN.
 <script
   type="text/javascript"
   src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@latest/dist/tooltip.min.js"
-  integrity="sha256-5U8LfA2qCFW7aj7YC0qhrrg9hkK8jXvQiNqw/+uP8sw="
+  integrity="sha256-3gjMkh3ozFWVa5h8wTEKc5EHLwValIe/ltdu6PsSEkI="
   crossorigin="anonymous"
 ></script>
 ```
