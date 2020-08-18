@@ -18,7 +18,7 @@
   "module": "lib/tooltip.es.js",
   "type": "module",
   "dependencies": {
-    "upgraded-element": ">=0.3.5"
+    "upgraded-element": ">=0.3.6"
   },
   "peerDependencies": {
     "upgraded-element": ">= 0.3.2"
