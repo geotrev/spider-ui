@@ -80,7 +80,7 @@ const updatePackageIntegrity = (packagePath) => {
   fs.writeFileSync(readmePath, nextReadmeFile, FILE_FORMAT)
   console.log(`-> Content hashes updated in elements/${PACKAGE_SUFFIX}/README.md
     - Bundle: ${formattedBundleSHA}
-    - Bundle (minified): ${nextBundleMinSHA}
+    - Bundle (minified): ${formattedBundleMinSHA}
 `)
 }
 

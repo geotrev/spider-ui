@@ -14,7 +14,7 @@
     "lint": "npm run scss:lint && npm run js:lint",
     "prepublish:build-integrity": "node build/integrity.js",
     "prepublish:bump-origin": "git add . && git commit -m 'adds new hashes' && git push && git push --tags",
-    "prepublishOnly": "npm run postversion:build-integrity && npm run postversion:bump-origin"
+    "prepublishOnly": "npm run prepublish:build-integrity && npm run prepublish:bump-origin"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
