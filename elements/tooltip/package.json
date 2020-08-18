@@ -1,6 +1,6 @@
 {
   "name": "@spider-ui/tooltip",
-  "version": "0.2.0-alpha.3",
+  "version": "0.2.0",
   "description": "Bare tooltip web component.",
   "scripts": {
     "test": "BABEL_ENV=test jest",
@@ -33,7 +33,7 @@
     "@spider-ui/rollup-config-build": "^0.2.0-alpha.3",
     "@spider-ui/rollup-config-demo": "^0.2.0-alpha.3",
     "@spider-ui/sass": "^0.2.0-alpha.3",
-    "@spider-ui/test-helpers": "^0.2.0-alpha.3",
+    "@spider-ui/test-helpers": "^0.2.0",
     "autoprefixer": "^9.8.6",
     "babel-jest": "^26.3.0",
     "jest": "^26.4.0",
