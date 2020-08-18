@@ -36,8 +36,8 @@ const terserConfig = terser({
 const baseOutput = (format) => ({
   format,
   banner: banner(packagePath, COMPONENT_NAME),
+  name,
   sourcemap: true,
-  name: name,
 })
 
 // Module outputs
@@ -55,8 +55,8 @@ const distOutputFiles = [
 const distOutputs = distOutputFiles.map((filePath) => ({
   ...baseOutput(FORMAT_UMD),
   file: getPath(packagePath, filePath),
+  globals: { "upgraded-element": "UpgradedElement" },
   plugins: filePath.includes("min.js") ? [terserConfig] : undefined,
-  globals: { "upgraded-element": "upgradedElement" },
 }))
 
 const output = [...moduleOutputs, ...distOutputs]
