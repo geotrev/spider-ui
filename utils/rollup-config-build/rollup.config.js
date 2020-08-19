@@ -2,7 +2,7 @@
 // packages to build the published package.
 
 import { terser } from "rollup-plugin-terser"
-import { banner } from "./banner"
+import { createBanner } from "./create-banner"
 import { packagePlugins, getPath } from "../../build/rollup-config-base"
 
 const FORMAT_ES = "es"
@@ -35,7 +35,7 @@ const terserConfig = terser({
 // Shared output
 const baseOutput = (format) => ({
   format,
-  banner: banner(packagePath, COMPONENT_NAME),
+  banner: createBanner(packagePath, COMPONENT_NAME),
   name,
   sourcemap: true,
 })

@@ -1,4 +1,4 @@
-export const banner = async (packagePath, name) => {
+export const createBanner = async (packagePath, name) => {
   const { default: pkg } = await import(`${packagePath}/package.json`)
   const year = new Date().getFullYear()
 
