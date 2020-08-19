@@ -6,7 +6,7 @@ TODO:
 
 - [ ] Tests, tests, tests
 - [ ] Localization (CSS direction)
-- [ ] Create non-npm demo + release pipeline
+- [ ] Script to bump CDN link package versions rip
 
 ## Usage
 
@@ -43,7 +43,7 @@ If you don't want to use npm, you can grab the source from jsdelivr CDN.
 <!-- Use the unminified bundle in development -->
 <script
   type="text/javascript"
-  src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@latest/dist/tooltip.js"
+  src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@0.2.1/dist/tooltip.js"
   integrity="sha256-1X7uoqgiEnuqF9XtUKPUbRMA2LkPcohDq5jxlM+hlHI="
   crossorigin="anonymous"
 ></script>
@@ -51,7 +51,7 @@ If you don't want to use npm, you can grab the source from jsdelivr CDN.
 <!-- Or use the minified/uglified bundle in production -->
 <script
   type="text/javascript"
-  src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@latest/dist/tooltip.min.js"
+  src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@0.2.1/dist/tooltip.min.js"
   integrity="sha256-NLjQIhsQ3MBl0H67tDvYP3BNv+Ewx05gurqp77HQFuc="
   crossorigin="anonymous"
 ></script>
