@@ -4,13 +4,13 @@ Bare minimum interface elements for building web UIs. Every element in the libra
 
 What sets Spider UI apart from other web component UI libraries?
 
-- Styles are exposed through slots for easy customization.
+- All styles are configurable by consumers through slotted content.
 - Accessibility is baked in.
 - No other framework prescriptions except `upgraded-element`, the custom element engine that powers each element.
 
 ## Contribute
 
-This library is managed using Lerna.
+This library is managed using [Lerna](https://github.com/lerna/lerna).
 
 ### Setup
 
@@ -22,7 +22,7 @@ $ cd spider-ui
 $ npm i # this will also run `lerna bootstrap --hoist`
 ```
 
-If you plan to do dependency management, make sure you install `lerna` globally:
+If you plan to do any dependency management, make sure you install `lerna` globally:
 
 ```sh
 $ npm i -g lerna
@@ -48,9 +48,15 @@ Run all tests:
 $ npm test
 ```
 
+Lint sass and javascript using eslint and stylelint.
+
+```sh
+$ npm run lint
+```
+
 ### Package Scripts
 
-All packages that build and test code for use throughout the library use the same set of (up to) four scripts.
+All packages that build and/or test code use the same set of (up to) five scripts.
 
 Run the package in `watch` mode:
 
@@ -91,3 +97,16 @@ It's recommended to use Spider UI web components in a modern browser stack. Out 
 - Symbols
 - Custom Elements
 - Shadow DOM
+
+If you need IE and Edge support, you'll need to install and include the webcomponents polyfill and core-js for Symbols:
+
+```sh
+$ npm i -D @webcomponents/webcomponentsjs
+$ npm i -D core-js
+```
+
+In your JS, you can import the Symbol polyfill like so:
+
+```js
+import "core-js/features/promise"
+```
