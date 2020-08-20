@@ -1,9 +1,34 @@
-import { mount, unmount, queryRoot } from "@spider-ui/test-helpers"
-import { Slots } from "../src/constants"
+import { mount, unmount, queryRoot, events } from "@spider-ui/test-helpers"
+import { Slots, TIMEOUT_DELAY } from "../src/constants"
 import "../src"
 
 window.setTimeout = jest.fn().mockImplementation((fn) => fn())
 window.clearTimeout = jest.fn().mockImplementation((fn) => fn())
+
+const mountFixture = (tag = "div", slotted = "", config = {}) => {
+  let stringifiedConfig = ""
+  const attributes = Object.keys(config)
+
+  if (attributes.length) {
+    stringifiedConfig = attributes.reduce((options, attribute) => {
+      const value = config[attribute]
+      const stringifiedValue = typeof value === "undefined" ? "" : `="${value}"`
+      return (options += ` ${attribute}${stringifiedValue}`)
+    }, "")
+  }
+
+  return mount(`
+    <${tag}${stringifiedConfig}>
+      ${slotted}
+    </${tag}>
+  `)
+}
+
+const tagName = "spider-tooltip"
+const basicSlots = `
+  <button slot="trigger">Open</button>
+  <div slot="content">Test content</div>
+`
 
 describe("@spider-ui/tooltip", () => {
   beforeEach(jest.useFakeTimers)
@@ -11,14 +36,7 @@ describe("@spider-ui/tooltip", () => {
 
   describe("default configuration", () => {
     let fixture
-    beforeEach(() => {
-      fixture = mount(`
-        <spider-tooltip>
-          <button slot="trigger">Open</button>
-          <div slot="content">Test content</div>
-        </spider-tooltip>
-      `)
-    })
+    beforeEach(() => (fixture = mountFixture(tagName, basicSlots)))
 
     it("renders content slot as tooltip", () => {
       // Given
@@ -37,8 +55,50 @@ describe("@spider-ui/tooltip", () => {
     })
 
     it("renders default state", () => {
-      const shadowContainer = queryRoot(fixture, ".tooltip")
-      expect(shadowContainer).toMatchSnapshot()
+      const root = queryRoot(fixture, ".tooltip")
+      expect(root).toMatchSnapshot()
+    })
+  })
+
+  describe("configurations", () => {
+    const positions = ["block-end", "inline-start", "inline-end"]
+
+    positions.forEach((position) => {
+      it(`renders ${position} position`, () => {
+        const fixture = mountFixture(tagName, basicSlots, { position })
+        const root = queryRoot(fixture, ".tooltip")
+        expect(root.classList.contains(position)).toBe(true)
+      })
+    })
+
+    it("renders in light mode", () => {
+      const fixture = mountFixture(tagName, basicSlots, { mode: "light" })
+      const root = queryRoot(fixture, ".tooltip")
+      expect(root.classList.contains("light")).toBe(true)
+    })
+
+    describe("show-arrow", () => {
+      const fixture = mountFixture(tagName, basicSlots, {
+        "show-arrow": undefined,
+      })
+      const root = queryRoot(fixture, ".tooltip")
+      expect(root.classList.contains("arrow")).toBe(true)
+    })
+  })
+
+  describe.skip("handleOpen (mouseover/blur)", () => {
+    let fixture, trigger
+
+    beforeEach(() => {
+      fixture = mountFixture(tagName, basicSlots)
+      trigger = fixture.querySelector(Slots.TRIGGER)
+    })
+
+    it("shows tooltip content on mouseover", () => {
+      events.mouseover(trigger)
+      jest.advanceTimersByTime(TIMEOUT_DELAY)
+      const root = queryRoot(fixture, ".tooltip")
+      expect(root.classList.contains("visible")).toBe(true)
     })
   })
 })
