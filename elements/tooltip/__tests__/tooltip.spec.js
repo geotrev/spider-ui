@@ -86,18 +86,18 @@ describe("@spider-ui/tooltip", () => {
     })
   })
 
-  describe.skip("handleOpen (mouseover/blur)", () => {
-    let fixture, trigger
+  describe("handleOpen (mouseover/blur)", () => {
+    let fixture, trigger, root
 
     beforeEach(() => {
       fixture = mountFixture(tagName, basicSlots)
       trigger = fixture.querySelector(Slots.TRIGGER)
+      root = queryRoot(fixture, ".tooltip")
     })
 
     it("shows tooltip content on mouseover", () => {
       events.mouseover(trigger)
       jest.advanceTimersByTime(TIMEOUT_DELAY)
-      const root = queryRoot(fixture, ".tooltip")
       expect(root.classList.contains("visible")).toBe(true)
     })
   })
