@@ -1,12 +1,10 @@
-# `@spider-ui/tooltip`
+# `<spider-tooltip></spider-tooltip>`
 
 A tooltip web component.
 
 TODO:
 
-- [ ] Tests, tests, tests
 - [ ] Localization (CSS direction)
-- [ ] Script to bump CDN link package versions rip
 
 ## Usage
 
@@ -57,9 +55,19 @@ If you don't want to use npm, you can grab the source from jsdelivr CDN.
 ></script>
 ```
 
-_NOTE: Make sure to include a script link to [`upgraded-element`]() before `tooltip`!_
+_NOTE: Make sure to include a script link to [`upgraded-element`]() before `spider-tooltip`!_
 
 Then you're good to go!
+
+### Visibility Check
+
+Because slotted elements aren't hidden in the DOM on first render, you may see a flash of unstyled content when using this component. You can work around this by adding the following to your app's stylesheet:
+
+```css
+spider-tooltip:not(:defined) {
+  display: none;
+}
+```
 
 ## Attributes
 
@@ -85,6 +93,30 @@ Then you're good to go!
 
 ```html
 <spider-tooltip mode="light">...</spider-tooltip>
+```
+
+### `delay`
+
+> Configures a custom show/hide delay duration (in milliseconds) for tooltip content. If defined, both `delay-on` and `delay-off` will be ignored.<br/><br/>Default: `'300'`.
+
+```html
+<spider-tooltip delay="500">...</spider-tooltip>
+```
+
+### `delay-on`
+
+> Configures a custom show delay duration (in milliseconds) for tooltip content. Must be configured with `delay-off`.<br/><br/>Default: `undefined`.
+
+```html
+<spider-tooltip delay="500">...</spider-tooltip>
+```
+
+### `delay-off`
+
+> Configures a custom hide delay duration (in milliseconds) for tooltip content. Must be configured with `delay-on`.<br/><br/>Default: `undefined`.
+
+```html
+<spider-tooltip delay="500">...</spider-tooltip>
 ```
 
 ## Slots

@@ -70,7 +70,7 @@ Build the package for development:
 $ npm run build
 ```
 
-Build the package for publishing (also runs on `prepublishOnly`):
+Build the package for publishing (also runs on `prepublishOnly`, this step updates integrity hashes in each `element/*` package):
 
 ```sh
 $ npm run build:publish
@@ -98,15 +98,18 @@ It's recommended to use Spider UI web components in a modern browser stack. Out 
 - Custom Elements
 - Shadow DOM
 
-If you need IE and Edge support, you'll need to install and include the webcomponents polyfill and core-js for Symbols:
+Additionally, it's recommended to use the `:defined` CSS pseudo-selector to ensure there are no flashes of unstyled content from your element before they've been registered to `window.customElements`. This isn't supported in IE 11, either.
+
+If you need IE and Edge support, you'll need to [install relevant polyfills](https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs#how-to-use):
 
 ```sh
-$ npm i -D @webcomponents/webcomponentsjs
-$ npm i -D core-js
+$ npm i @webcomponents/webcomponentsjs core-js
 ```
 
-In your JS, you can import the Symbol polyfill like so:
+To add symbol support, you can import the Symbol polyfill like so at your app's entry point:
 
 ```js
-import "core-js/features/promise"
+import "core-js/features/symbol"
 ```
+
+If you already use a babel polyfill or equivalent solution, using core-js is unnecessary.

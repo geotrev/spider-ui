@@ -1,8 +1,21 @@
-export const createMouseEvent = (name) => {
-  return new MouseEvent(name, {
+export const createMouseEvent = (type) => {
+  return new MouseEvent(type, {
     bubbles: true,
     relatedTarget: window,
   })
+}
+
+export const createKeyboardEvent = (type, key, shiftKey = false) => {
+  return new KeyboardEvent(type, {
+    key,
+    shiftKey,
+    bubbles: true,
+  })
+}
+
+export const pressEscape = (target) => {
+  const event = createKeyboardEvent("keydown", "Escape")
+  return target ? target.dispatchEvent(event) : document.dispatchEvent(event)
 }
 
 export const mouseover = (target) => {

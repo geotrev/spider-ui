@@ -2,6 +2,13 @@ export const Attributes = {
   POSITION: "position",
   MODE: "mode",
   SHOW_ARROW: "show-arrow",
+  DELAY: "delay",
+  DELAY_ON: "delay-on",
+  DELAY_OFF: "delay-off",
+
+  // A11y
+  ARIA_DESCRIBEDBY: "aria-describedby",
+  ROLE: "role",
 }
 
 export const Positions = {
@@ -28,3 +35,4 @@ export const Slots = {
 }
 
 export const TIMEOUT_DELAY = 300
+export const ESCAPE_KEY = "Escape"

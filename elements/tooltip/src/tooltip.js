@@ -6,6 +6,7 @@ import {
   ClassNames,
   Slots,
   TIMEOUT_DELAY,
+  ESCAPE_KEY,
 } from "./constants"
 import styles from "./styles.scss"
 
@@ -57,9 +58,12 @@ class SpiderTooltip extends UpgradedElement {
     this.content = this.querySelector(Slots.CONTENT)
 
     // set attributes
-    this.trigger.setAttribute("aria-describedby", this.elementId)
+    this.trigger.setAttribute(Attributes.ARIA_DESCRIBEDBY, this.elementId)
     this.content.id = this.elementId
-    this.content.setAttribute("role", "tooltip")
+    this.content.setAttribute(Attributes.ROLE, "tooltip")
+
+    // set delay values
+    this.setDelay()
 
     this.addOpenListeners()
     this.addCloseListeners()
@@ -82,6 +86,27 @@ class SpiderTooltip extends UpgradedElement {
       } else {
         this.alignTooltip("width")
       }
+    }
+  }
+
+  setDelay() {
+    const delayOn = this.getAttribute(Attributes.DELAY_ON)
+    const delayOff = this.getAttribute(Attributes.DELAY_OFF)
+    const delay = this.getAttribute(Attributes.DELAY)
+
+    if (!delay && !delayOn && !delayOff) {
+      this.delay = TIMEOUT_DELAY
+    }
+
+    if (delay) {
+      this.delay = parseInt(delay)
+    } else if (delayOn && delayOff) {
+      this.delayOn = parseInt(delayOn)
+      this.delayOff = parseInt(delayOff)
+    } else if (!delayOn && delayOff) {
+      this.delay = parseInt(delayOff)
+    } else if (delayOn && !delayOff) {
+      this.delay = parseInt(delayOn)
     }
   }
 
@@ -133,14 +158,16 @@ class SpiderTooltip extends UpgradedElement {
   }
 
   handleKeydown(event) {
-    if (this.isVisible && event.key === "Escape") {
+    if (this.isVisible && event.key === ESCAPE_KEY) {
       this.removeTimeout()
       this.isVisible = false
     }
   }
 
   removeTimeout() {
-    if (this.timeout) clearTimeout(this.timeout)
+    if (!this.timeout) return
+    clearTimeout(this.timeout)
+    this.timeout = null
   }
 
   handleOpen() {
@@ -150,7 +177,7 @@ class SpiderTooltip extends UpgradedElement {
       this.removeOpenCancelListeners()
       this.timeout = null
       this.isVisible = true
-    }, TIMEOUT_DELAY)
+    }, this.delayOn || this.delay)
 
     this.addOpenCancelListeners()
   }
@@ -162,7 +189,7 @@ class SpiderTooltip extends UpgradedElement {
       this.removeCloseCancelListeners()
       this.timeout = null
       this.isVisible = false
-    }, TIMEOUT_DELAY)
+    }, this.delayOff || this.delay)
 
     this.addCloseCancelListeners()
   }
