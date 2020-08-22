@@ -4,9 +4,10 @@ Bare minimum interface elements for building web UIs. Every element in the libra
 
 What sets Spider UI apart from other web component UI libraries?
 
-- All styles are configurable by consumers through slotted content.
+- All styles are configurable by consumers through slotted content. As few styles as possible are added to an element's shadow root.
 - Accessibility is baked in.
-- No other framework prescriptions except `upgraded-element`, the custom element engine that powers each element.
+
+Spider UI elements use [`upgraded-element`](https://github.com/geotrev/upgraded-element) as their base class, which is also the only dependency of the library.
 
 ## Contribute
 
