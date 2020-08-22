@@ -47,17 +47,23 @@ const moduleOutputs = [FORMAT_ES, FORMAT_CJS].map((format) => ({
   plugins: process.env.BABEL_ENV === "publish" ? [terserConfig] : undefined,
 }))
 
-// Dist outputs
-const distOutputFiles = [
-  `dist/${COMPONENT_NAME}.js`,
-  `dist/${COMPONENT_NAME}.min.js`,
-]
-const distOutputs = distOutputFiles.map((filePath) => ({
-  ...baseOutput(FORMAT_UMD),
-  file: getPath(packagePath, filePath),
-  globals: { "upgraded-element": "UpgradedElement" },
-  plugins: filePath.includes("min.js") ? [terserConfig] : undefined,
-}))
+let output = [...moduleOutputs]
 
-const output = [...moduleOutputs, ...distOutputs]
+// Only create dist outputs for `elements/*` packages
+if (packagePath.includes("elements/")) {
+  const distOutputFiles = [
+    `dist/${COMPONENT_NAME}.js`,
+    `dist/${COMPONENT_NAME}.min.js`,
+  ]
+
+  const distOutputs = distOutputFiles.map((filePath) => ({
+    ...baseOutput(FORMAT_UMD),
+    file: getPath(packagePath, filePath),
+    globals: { "upgraded-element": "UpgradedElement" },
+    plugins: filePath.includes("min.js") ? [terserConfig] : undefined,
+  }))
+
+  output = [...output, ...distOutputs]
+}
+
 export default { input, external, plugins, output }
