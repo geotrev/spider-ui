@@ -165,6 +165,7 @@ class SpiderTooltip extends UpgradedElement {
   }
 
   removeTimeout() {
+    if (!this.isConnected) return
     if (!this.timeout) return
     clearTimeout(this.timeout)
     this.timeout = null
@@ -172,8 +173,10 @@ class SpiderTooltip extends UpgradedElement {
 
   handleOpen() {
     if (this.isVisible) return
+    const context = this
 
     this.timeout = setTimeout(() => {
+      if (!context.isConnected) return
       this.removeOpenCancelListeners()
       this.timeout = null
       this.isVisible = true
@@ -184,8 +187,10 @@ class SpiderTooltip extends UpgradedElement {
 
   handleClose() {
     if (!this.isVisible) return
+    const context = this
 
     this.timeout = setTimeout(() => {
+      if (!context.isConnected) return
       this.removeCloseCancelListeners()
       this.timeout = null
       this.isVisible = false
