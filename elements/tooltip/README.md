@@ -2,10 +2,6 @@
 
 A tooltip web component.
 
-TODO:
-
-- [ ] Localization (CSS direction)
-
 ## Usage
 
 `@spider-ui/tooltip` requires minimal set up with either npm or the distribution code.

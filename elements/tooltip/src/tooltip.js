@@ -62,9 +62,6 @@ class SpiderTooltip extends UpgradedElement {
     this.content.id = this.elementId
     this.content.setAttribute(Attributes.ROLE, "tooltip")
 
-    // set delay values
-    this.setDelay()
-
     this.addOpenListeners()
     this.addCloseListeners()
   }
@@ -226,6 +223,7 @@ class SpiderTooltip extends UpgradedElement {
 
   render() {
     const { position, mode, hasArrow, isVisible } = this.classNames
+    this.setDelay()
 
     return `
       <div class="tooltip ${isVisible} ${position} ${mode} ${hasArrow}">

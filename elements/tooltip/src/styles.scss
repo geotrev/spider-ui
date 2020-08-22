@@ -1,5 +1,5 @@
 @use "@spider-ui/sass";
-@use "variables" as *;
+@use "helpers" as *;
 
 .tooltip {
   position: relative;
@@ -45,14 +45,13 @@
   // position
 
   .block-start & {
-    left: 0; // This is a fallback.
     bottom: 100%;
     margin: 0 0 $global-arrow-size 0;
   }
 
   .inline-end & {
-    left: 100%;
-    margin-left: $global-arrow-size;
+    @include create-flow-property("left", 100%);
+    @include create-flow-property("margin-left", $global-arrow-size);
     margin-top: 0;
     margin-bottom: 0;
     bottom: auto;
@@ -60,9 +59,9 @@
   }
 
   .inline-start & {
-    right: 100%;
-    left: auto;
-    margin-right: $global-arrow-size;
+    @include create-flow-property("right", 100%);
+    @include create-flow-property("left", auto);
+    @include create-flow-property("margin-right", $global-arrow-size);
     margin-top: 0;
     margin-bottom: 0;
     bottom: auto;
@@ -70,7 +69,6 @@
   }
 
   .block-end & {
-    left: 0; // This is a fallback.
     top: 100%;
     margin: $global-arrow-size 0 0 0;
     bottom: auto;
@@ -87,7 +85,7 @@
   }
 
   .dark.inline-end.arrow & {
-    @include create-left-arrow(
+    @include create-start-arrow(
       $tooltip-arrow-offset,
       $tooltip-arrow-background-color--dark,
       $tooltip-arrow-border-color--dark
@@ -95,7 +93,7 @@
   }
 
   .dark.inline-start.arrow & {
-    @include create-right-arrow(
+    @include create-end-arrow(
       $tooltip-arrow-offset,
       $tooltip-arrow-background-color--dark,
       $tooltip-arrow-border-color--dark
@@ -121,7 +119,7 @@
   }
 
   .light.inline-end.arrow & {
-    @include create-left-arrow(
+    @include create-start-arrow(
       $tooltip-arrow-offset,
       $tooltip-arrow-background-color--light,
       $tooltip-arrow-border-color--light
@@ -129,7 +127,7 @@
   }
 
   .light.inline-start.arrow & {
-    @include create-right-arrow(
+    @include create-end-arrow(
       $tooltip-arrow-offset,
       $tooltip-arrow-background-color--light,
       $tooltip-arrow-border-color--light
