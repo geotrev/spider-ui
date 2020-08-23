@@ -1,17 +1,12 @@
 # Spider UI 🕷 🕸
 
-Bare minimum interface elements for building web UIs. Every element in the library is a custom element with a shadow DOM and an API defined largely by attributes.
+Build applications with modern interaction patterns in regular ol' HTML. Spider elements extend the [HTML standard](https://html.spec.whatwg.org/multipage/) to create predictable and flexible UI elements.
 
-What sets Spider UI apart from other web component UI libraries?
-
-- All styles are configurable by consumers through slotted content. As few styles as possible are added to an element's shadow root.
-- Accessibility is baked in.
-
-Spider UI elements use [`upgraded-element`](https://github.com/geotrev/upgraded-element) as their base class, which is also the only dependency of the library.
+All elements use [`upgraded-element`](https://github.com/geotrev/upgraded-element) as their base class, which is also the only dependency of the library.
 
 ## Contribute
 
-This library is managed using [Lerna](https://github.com/lerna/lerna).
+Please feel free to file bugs and pull requests as you encounter problems. Ideally, include the behavior you're seeing, the behavior you expect, and reproduction steps
 
 ### Setup
 
@@ -23,7 +18,7 @@ $ cd spider-ui
 $ npm i # this will also run `lerna bootstrap --hoist`
 ```
 
-If you plan to do any dependency management, make sure you install `lerna` globally:
+Since the repo is managed primarily using [Lerna](https://github.com/lerna/lerna), you should also install that globally:
 
 ```sh
 $ npm i -g lerna
@@ -99,8 +94,6 @@ It's recommended to use Spider UI web components in a modern browser stack. Out 
 - Custom Elements
 - Shadow DOM
 
-Additionally, it's recommended to use the `:defined` CSS pseudo-selector to ensure there are no flashes of unstyled content from your element before they've been registered to `window.customElements`. This isn't supported in IE 11, either.
-
 If you need IE and Edge support, you'll need to [install relevant polyfills](https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs#how-to-use):
 
 ```sh
@@ -114,3 +107,28 @@ import "core-js/features/symbol"
 ```
 
 If you already use a babel polyfill or equivalent solution, using core-js is unnecessary.
+
+## Why?
+
+Front-end web development is complicated, we can all agree on that.
+
+We've reached the point where after configuring our build environments, tools, and pipelines, we just want to build stuff and minimize the difficulty of interface development:
+
+- Lots of accessibility to consider
+- Complications of layering contexts: DOM hoisting and z-index management
+- Custom JavaScript to handle the seemingly endless nuances of each individual application
+
+Don't get me wrong: these are important problems that are worth the headache in getting right. The thing is, many interactive patterns we've grown accustomed to aren't implemented in the HTML standard by default, despite having a well-documented track record in the many millions of applications out on the WWW.
+
+Many interactions have not just a dozen ways to be implemented, but there's a handful of UI libraries that make reasoning about the implementation a brand new process every single time.
+
+At the end of the day, wouldn't it be nice to just add one or two `script` tags to your page (or in the npm world, import a file), then just write the basic HTML without the need of `data-*` attributes or custom JS transformers and UI libraries?
+
+These are all some of the core concerns in Spider UI aims to relieve.
+
+What we can agree on is that certain interactive patterns have solidified enough, within a tangible range of variations, that it's about time standard HTML could implement these common use-case, all the while providing:
+
+- Room for style customization
+- A broad range of configuration through attributes
+- An accessible experience out of the box
+- A clear and predictable understanding of layering for patterns like dropdowns, modals, and popovers

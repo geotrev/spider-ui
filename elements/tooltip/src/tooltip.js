@@ -91,20 +91,8 @@ class SpiderTooltip extends UpgradedElement {
     const delayOff = this.getAttribute(Attributes.DELAY_OFF)
     const delay = this.getAttribute(Attributes.DELAY)
 
-    if (!delay && !delayOn && !delayOff) {
-      this.delay = TIMEOUT_DELAY
-    }
-
-    if (delay) {
-      this.delay = parseInt(delay)
-    } else if (delayOn && delayOff) {
-      this.delayOn = parseInt(delayOn)
-      this.delayOff = parseInt(delayOff)
-    } else if (!delayOn && delayOff) {
-      this.delay = parseInt(delayOff)
-    } else if (delayOn && !delayOff) {
-      this.delay = parseInt(delayOn)
-    }
+    this.delayOn = parseInt(delayOn || delay) || TIMEOUT_DELAY
+    this.delayOff = parseInt(delayOff || delay) || TIMEOUT_DELAY
   }
 
   listen(type, target, handler) {
@@ -177,7 +165,7 @@ class SpiderTooltip extends UpgradedElement {
       this.removeOpenCancelListeners()
       this.timeout = null
       this.isVisible = true
-    }, this.delayOn || this.delay)
+    }, this.delayOn)
 
     this.addOpenCancelListeners()
   }
@@ -191,7 +179,7 @@ class SpiderTooltip extends UpgradedElement {
       this.removeCloseCancelListeners()
       this.timeout = null
       this.isVisible = false
-    }, this.delayOff || this.delay)
+    }, this.delayOff)
 
     this.addCloseCancelListeners()
   }

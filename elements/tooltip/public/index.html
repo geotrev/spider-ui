@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Spider UI Demo</title>
+    <title>@spider-ui/tooltip</title>
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -99,13 +99,25 @@
       <button slot="trigger">1000ms</button>
       <div slot="content">Oak's words echoed...</div>
     </spider-tooltip>
-    <spider-tooltip delay-on="100" delay-off="700">
-      <button slot="trigger">delay-on 100, delay-off 700</button>
+    <spider-tooltip delay="1000" delay-off="50">
+      <button slot="trigger">delay-off=50, delay=1000</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip delay="1000" delay-on="50">
+      <button slot="trigger">delay-on=50, delay=1000</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip delay-off="50">
+      <button slot="trigger">delay-off=50</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip delay-on="50">
+      <button slot="trigger">delay-on=50</button>
       <div slot="content">Oak's words echoed...</div>
     </spider-tooltip>
 
     <h3>Remove a node (should not print errors in console)</h3>
-    <button id="remover">Remove tooltip element</button>
+    <button id="remover">Remove an element</button>
 
     <!-- END TEST CASES -->
     <script src="bundle.js"></script>

@@ -165,28 +165,41 @@ describe("@spider-ui/tooltip", () => {
     })
   })
 
-  describe("delay", () => {
+  describe("show/hide delay", () => {
     afterEach(unmount)
 
     const DELAY = 200
     const DELAY_ON = 100
-    const DELAY_OFF = 250
+    const DELAY_OFF = 50
 
-    it(`delays by custom delay: ${DELAY}ms`, () => {
-      const fixture = mountFixture(tagName, slotContent, {
-        [Attributes.DELAY]: String(DELAY),
+    describe("[delay]", () => {
+      let fixture, root, trigger
+
+      beforeEach(() => {
+        fixture = mountFixture(tagName, slotContent, {
+          [Attributes.DELAY]: String(DELAY),
+        })
+        root = queryRoot(fixture, ".tooltip")
+        trigger = fixture.querySelector(Slots.TRIGGER)
+        events.mouseover(trigger)
+        jest.advanceTimersByTime(DELAY)
       })
-      const root = queryRoot(fixture, ".tooltip")
-      const trigger = fixture.querySelector(Slots.TRIGGER)
-      events.mouseover(trigger)
-      jest.advanceTimersByTime(DELAY)
-      expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
+
+      it(`shows with custom delay: ${DELAY}ms`, () => {
+        expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
+      })
+
+      it(`hides with custom delay: ${DELAY}ms`, () => {
+        events.mouseout(trigger)
+        jest.advanceTimersByTime(DELAY)
+        expect(root.classList.contains(ClassNames.HIDDEN)).toBe(true)
+      })
     })
 
     it(`shows with custom delay-on: ${DELAY_ON}ms`, () => {
       const fixture = mountFixture(tagName, slotContent, {
+        [Attributes.DELAY]: String(DELAY),
         [Attributes.DELAY_ON]: String(DELAY_ON),
-        [Attributes.DELAY_OFF]: String(DELAY_OFF),
       })
       const root = queryRoot(fixture, ".tooltip")
       const trigger = fixture.querySelector(Slots.TRIGGER)
@@ -197,8 +210,33 @@ describe("@spider-ui/tooltip", () => {
 
     it(`hides with custom delay-off: ${DELAY_OFF}ms`, () => {
       const fixture = mountFixture(tagName, slotContent, {
-        [Attributes.DELAY_ON]: String(DELAY_ON),
+        [Attributes.DELAY]: String(DELAY),
         [Attributes.DELAY_OFF]: String(DELAY_OFF),
+      })
+      const root = queryRoot(fixture, ".tooltip")
+      const trigger = fixture.querySelector(Slots.TRIGGER)
+      events.mouseover(trigger)
+      jest.advanceTimersByTime(DELAY)
+      expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
+      events.mouseout(trigger)
+      jest.advanceTimersByTime(DELAY_OFF)
+      expect(root.classList.contains(ClassNames.HIDDEN)).toBe(true)
+    })
+
+    it("falls back to default delay-on if not given", () => {
+      const fixture = mountFixture(tagName, slotContent, {
+        [Attributes.DELAY_OFF]: String(DELAY_OFF),
+      })
+      const root = queryRoot(fixture, ".tooltip")
+      const trigger = fixture.querySelector(Slots.TRIGGER)
+      events.mouseover(trigger)
+      jest.advanceTimersByTime(TIMEOUT_DELAY)
+      expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
+    })
+
+    it("falls back to default delay-off if not given", () => {
+      const fixture = mountFixture(tagName, slotContent, {
+        [Attributes.DELAY_ON]: String(DELAY_ON),
       })
       const root = queryRoot(fixture, ".tooltip")
       const trigger = fixture.querySelector(Slots.TRIGGER)
@@ -206,7 +244,7 @@ describe("@spider-ui/tooltip", () => {
       jest.advanceTimersByTime(DELAY_ON)
       expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
       events.mouseout(trigger)
-      jest.advanceTimersByTime(DELAY_OFF)
+      jest.advanceTimersByTime(TIMEOUT_DELAY)
       expect(root.classList.contains(ClassNames.HIDDEN)).toBe(true)
     })
   })

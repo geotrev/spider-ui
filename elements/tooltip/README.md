@@ -69,7 +69,7 @@ spider-tooltip:not(:defined) {
 
 ### `position`
 
-> Configures which side of the trigger to show the tooltip.<br/><br/>Default: `'block-start'`<br/><br/>Accepted Values: `'block-start'` | `'block-end'` | `'inline-start'` | `'inline-end'`
+> Configures which side of the trigger to show the tooltip.<br/><br/>Default: `"block-start"`<br/><br/>Accepted Values: `"block-start"` | `"block-end"` | `"inline-start"` | `"inline-end"`
 
 ```html
 <spider-tooltip position="inline-end">...</spider-tooltip>
@@ -77,7 +77,7 @@ spider-tooltip:not(:defined) {
 
 ### `show-arrow`
 
-> Configures the tooltip to show an arrow pointing to the trigger.<br/><br/>Default: `false`.
+> Configures the tooltip to show an arrow pointing to the trigger.
 
 ```html
 <spider-tooltip show-arrow>...</spider-tooltip>
@@ -85,31 +85,31 @@ spider-tooltip:not(:defined) {
 
 ### `mode`
 
-> Configures the visual theme of the tooltip.<br/><br/>Default: `'dark'`.<br/><br/>Accepted Values: `'dark'` | `'light'`.
+> Configures the base visual theme of the tooltip.<br/><br/>Default: `"dark"`.<br/><br/>Accepted Values: `"dark"` | `"light"`.
 
 ```html
 <spider-tooltip mode="light">...</spider-tooltip>
 ```
 
-### `delay`
-
-> Configures a custom show/hide delay duration (in milliseconds) for tooltip content. If defined, both `delay-on` and `delay-off` will be ignored.<br/><br/>Default: `'300'`.
-
-```html
-<spider-tooltip delay="500">...</spider-tooltip>
-```
-
 ### `delay-on`
 
-> Configures a custom show delay duration (in milliseconds) for tooltip content. Must be configured with `delay-off`.<br/><br/>Default: `undefined`.
+> Configures a custom show delay duration (in milliseconds) for the tooltip.
 
 ```html
-<spider-tooltip delay="500">...</spider-tooltip>
+<spider-tooltip delay-on="500">...</spider-tooltip>
 ```
 
 ### `delay-off`
 
-> Configures a custom hide delay duration (in milliseconds) for tooltip content. Must be configured with `delay-on`.<br/><br/>Default: `undefined`.
+> Configures a custom hide delay duration (in milliseconds) for the tooltip.
+
+```html
+<spider-tooltip delay-off="500">...</spider-tooltip>
+```
+
+### `delay`
+
+> Configures both the delay-on and delay-off delay durations of the tooltip. Use `delay-on` and `delay-off` to override the show and hide delay durations, respectively.<br/><br/>Default: `"300"`.
 
 ```html
 <spider-tooltip delay="500">...</spider-tooltip>
@@ -119,7 +119,7 @@ spider-tooltip:not(:defined) {
 
 ### trigger
 
-The trigger element for the tooltip. This can be any element, but it's recommended to use a focusable element (e.g., a `button`) for better accessibility.
+The trigger element for the tooltip. This can be any element, but it's recommended to be a focusable element (e.g., a `button`) for better accessibility.
 
 ### content
 
