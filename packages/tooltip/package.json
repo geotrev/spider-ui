@@ -23,7 +23,6 @@
   "devDependencies": {
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
-    "@rollup/plugin-alias": "^3.1.1",
     "@rollup/plugin-babel": "^5.2.0",
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
@@ -56,14 +55,15 @@
     "tooltip"
   ],
   "directories": {
-    "lib": "lib",
     "dist": "dist",
+    "lib": "lib",
     "src": "src",
     "test": "__tests__"
   },
   "files": [
     "lib/*.{js,map}",
-    "dist/*.{js,map}"
+    "dist/*.{js,map}",
+    "src/*.js"
   ],
   "publishConfig": {
     "access": "public"

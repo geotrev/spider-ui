@@ -49,8 +49,8 @@ const moduleOutputs = [FORMAT_ES, FORMAT_CJS].map((format) => ({
 
 let output = [...moduleOutputs]
 
-// Only create dist outputs for `elements/*` packages
-if (packagePath.includes("elements/")) {
+// Only create dist outputs for modules `packages/*`
+if (packagePath.includes("packages/")) {
   const distOutputFiles = [
     `dist/${COMPONENT_NAME}.js`,
     `dist/${COMPONENT_NAME}.min.js`,

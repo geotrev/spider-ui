@@ -1,0 +1,6 @@
+__tests__/
+.jest/
+public/
+.browserslistrc
+babel.config.json
+jest.config.json

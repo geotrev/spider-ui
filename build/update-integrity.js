@@ -198,7 +198,7 @@ const updateDemoIntegrity = (basePath, targetFile) => {
   console.log(resultMessage)
 }
 
-glob.sync(path.resolve(process.cwd(), "elements/*/")).forEach((basePath) => {
+glob.sync(path.resolve(process.cwd(), "packages/*/")).forEach((basePath) => {
   console.log("\n===============================")
   // Update documentation
   updateReadMeIntegrity(basePath, "README.md")

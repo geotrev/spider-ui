@@ -4,6 +4,10 @@ Build applications with modern interaction patterns in regular ol' HTML. Spider 
 
 All elements use [`upgraded-element`](https://github.com/geotrev/upgraded-element) as their base class, which is also the only dependency of the library.
 
+TODO:
+
+- [ ] update package version on CDN script links in readme/demo files.
+
 ## Contribute
 
 Please feel free to file bugs and pull requests as you encounter problems. Ideally, include the behavior you're seeing, the behavior you expect, and reproduction steps
@@ -86,7 +90,7 @@ $ npm run test:watch
 
 ## Support
 
-It's recommended to use Spider UI web components in a modern browser stack. Out of the box, IE 11 is not supported, although there could be a polyfilled version in the future.
+It's recommended to use Spider UI web elements in a modern browser stack. Out of the box, IE 11 is not supported, although there could be a polyfilled version in the future.
 
 `@spider-ui/tooltip` relies on these JavaScript features:
 

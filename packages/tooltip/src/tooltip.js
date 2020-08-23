@@ -115,6 +115,8 @@ class SpiderTooltip extends UpgradedElement {
     this.listen("blur", this.content, this.handleClose)
     this.listen("mouseout", this.trigger, this.handleClose)
     this.listen("mouseout", this.content, this.handleClose)
+
+    // This should use globalEventRegistry
     this.listen("keydown", window, this.handleKeydown)
   }
 
@@ -143,6 +145,7 @@ class SpiderTooltip extends UpgradedElement {
   }
 
   handleKeydown(event) {
+    // This should be used by globalEventRegistry
     if (this.isVisible && event.key === ESCAPE_KEY) {
       this.removeTimeout()
       this.isVisible = false

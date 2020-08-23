@@ -1,8 +1,27 @@
-# `<spider-tooltip></spider-tooltip>`
+# `@spider-ui/tooltip`
 
-A tooltip web component.
+Create an accessible tooltip on an any element. The tooltip will show on focus or hover.
+
+- [Usage](#usage)
+- [Install](#install)
+  - [NPM](#npm)
+  - [CDN/Bundle](#cdn-bundle)
+- [Controlling Visibility](#controlling-visibility)
+- [Attributes](#attributes)
+- [Slots](#slots)
 
 ## Usage
+
+To use the element, use the `spider-tooltip` tag, and pass in your slotted elements:
+
+```html
+<spider-tooltip>
+  <button slot="trigger">Learn More</button>
+  <div slot="content">You've already learned too much.</div>
+</spider-tooltip>
+```
+
+## Install
 
 `@spider-ui/tooltip` requires minimal set up with either npm or the distribution code.
 
@@ -20,15 +39,6 @@ Then import the element in your JavaScript:
 import "@spider-ui/tooltip"
 ```
 
-Then use it:
-
-```html
-<spider-tooltip>
-  <button slot="trigger">Learn More</button>
-  <div slot="content">You've already learned too much.</div>
-</spider-tooltip>
-```
-
 ### Bundle
 
 If you don't want to use npm, you can grab the source from jsdelivr CDN.
@@ -37,7 +47,7 @@ If you don't want to use npm, you can grab the source from jsdelivr CDN.
 <!-- Use the unminified bundle in development -->
 <script
   type="text/javascript"
-  src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@0.2.1/dist/tooltip.js"
+  src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@0.2.2/dist/tooltip.js"
   integrity="sha256-808dLgCMN6W2nAlGIHvQsRl3te9/a5n5zIy/ocK7tiE="
   crossorigin="anonymous"
 ></script>
@@ -45,7 +55,7 @@ If you don't want to use npm, you can grab the source from jsdelivr CDN.
 <!-- Or use the minified/uglified bundle in production -->
 <script
   type="text/javascript"
-  src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@0.2.1/dist/tooltip.min.js"
+  src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@0.2.2/dist/tooltip.min.js"
   integrity="sha256-YWEyl1icf2rpBrsaRUhd6y+A6UJU2cNx/oLSmrfwTts="
   crossorigin="anonymous"
 ></script>
@@ -55,15 +65,17 @@ _NOTE: Make sure to include a script link to [`upgraded-element`]() before `spid
 
 Then you're good to go!
 
-### Visibility Check
+## Controlling Visibility
 
-Because slotted elements aren't hidden in the DOM on first render, you may see a flash of unstyled content when using this component. You can work around this by adding the following to your app's stylesheet:
+Because slotted elements aren't hidden in the DOM on first render, you may see your tooltip's unstyled content on page load. You can fix around this by adding the following to your app's stylesheet:
 
 ```css
 spider-tooltip:not(:defined) {
   display: none;
 }
 ```
+
+Unfortunately, however, this won't work in IE 11.
 
 ## Attributes
 
@@ -124,7 +136,3 @@ The trigger element for the tooltip. This can be any element, but it's recommend
 ### content
 
 The content of the tooltip. It's recommended to use a basic `div` or `span` as the slotted element.
-
-## Contribute
-
-[Learn how to contribute.](https://github.com/geotrev/spider-ui/blob/master/README.md#contribute)
