@@ -1,7 +1,8 @@
 lerna-debug.log
-node_modules/
+npm-error.log
 
-packages/*/coverage/
-packages/**/lib/
-packages/*/node_modules/
-packages/**/public/bundle.js
+node_modules/
+lib/
+dist/
+
+elements/**/public/bundle.js

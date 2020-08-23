@@ -1,0 +1,21 @@
+@use "sass:string";
+@use "variables" as *;
+
+@function replace-string($string, $search, $replace: "") {
+  $index: string.index($string, $search);
+
+  @if $index {
+    @return string.slice($string, 1, $index - 1) + $replace +
+      replace-string(
+        string.slice($string, $index + string.length($search)),
+        $search,
+        $replace
+      );
+  }
+
+  @return $string;
+}
+
+@function px-to-em($numerator, $divisor: $global-font-size) {
+  @return #{$numerator / $divisor}em;
+}

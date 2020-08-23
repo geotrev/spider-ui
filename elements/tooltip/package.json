@@ -1,0 +1,79 @@
+{
+  "name": "@spider-ui/tooltip",
+  "version": "0.2.2",
+  "description": "Bare tooltip web component.",
+  "scripts": {
+    "test": "BABEL_ENV=test jest",
+    "test:watch": "BABEL_ENV=test jest --watch",
+    "build": "BABEL_ENV=build rollup -c node:@spider-ui/rollup-config-build",
+    "build:publish": "BABEL_ENV=publish rollup -c node:@spider-ui/rollup-config-build",
+    "watch": "BABEL_ENV=build rollup -c node:@spider-ui/rollup-config-demo -w",
+    "preversion": "npm test",
+    "postversion": "npm run build:publish"
+  },
+  "author": "George Treviranus <hello@geotrev.com>",
+  "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/tooltip#readme",
+  "license": "MIT",
+  "main": "lib/tooltip.cjs.js",
+  "module": "lib/tooltip.es.js",
+  "type": "module",
+  "peerDependencies": {
+    "upgraded-element": ">= 0.4.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "@rollup/plugin-alias": "^3.1.1",
+    "@rollup/plugin-babel": "^5.2.0",
+    "@rollup/plugin-commonjs": "^15.0.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@spider-ui/rollup-config-build": "^0.2.2",
+    "@spider-ui/rollup-config-demo": "^0.2.2",
+    "@spider-ui/sass": "^0.2.2",
+    "@spider-ui/test-helpers": "^0.2.2",
+    "autoprefixer": "^9.8.6",
+    "babel-jest": "^26.3.0",
+    "jest": "^26.4.0",
+    "postcss": "^7.0.32",
+    "rollup": "^2.26.4",
+    "rollup-plugin-livereload": "^1.3.0",
+    "rollup-plugin-scss": "^2.6.0",
+    "rollup-plugin-serve": "^1.0.3",
+    "rollup-plugin-terser": "^7.0.0",
+    "sass": "^1.26.10",
+    "upgraded-element": "^0.4.0"
+  },
+  "keywords": [
+    "style",
+    "styles",
+    "css",
+    "sass",
+    "component",
+    "web component",
+    "html",
+    "web",
+    "spider-ui",
+    "tooltip"
+  ],
+  "directories": {
+    "lib": "lib",
+    "dist": "dist",
+    "src": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib/*.{js,map}",
+    "dist/*.{js,map}"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geotrev/spider-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/geotrev/spider-ui/issues"
+  },
+  "gitHead": "8b5ce615252eacff8441c7d21c7206451b5db7f9"
+}

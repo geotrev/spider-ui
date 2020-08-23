@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>@spider-ui/tooltip</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <style>
+      html {
+        font-family: sans-serif;
+      }
+
+      spider-tooltip:not(:defined) {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- BEGIN TEST CASES -->
+
+    <h2>@spider-ui/tooltip</h2>
+
+    <h3>default</h3>
+    <spider-tooltip>
+      <button slot="trigger">block-start (default)</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip position="block-end">
+      <button slot="trigger">block-end</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip position="inline-start">
+      <button slot="trigger">inline-start</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip position="inline-end">
+      <button slot="trigger">inline-end</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+
+    <h3>mode="light"</h3>
+    <spider-tooltip mode="light">
+      <button slot="trigger">block-start (default)</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip mode="light" position="block-end">
+      <button slot="trigger">block-end</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip mode="light" position="inline-start">
+      <button slot="trigger">inline-start</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip mode="light" position="inline-end">
+      <button slot="trigger">inline-end</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+
+    <h3>show-arrow</h3>
+    <spider-tooltip show-arrow>
+      <button slot="trigger">block-start (default)</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip show-arrow position="block-end">
+      <button slot="trigger">block-end</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip show-arrow position="inline-start">
+      <button slot="trigger">inline-start</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip show-arrow position="inline-end">
+      <button slot="trigger">inline-end</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+
+    <h3>show-arrow mode="light"</h3>
+    <spider-tooltip mode="light" show-arrow>
+      <button slot="trigger">block-start (default)</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip mode="light" show-arrow position="block-end">
+      <button slot="trigger">block-end</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip mode="light" show-arrow position="inline-start">
+      <button slot="trigger">inline-start</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip mode="light" show-arrow position="inline-end">
+      <button slot="trigger">inline-end</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+
+    <h3>custom delay</h3>
+    <spider-tooltip delay="1000">
+      <button slot="trigger">1000ms</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip delay="1000" delay-off="50">
+      <button slot="trigger">delay-off=50, delay=1000</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip delay="1000" delay-on="50">
+      <button slot="trigger">delay-on=50, delay=1000</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip delay-off="50">
+      <button slot="trigger">delay-off=50</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+    <spider-tooltip delay-on="50">
+      <button slot="trigger">delay-on=50</button>
+      <div slot="content">Oak's words echoed...</div>
+    </spider-tooltip>
+
+    <h3>Remove a node (should not print errors in console)</h3>
+    <button id="remover">Remove an element</button>
+
+    <!-- END TEST CASES -->
+    <script src="bundle.js"></script>
+    <script>
+      const tooltip = document.querySelector("spider-tooltip")
+      const target = document.querySelector("#remover")
+      target.onclick = () => tooltip.parentNode.removeChild(tooltip)
+    </script>
+
+    <!--
+      DIST CDN TEST:
+      - COMMENT OUT BUNDLE.JS
+      - UNCOMMENT BELOW SCRIPTS
+    -->
+
+    <!-- <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/upgraded-element@0.4.0/dist/upgraded-element.min.js"
+      integrity="sha256-waCWKicYMCJic4tBKdkV54qhuGsq8J9JWQY+QmFVjj8="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@0.2.2/dist/tooltip.min.js"
+      integrity="sha256-YWEyl1icf2rpBrsaRUhd6y+A6UJU2cNx/oLSmrfwTts="
+      crossorigin="anonymous"
+    ></script> -->
+  </body>
+</html>
