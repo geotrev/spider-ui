@@ -1,7 +1,7 @@
 {
   "name": "@spider-ui/sass",
   "private": true,
-  "version": "0.2.0-alpha.3",
+  "version": "0.2.2",
   "description": "Base styles for Spider UI components.",
   "author": "George Treviranus <hello@geotrev.com>",
   "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/sass#readme",

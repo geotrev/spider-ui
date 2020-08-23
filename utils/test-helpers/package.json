@@ -1,7 +1,7 @@
 {
   "name": "@spider-ui/test-helpers",
   "private": true,
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Test helper utilities for Spider UI components.",
   "author": "George Treviranus <hello@geotrev.com>",
   "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/test#readme",
@@ -20,8 +20,8 @@
     "@rollup/plugin-babel": "^5.2.0",
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
-    "@spider-ui/rollup-config-build": "^0.2.1",
-    "@spider-ui/sass": "^0.2.0-alpha.3",
+    "@spider-ui/rollup-config-build": "^0.2.2",
+    "@spider-ui/sass": "^0.2.2",
     "rollup": "^2.26.4",
     "rollup-plugin-terser": "^7.0.0"
   },
