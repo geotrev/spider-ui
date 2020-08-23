@@ -1,24 +1,20 @@
 #!/usr/bin/env node
 
-import fs from "fs"
 import path from "path"
-import glob from "glob"
 import Hashes from "jshashes"
+import {
+  UPGRADED_ELEMENT_NAME,
+  getRootFileContent,
+  getFileContent,
+  writeFileContent,
+} from "./helpers.js"
 
 // Constants
-const FILE_FORMAT = "utf-8"
-const UPGRADED_ELEMENT_NAME = "upgraded-element"
+
 const UPGRADED_ELEMENT_DIST_PATH = `node_modules/${UPGRADED_ELEMENT_NAME}/dist/${UPGRADED_ELEMENT_NAME}.min.js`
 const B64_PATTERN = /sha256-([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}|[A-Za-z0-9+/]{2})=/g
 
 // Helpers
-const getFileContent = (basePath, filePath) => {
-  return fs.readFileSync(path.resolve(basePath, filePath), FILE_FORMAT)
-}
-
-const getRootFileContent = (basePath, filePath) => {
-  return fs.readFileSync(path.resolve(process.cwd(), filePath), FILE_FORMAT)
-}
 
 const getSHA = (data) => {
   return new Hashes.SHA256().b64(data)
@@ -32,18 +28,18 @@ const nextBundleMinSHA = (basePath, name) => {
   return getSHA(getFileContent(basePath, `dist/${name}.min.js`))
 }
 
-const nextUpgradedElementMinSHA = (basePath) => {
-  return getSHA(getRootFileContent(basePath, UPGRADED_ELEMENT_DIST_PATH))
+const nextUpgradedElementMinSHA = () => {
+  return getSHA(getRootFileContent(UPGRADED_ELEMENT_DIST_PATH))
 }
 
 /**
  * Updates readme sri hashes
  */
-const updateReadMeIntegrity = (basePath, targetFile) => {
+export const updateReadMeIntegrity = (basePath, targetFile) => {
   const pathParts = basePath.split("/")
   const PACKAGE_SUFFIX = pathParts[pathParts.length - 1]
   const targetFilePath = path.resolve(basePath, targetFile)
-  const targetFileContent = fs.readFileSync(targetFilePath, FILE_FORMAT)
+  const targetFileContent = getFileContent(basePath, targetFile)
 
   /**
    * Detect existing hashes.
@@ -54,11 +50,11 @@ const updateReadMeIntegrity = (basePath, targetFile) => {
   )
 
   if (currentBundleSHA && currentBundleMinSHA) {
-    console.log(`
--> Detected content hashes in ${PACKAGE_SUFFIX}/${targetFile}. Attempting update...`)
+    console.log(`\n    Detected content hashes. Attempting update...`)
   } else {
-    console.error(`
--> Couldn't find hash pairs. Something went wrong. Exiting...`)
+    console.error(
+      `\n    Couldn't find hash pairs. Something went wrong. Skipping...`
+    )
     return
   }
 
@@ -76,7 +72,7 @@ const updateReadMeIntegrity = (basePath, targetFile) => {
     currentBundleSHA === formattedBundleSHA &&
     currentBundleMinSHA === formattedBundleMinSHA
   ) {
-    console.info("-> Integrity hasn't changed. Exiting...")
+    console.info("    Integrity hasn't changed. Skipping...")
     return
   }
 
@@ -90,23 +86,21 @@ const updateReadMeIntegrity = (basePath, targetFile) => {
     .replace(currentBundleSHA, formattedBundleSHA)
     .replace(currentBundleMinSHA, formattedBundleMinSHA)
 
-  fs.writeFileSync(targetFilePath, nextFileContent, FILE_FORMAT)
+  writeFileContent(basePath, targetFilePath, nextFileContent)
 
-  console.log(`-> Content hashes updated in ${PACKAGE_SUFFIX}/${targetFile}
-    - Bundle: ${formattedBundleSHA}
-    - Bundle: ${formattedBundleMinSHA}
-  `)
+  console.log(`    Content hashes updated.
+      - Bundle: ${formattedBundleSHA}
+      - Bundle: ${formattedBundleMinSHA}`)
 }
 
 /**
  * Updates public/index.html sri hashes
  */
-const updateDemoIntegrity = (basePath, targetFile) => {
+export const updateDemoIntegrity = (basePath, targetFile) => {
   const pathParts = basePath.split("/")
   const PACKAGE_SUFFIX = pathParts[pathParts.length - 1]
   const PACKAGE_NAME = `@spider-ui/${PACKAGE_SUFFIX}`
-  const targetFilePath = path.resolve(basePath, targetFile)
-  const targetFileContent = fs.readFileSync(targetFilePath, FILE_FORMAT)
+  const targetFileContent = getFileContent(basePath, targetFile)
 
   /**
    * Detect existing hashes.
@@ -117,18 +111,16 @@ const updateDemoIntegrity = (basePath, targetFile) => {
   )
 
   if (upgradedElementMinSHA && currentBundleMinSHA) {
-    console.log(`
--> Detected content hashes in ${PACKAGE_SUFFIX}/${targetFile}. Attempting update...`)
+    console.log(`\n    Detected content hashes. Attempting update...`)
   } else {
-    console.error(`
--> Couldn't find hashes. Something went wrong. Exiting...`)
+    console.error(
+      `\n    Couldn't find hashes. Something went wrong. Skipping...`
+    )
     return
   }
 
   const formatSHA = (hash) => `sha256-${hash}`
-  const formattedUpgradedElementMinSHA = formatSHA(
-    nextUpgradedElementMinSHA(basePath)
-  )
+  const formattedUpgradedElementMinSHA = formatSHA(nextUpgradedElementMinSHA())
   const formattedBundleMinSHA = formatSHA(
     nextBundleMinSHA(basePath, PACKAGE_SUFFIX)
   )
@@ -141,7 +133,7 @@ const updateDemoIntegrity = (basePath, targetFile) => {
     upgradedElementMinSHA === formattedUpgradedElementMinSHA &&
     currentBundleMinSHA === formattedBundleMinSHA
   ) {
-    console.info("-> Integrity hasn't changed. Exiting...")
+    console.info("    Integrity hasn't changed. Skipping...")
     return
   }
 
@@ -169,11 +161,11 @@ const updateDemoIntegrity = (basePath, targetFile) => {
     )
   }
 
-  fs.writeFileSync(targetFilePath, nextFileContent, FILE_FORMAT)
+  writeFileContent(basePath, targetFile, nextFileContent)
 
-  const noChange = (name, msg) => `${msg}\n    - ${name} unchanged. Skipped.`
-  const didChange = (name, msg, hash) => `${msg}\n    - ${name}: ${hash}`
-  let resultMessage = `-> Content hashes updated in ${PACKAGE_SUFFIX}/${targetFile}`
+  const noChange = (name, msg) => `${msg}\n      - ${name} unchanged. Skipped.`
+  const didChange = (name, msg, hash) => `${msg}\n      - ${name}: ${hash}`
+  let resultMessage = `    Content hashes updated`
 
   if (upgradedElementUpdated) {
     resultMessage = didChange(
@@ -197,13 +189,3 @@ const updateDemoIntegrity = (basePath, targetFile) => {
 
   console.log(resultMessage)
 }
-
-glob.sync(path.resolve(process.cwd(), "packages/*/")).forEach((basePath) => {
-  console.log("\n===============================")
-  // Update documentation
-  updateReadMeIntegrity(basePath, "README.md")
-  // Update demo html pages for static asset testing
-  updateDemoIntegrity(basePath, "public/index.html")
-
-  console.log("\n-> Done ✨")
-})

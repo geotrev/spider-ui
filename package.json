@@ -12,9 +12,9 @@
     "scss:lint": "stylelint '**/*.scss'",
     "scss:lint:check": "stylelint-config-prettier-check",
     "lint": "npm run scss:lint && npm run js:lint",
-    "prepublish:build-integrity": "node build/update-integrity.js",
-    "prepublish:bump-origin": "git add . && git commit -m 'adds new hashes' && git push && git push --tags",
-    "prepublishOnly": "npm run prepublish:build-integrity && npm run prepublish:bump-origin"
+    "prepublish:update-cdn-tags": "node build/update-cdn-tags.js",
+    "prepublish:update-origin": "git add . && git commit -m 'adds new hashes' && git push && git push --tags",
+    "prepublishOnly": "npm run prepublish:update-cdn-tags && npm run prepublish:update-origin"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
