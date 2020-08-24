@@ -1,6 +1,6 @@
 {
   "name": "@spider-ui/tooltip",
-  "version": "0.2.3-alpha.0",
+  "version": "0.2.3-alpha.1",
   "description": "Bare tooltip web component.",
   "scripts": {
     "test": "BABEL_ENV=test jest",
