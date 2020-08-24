@@ -1,6 +1,5 @@
 {
   "name": "@spider-ui/global-event-registry",
-  "private": true,
   "version": "0.2.3-alpha.0",
   "description": "Context utility for tracking global events in Spider UI elements.",
   "author": "george <hello@geotrev.com>",
