@@ -18,7 +18,8 @@
   "module": "lib/tooltip.es.js",
   "type": "module",
   "peerDependencies": {
-    "upgraded-element": ">= 0.4.0"
+    "upgraded-element": ">= 0.4.0",
+    "@spider-ui/global-event-registry": ">= 0.2.3"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
@@ -30,6 +31,7 @@
     "@spider-ui/rollup-config-demo": "^0.2.3-alpha.0",
     "@spider-ui/sass": "^0.2.3-alpha.0",
     "@spider-ui/test-helpers": "^0.2.3-alpha.0",
+    "@spider-ui/global-event-registry": "^0.2.3-alpha.0",
     "autoprefixer": "^9.8.6",
     "babel-jest": "^26.3.0",
     "jest": "^26.4.0",

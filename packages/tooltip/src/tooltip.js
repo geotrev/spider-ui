@@ -1,4 +1,5 @@
 import { UpgradedElement, register } from "upgraded-element"
+import { globalEventRegistry } from "@spider-ui/global-event-registry"
 import {
   Attributes,
   Positions,
@@ -83,6 +84,14 @@ class SpiderTooltip extends UpgradedElement {
       } else {
         this.alignTooltip("width")
       }
+
+      globalEventRegistry.register({
+        events: ["keydown"],
+        id: this.elementId,
+        callback: this.handleKeydown,
+      })
+    } else {
+      globalEventRegistry.unregister(this.elementId)
     }
   }
 
@@ -115,9 +124,6 @@ class SpiderTooltip extends UpgradedElement {
     this.listen("blur", this.content, this.handleClose)
     this.listen("mouseout", this.trigger, this.handleClose)
     this.listen("mouseout", this.content, this.handleClose)
-
-    // This should use globalEventRegistry
-    this.listen("keydown", window, this.handleKeydown)
   }
 
   addOpenCancelListeners() {
@@ -145,7 +151,6 @@ class SpiderTooltip extends UpgradedElement {
   }
 
   handleKeydown(event) {
-    // This should be used by globalEventRegistry
     if (this.isVisible && event.key === ESCAPE_KEY) {
       this.removeTimeout()
       this.isVisible = false

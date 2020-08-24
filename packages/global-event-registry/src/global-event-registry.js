@@ -4,6 +4,7 @@ const contextExists = Symbol("#contextExists")
 const eventsReducer = Symbol("#eventsReducer")
 const isValidContext = Symbol("#isValidContext")
 const handleEvent = Symbol("#handleEvent")
+const STORE_KEY = "__GLOBAL_EVENT_REGISTRY__"
 
 /**
  * This utility is an event bus to track
@@ -53,7 +54,7 @@ class GlobalEventRegistry {
   // private
 
   [initContext]() {
-    if (typeof this.context === "undefined") return
+    if (STORE_KEY in window) return
 
     const context = []
     const registry = {}
@@ -61,7 +62,7 @@ class GlobalEventRegistry {
 
     // Add it to the window. This will ensure duplicates
     // never create multiple stores.
-    Object.defineProperty(window, "__GLOBAL_EVENT_REGISTRY__", {
+    Object.defineProperty(window, STORE_KEY, {
       value: context,
     })
   }
