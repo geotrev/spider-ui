@@ -47,16 +47,16 @@ If you don't want to use npm, you can grab the source from jsdelivr CDN.
 <!-- Use the unminified bundle in development -->
 <script
   type="text/javascript"
-  src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@0.2.3-alpha.2/dist/tooltip.js"
-  integrity="sha256-+t13d2TZNGI3JdoHtoXC4jmCDYJFvM+7L7wieytiUoE="
+  src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@0.2.3/dist/tooltip.js"
+  integrity="sha256-+48jYCqDQgXCbx+LmrCGJ0jh5OD7gDUvuP91rw1MV+U="
   crossorigin="anonymous"
 ></script>
 
 <!-- Or use the minified/uglified bundle in production -->
 <script
   type="text/javascript"
-  src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@0.2.3-alpha.2/dist/tooltip.min.js"
-  integrity="sha256-hrNWV6Oish3O/e7H4JE7BqP45/OXVKUI9aCfXFRfb08="
+  src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@0.2.3/dist/tooltip.min.js"
+  integrity="sha256-V7OvzG3C0UnLWx2XfoDdKzDBuhPHLa0MkfAlts4DwFs="
   crossorigin="anonymous"
 ></script>
 ```

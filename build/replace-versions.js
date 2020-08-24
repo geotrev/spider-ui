@@ -39,7 +39,7 @@ export const updateReadMeVersions = (basePath, targetFile) => {
   writeFileContent(basePath, targetFile, nextFileContent)
 
   console.log(`    CDN link versions updated.
-      ${oldVersion.slice(1, -1)} -> ${nextVersion}`)
+      ${oldVersion.slice(1, -1)} -> ${nextVersion.slice(1, -1)}`)
 }
 
 /**
