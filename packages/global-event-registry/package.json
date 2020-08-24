@@ -2,7 +2,7 @@
   "name": "@spider-ui/global-event-registry",
   "version": "0.2.3-alpha.1",
   "description": "Context utility for tracking global events in Spider UI elements.",
-  "author": "george <hello@geotrev.com>",
+  "author": "George Treviranus <hello@geotrev.com>",
   "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/global-event-registry#readme",
   "license": "MIT",
   "main": "lib/index.cjs.js",
@@ -44,6 +44,9 @@
   },
   "bugs": {
     "url": "https://github.com/geotrev/spider-ui/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "gitHead": "e1f117cc497ee38fb7b4acff25ac4809068c3c07"
 }
