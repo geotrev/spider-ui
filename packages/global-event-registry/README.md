@@ -4,18 +4,15 @@ This is a utility for tracking and managing global DOM events. If you are workin
 
 ## Problem
 
-In a complex user interface, it's common for UI elements to use global events in order to manage their visible state. Examples of usage include
+In a complex user interface, it's common for UI elements to use global events in order to manage some app state (ones that don't use some form of global state with dispatchers, mind you). Examples of usage include using the escape key or clicking off of a context menu, to close it.
 
-- A modal element using the escape key to close itself.
-- A popover (tooltip, dropdown, etc) which closes either by clicking off of its popover content or pressing the escape key.
-
-So how do you prevent one escape key press from closing a dropdown inside a modal at the same time?
+So how do you prevent one escape key press from closing a dropdown inside a modal at the same time? That's what this package takes care of. 🎉
 
 ## Solution
 
-To work around competing global events (e.g., multiple elements registering the same type of event with trigger conditions), this utility implements a [global data store](#data-store), comprised of an [event context](#context) and [event registry](#registry), to track these events.
+To better manage global events (e.g., multiple elements registering the same type of event with identical trigger conditions), this utility implements a [global data store](#data-store), comprised of an [event context](#context) and [event registry](#registry), to track these events.
 
-While this tool is used in Spider UI elements, it can easily be used in your own application for keeping global event state in sync.
+While this tool is used in Spider UI elements, it can easily be used in your own application for keeping global event state in sync. Read me at the end of this README.
 
 - [Usage](#usage)
 - [Install](#install)
