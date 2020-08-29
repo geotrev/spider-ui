@@ -8,20 +8,20 @@ logger.begin("Updating CDN Tags")
 
 const metadata = getJSON("build/metadata.json")
 
-// Peer dependencies
+// External dependencies
 
-// const peers = {}
-// metadata.filter((data) => data.external ? peers[data.name] = data)
+const peers = {}
+metadata.forEach((data) => data.external && (peers[data.name] = data))
 
-const upgradedElement = metadata.filter(
-  (data) => data.name === "upgraded-element"
-)[0]
+// const upgradedElement = metadata.filter(
+//   (data) => data.name === "upgraded-element"
+// )[0]
 
-const globalEventRegistry = metadata.filter((data) =>
-  data.name.includes("global-event-registry")
-)[0]
+// const globalEventRegistry = metadata.filter((data) =>
+//   data.name.includes("global-event-registry")
+// )[0]
 
-// Everything else
+// Spider elements
 const spiderElements = metadata.filter(
   (data) => data.name !== "upgraded-element"
 )
@@ -46,137 +46,70 @@ const Patterns = {
 spiderElements.forEach((pkg) => {
   const { name, dir, sri, version } = pkg
 
-  /**
-   * README.md
-   */
+  logger.step(`\nUpdating package files for: ${name}`)
 
-  logger.step(`Updating file: ${name}/${Files.README}`)
+  Object.keys(Files).forEach((fileKey) => {
+    const fileTarget = Files[fileKey]
+    const filePath = `${dir}/${fileTarget}`
 
-  const readmeFile = getFileContent(dir, Files.README)
-  const readmeScriptTags = readmeFile
-    .match(Patterns.SCRIPT)
-    .filter((tag) => tag.includes("cdn.jsdelivr.net"))
-  const nextReadmeTags = readmeScriptTags.map((tag) => {
-    const isMin = tag.includes(".min.js")
-    const oldHash = tag.match(Patterns.SRI)[0]
-    const nextHash = isMin ? sri.bundleMin : sri.bundle
-    const oldVersion = tag.match(Patterns.VERSION)[0]
-    let updaters = []
+    if (fs.existsSync(filePath) !== false) {
+      logger.step(`--> Updating ${filePath}`)
 
-    if ([sri.bundleMin, sri.bundle].includes(oldHash)) {
-      logger.step("--> SRIs unchanged, skipping...")
-    } else {
-      updaters.push((tagString) => tagString.replace(oldHash, nextHash))
-      logger.step(`--> SRI hash changed, updated.`)
-    }
+      const fileContent = getFileContent(dir, fileTarget)
+      const fileScriptTags = fileContent
+        .match(Patterns.SCRIPT)
+        .filter((tag) => tag.includes("cdn.jsdelivr.net"))
 
-    if (version === oldVersion) {
-      logger.step("--> Version unchanged, skipping...")
-    } else {
-      updaters.push((tagString) =>
-        tagString.replace(oldVersion, `@${version}/`)
-      )
-      logger.step(`--> Version changed, updated.`)
-    }
-
-    if (updaters.length) {
-      return updaters.reduce(
-        (updatedTag, updater) => (updatedTag = updater(updatedTag)),
-        tag
-      )
-    }
-  })
-
-  let nextReadmeFile = readmeFile
-  readmeScriptTags.forEach((oldTag, i) => {
-    nextReadmeFile = nextReadmeFile.replace(oldTag, nextReadmeTags[i])
-  })
-  writeFileContent(dir, Files.README, nextReadmeFile)
-
-  /**
-   * public/index.html
-   */
-
-  const DEMO_PATH = `${dir}/public/index.html`
-  if (fs.existsSync(DEMO_PATH) !== false) {
-    logger.step(`Updating file: ${name}/${Files.DEMO_HTML}`)
-
-    const htmlFile = getFileContent(dir, Files.DEMO_HTML)
-    const htmlScriptTags = htmlFile
-      .match(Patterns.SCRIPT)
-      .filter((tag) => tag.includes("cdn.jsdelivr.net"))
-
-    const nextHtmlTags = htmlScriptTags.map((tag) => {
-      const isMin = tag.includes(".min.js")
-      const oldHash = tag.match(Patterns.SRI)[0]
-      const nextHash = isMin ? sri.bundleMin : sri.bundle
-      const oldVersion = tag.match(Patterns.VERSION)[0]
-      const isUpgradedElement = tag.includes("upgraded-element")
-      const isGlobalEventRegistry = tag.includes("global-event-registry")
-      let updaters = []
-
-      if (isUpgradedElement || isGlobalEventRegistry) {
-        logger.step(
-          `--> Updating external dependency: ${
-            isUpgradedElement
-              ? "upgraded-element"
-              : "@spider-ui/global-event-registry"
-          }`
+      const nextScriptTags = fileScriptTags.map((tag) => {
+        const isMin = tag.includes(".min.js")
+        const oldHash = tag.match(Patterns.SRI)[0]
+        const nextHash = isMin ? sri.bundleMin : sri.bundle
+        const oldVersion = tag.match(Patterns.VERSION)[0]
+        const externals = Object.keys(peers).filter((peerName) =>
+          tag.includes(peerName)
         )
-      }
+        const externalName = externals.length ? externals[0] : null
 
-      if ([sri.bundleMin, sri.bundle].includes(oldHash)) {
-        logger.step("--> SRIs unchanged, skipping...")
-      } else {
-        updaters.push((tagString) => tagString.replace(oldHash, nextHash))
-        logger.step(`--> SRI hash changed, updated.`)
-      }
+        // If known externals were encountered, update them
 
-      if (version === oldVersion) {
-        logger.step("--> Version unchanged, skipping...")
-      } else {
-        updaters.push((tagString) => tagString.replace(oldVersion, version))
-        logger.step(`--> Version changed, updated.`)
-      }
+        if (externalName) {
+          const peer = peers[externalName]
+          return tag
+            .replace(Patterns.SRI, isMin ? peer.sri.bundleMin : peer.sri.bundle)
+            .replace(Patterns.VERSION, `@${peer.version}/`)
+        }
 
-      // Update known external dependencies if we encounter them:
+        // Otherwise, update the element CDN
 
-      if (isUpgradedElement) {
-        return tag
-          .replace(
-            Patterns.SRI,
-            isMin ? upgradedElement.sri.bundleMin : upgradedElement.sri.bundle
+        let updaters = []
+
+        if (![sri.bundleMin, sri.bundle].includes(oldHash)) {
+          updaters.push((tagString) => tagString.replace(oldHash, nextHash))
+        }
+
+        if (version !== oldVersion) {
+          updaters.push((tagString) =>
+            tagString.replace(oldVersion, `@${version}/`)
           )
-          .replace(Patterns.VERSION, `@${upgradedElement.version}/`)
-      }
+        }
 
-      if (isGlobalEventRegistry) {
-        return tag
-          .replace(
-            Patterns.SRI,
-            isMin
-              ? globalEventRegistry.sri.bundleMin
-              : globalEventRegistry.sri.bundle
+        if (updaters.length) {
+          return updaters.reduce(
+            (updatedTag, updater) => (updatedTag = updater(updatedTag)),
+            tag
           )
-          .replace(Patterns.VERSION, `@${globalEventRegistry.version}/`)
-      }
+        }
+      })
 
-      // Otherwise, update the star of the show:
-
-      if (updaters.length) {
-        return updaters.reduce(
-          (updatedTag, updater) => (updatedTag = updater(updatedTag)),
-          tag
-        )
-      }
-    })
-
-    let nextHtmlFile = htmlFile
-    htmlScriptTags.forEach((oldTag, i) => {
-      nextHtmlFile = nextHtmlFile.replace(oldTag, nextHtmlTags[i])
-    })
-    writeFileContent(dir, Files.DEMO_HTML, nextHtmlFile)
-  }
-})
+      let nextFileContent = fileContent
+      fileScriptTags.forEach((oldTag, i) => {
+        nextFileContent = nextFileContent.replace(oldTag, nextScriptTags[i])
+      })
+      writeFileContent(dir, fileTarget, nextFileContent)
+    } else {
+      logger.step(`--> File not found: ${filePath}. Skipping.`)
+    }
+  }) // end Object.keys
+}) // end spiderElements.forEach
 
 logger.finish()
