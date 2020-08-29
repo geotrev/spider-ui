@@ -1,7 +1,7 @@
 {
   "name": "@spider-ui/rollup-config-build",
   "private": true,
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Rollup config for building a Spider UI component",
   "author": "George Treviranus <hello@geotrev.com>",
   "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/utils#readme",
