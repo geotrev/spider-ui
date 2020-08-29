@@ -12,7 +12,7 @@
   {
     "name": "@spider-ui/global-event-registry",
     "dir": "packages/global-event-registry",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "external": true,
     "sri": {
       "bundle": "sha256-Vxh2iNMf6A5b25uuK4Bk8MlJa1tffME8Tj3NBlqc6YA=",
@@ -22,10 +22,10 @@
   {
     "name": "@spider-ui/tooltip",
     "dir": "packages/tooltip",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "sri": {
-      "bundle": "sha256-h1j6KGIOSpPtkEyPC6KC5z61AJG9hdRse3RGUM/m0xE=",
-      "bundleMin": "sha256-4jBE5+5t6AkZZvpE2KecsKV42U17bGpT8fWxfY8tYrQ="
+      "bundle": "sha256-Igp6lFGnHt4EFfRtn4snGvSW+cNZimD2IG6l9AA7PrQ=",
+      "bundleMin": "sha256-JIkYGoGzcTBPRn7YkAkX2X94PKfJKoAUDYeK8jYpdWs="
     }
   }
 ]
