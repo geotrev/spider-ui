@@ -10,5 +10,5 @@ export function step(msg, newLine) {
 }
 
 export function finish(msg) {
-  console.log(`Done ✨`)
+  console.log(`\nDone ✨\n`)
 }

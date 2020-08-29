@@ -56,8 +56,10 @@ const updatedMetadata = metadata.map((pkg) => {
     sri.bundle = bundleContentHash
     sri.bundleMin = bundleMinContentHash
     logger.step(
-      `--> SRI hashes changed, updating:\n      bundle: ${bundleContentHash}\n      bundle (minified): ${bundleMinContentHash}`
+      `--> SRI hashes changed, updated.\n      bundle: ${bundleContentHash}\n      bundle (minified): ${bundleMinContentHash}`
     )
+  } else {
+    logger.step("--> SRI hashes unchanged, skipping...")
   }
 
   // Update version
@@ -68,12 +70,14 @@ const updatedMetadata = metadata.map((pkg) => {
   if (pkgVersion !== prevVersion) {
     version = pkgVersion
     logger.step(
-      `--> Version changed, updating:\n      ${prevVersion} -> ${pkgVersion}`,
+      `--> Version changed, updated.\n      ${prevVersion} -> ${pkgVersion}`,
       true
     )
+  } else {
+    logger.step("--> Version unchanged, skipping...")
   }
 
-  return { name, dir, version, sri }
+  return { ...pkg, version, sri }
 })
 
 const payload = JSON.stringify(updatedMetadata, null, 2)
