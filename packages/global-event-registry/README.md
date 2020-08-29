@@ -71,8 +71,8 @@ If you don't want to use npm, you can grab the source from jsdelivr CDN.
 <script
   defer
   type="text/javascript"
-  src="https://cdn.jsdelivr.net/npm/@spider-ui/global-event-registry@0.2.1/dist/global-event-registry.js"
-  integrity="sha256-pg1zltNz1tytURnK5bHNjhOKHLUqg88lcB33XmhV6vg="
+  src="https://cdn.jsdelivr.net/npm/@spider-ui/global-event-registry@0.2.3/dist/global-event-registry.js"
+  integrity="sha256-Vxh2iNMf6A5b25uuK4Bk8MlJa1tffME8Tj3NBlqc6YA="
   crossorigin="anonymous"
 ></script>
 
@@ -80,8 +80,8 @@ If you don't want to use npm, you can grab the source from jsdelivr CDN.
 <script
   defer
   type="text/javascript"
-  src="https://cdn.jsdelivr.net/npm/@spider-ui/global-event-registry@0.2.1/dist/global-event-registry.min.js"
-  integrity="sha256-5NQMGAPVOnzW5gI4hdxE2vBz2zM0CvnykbZzk3Z6wCc="
+  src="https://cdn.jsdelivr.net/npm/@spider-ui/global-event-registry@0.2.3/dist/global-event-registry.min.js"
+  integrity="sha256-B2kclYuCujvm8L12W0NP58MzFNXazYJJSxIkqDww4Yc="
   crossorigin="anonymous"
 ></script>
 ```

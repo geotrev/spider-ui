@@ -28,7 +28,7 @@ const updatedMetadata = metadata.map((pkg) => {
     nameSuffix = nameParts[1]
   }
 
-  logger.step(`Updating package: ${name}`)
+  logger.step(`\nUpdating package: ${name}`)
 
   // Update SRI hashes
 
@@ -70,8 +70,7 @@ const updatedMetadata = metadata.map((pkg) => {
   if (pkgVersion !== prevVersion) {
     version = pkgVersion
     logger.step(
-      `--> Version changed, updated.\n      ${prevVersion} -> ${pkgVersion}`,
-      true
+      `--> Version changed, updated.\n      ${prevVersion} -> ${pkgVersion}`
     )
   } else {
     logger.step("--> Version unchanged, skipping...")
