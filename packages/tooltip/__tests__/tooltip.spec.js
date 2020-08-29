@@ -196,56 +196,58 @@ describe("@spider-ui/tooltip", () => {
       })
     })
 
-    it(`shows with custom delay-on: ${DELAY_ON}ms`, () => {
-      const fixture = mountFixture(tagName, slotContent, {
-        [Attributes.DELAY]: String(DELAY),
-        [Attributes.DELAY_ON]: String(DELAY_ON),
+    describe("[delay-on] & [delay-off]", () => {
+      it(`shows with custom delay-on: ${DELAY_ON}ms`, () => {
+        const fixture = mountFixture(tagName, slotContent, {
+          [Attributes.DELAY]: String(DELAY),
+          [Attributes.DELAY_ON]: String(DELAY_ON),
+        })
+        const root = queryRoot(fixture, ".tooltip")
+        const trigger = fixture.querySelector(Slots.TRIGGER)
+        events.mouseover(trigger)
+        jest.advanceTimersByTime(DELAY_ON)
+        expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
       })
-      const root = queryRoot(fixture, ".tooltip")
-      const trigger = fixture.querySelector(Slots.TRIGGER)
-      events.mouseover(trigger)
-      jest.advanceTimersByTime(DELAY_ON)
-      expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
-    })
 
-    it(`hides with custom delay-off: ${DELAY_OFF}ms`, () => {
-      const fixture = mountFixture(tagName, slotContent, {
-        [Attributes.DELAY]: String(DELAY),
-        [Attributes.DELAY_OFF]: String(DELAY_OFF),
+      it(`hides with custom delay-off: ${DELAY_OFF}ms`, () => {
+        const fixture = mountFixture(tagName, slotContent, {
+          [Attributes.DELAY]: String(DELAY),
+          [Attributes.DELAY_OFF]: String(DELAY_OFF),
+        })
+        const root = queryRoot(fixture, ".tooltip")
+        const trigger = fixture.querySelector(Slots.TRIGGER)
+        events.mouseover(trigger)
+        jest.advanceTimersByTime(DELAY)
+        expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
+        events.mouseout(trigger)
+        jest.advanceTimersByTime(DELAY_OFF)
+        expect(root.classList.contains(ClassNames.HIDDEN)).toBe(true)
       })
-      const root = queryRoot(fixture, ".tooltip")
-      const trigger = fixture.querySelector(Slots.TRIGGER)
-      events.mouseover(trigger)
-      jest.advanceTimersByTime(DELAY)
-      expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
-      events.mouseout(trigger)
-      jest.advanceTimersByTime(DELAY_OFF)
-      expect(root.classList.contains(ClassNames.HIDDEN)).toBe(true)
-    })
 
-    it("falls back to default delay-on if not given", () => {
-      const fixture = mountFixture(tagName, slotContent, {
-        [Attributes.DELAY_OFF]: String(DELAY_OFF),
+      it("falls back to default delay-on if not given", () => {
+        const fixture = mountFixture(tagName, slotContent, {
+          [Attributes.DELAY_OFF]: String(DELAY_OFF),
+        })
+        const root = queryRoot(fixture, ".tooltip")
+        const trigger = fixture.querySelector(Slots.TRIGGER)
+        events.mouseover(trigger)
+        jest.advanceTimersByTime(TIMEOUT_DELAY)
+        expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
       })
-      const root = queryRoot(fixture, ".tooltip")
-      const trigger = fixture.querySelector(Slots.TRIGGER)
-      events.mouseover(trigger)
-      jest.advanceTimersByTime(TIMEOUT_DELAY)
-      expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
-    })
 
-    it("falls back to default delay-off if not given", () => {
-      const fixture = mountFixture(tagName, slotContent, {
-        [Attributes.DELAY_ON]: String(DELAY_ON),
+      it("falls back to default delay-off if not given", () => {
+        const fixture = mountFixture(tagName, slotContent, {
+          [Attributes.DELAY_ON]: String(DELAY_ON),
+        })
+        const root = queryRoot(fixture, ".tooltip")
+        const trigger = fixture.querySelector(Slots.TRIGGER)
+        events.mouseover(trigger)
+        jest.advanceTimersByTime(DELAY_ON)
+        expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
+        events.mouseout(trigger)
+        jest.advanceTimersByTime(TIMEOUT_DELAY)
+        expect(root.classList.contains(ClassNames.HIDDEN)).toBe(true)
       })
-      const root = queryRoot(fixture, ".tooltip")
-      const trigger = fixture.querySelector(Slots.TRIGGER)
-      events.mouseover(trigger)
-      jest.advanceTimersByTime(DELAY_ON)
-      expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
-      events.mouseout(trigger)
-      jest.advanceTimersByTime(TIMEOUT_DELAY)
-      expect(root.classList.contains(ClassNames.HIDDEN)).toBe(true)
     })
   })
 })
