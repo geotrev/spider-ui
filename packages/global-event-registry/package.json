@@ -1,6 +1,6 @@
 {
   "name": "@spider-ui/global-event-registry",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Context utility for tracking global events in Spider UI elements.",
   "author": "George Treviranus <hello@geotrev.com>",
   "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/global-event-registry#readme",
@@ -20,8 +20,8 @@
     "@rollup/plugin-babel": "^5.2.0",
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
-    "@spider-ui/rollup-config-build": "^0.2.3-alpha.0",
-    "@spider-ui/test-helpers": "^0.2.3-alpha.0",
+    "@spider-ui/rollup-config-build": "^0.2.4",
+    "@spider-ui/test-helpers": "^0.2.4",
     "babel-jest": "^26.3.0",
     "jest": "^26.4.0",
     "rollup": "^2.26.4",
