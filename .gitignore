@@ -5,4 +5,4 @@ node_modules/
 lib/
 dist/
 
-elements/**/public/bundle.js
+packages/**/public/bundle.js

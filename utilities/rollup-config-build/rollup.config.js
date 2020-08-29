@@ -10,14 +10,16 @@ const FORMAT_CJS = "cjs"
 const FORMAT_UMD = "umd"
 const packagePath = process.cwd()
 
-// Get the folder name, e.g. "tooltip"
+// Get the folder name, e.g. `tooltip`
 const pathParts = getPath(packagePath).split("/")
 const COMPONENT_NAME = pathParts[pathParts.length - 1]
-const name = `@spider-ui/${COMPONENT_NAME}`
+
+// Configures the global namespace, e.g. `window['spider-global-event-registry']`
+const name = `spider-${COMPONENT_NAME}`
 
 // Input
 const input = getPath(packagePath, "src/index.js")
-const external = ["upgraded-element"]
+const external = ["upgraded-element", "@spider-ui/global-event-registry"]
 
 // Plugins
 const plugins = packagePlugins(packagePath)
@@ -49,8 +51,8 @@ const moduleOutputs = [FORMAT_ES, FORMAT_CJS].map((format) => ({
 
 let output = [...moduleOutputs]
 
-// Only create dist outputs for `elements/*` packages
-if (packagePath.includes("elements/")) {
+// Only create dist outputs for modules in `packages/*`
+if (packagePath.includes("packages/")) {
   const distOutputFiles = [
     `dist/${COMPONENT_NAME}.js`,
     `dist/${COMPONENT_NAME}.min.js`,
@@ -59,7 +61,10 @@ if (packagePath.includes("elements/")) {
   const distOutputs = distOutputFiles.map((filePath) => ({
     ...baseOutput(FORMAT_UMD),
     file: getPath(packagePath, filePath),
-    globals: { "upgraded-element": "UpgradedElement" },
+    globals: {
+      "upgraded-element": "UpgradedElement",
+      "@spider-ui/global-event-registry": "spider-global-event-registry",
+    },
     plugins: filePath.includes("min.js") ? [terserConfig] : undefined,
   }))
 

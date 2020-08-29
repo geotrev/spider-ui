@@ -1,13 +1,13 @@
 {
-  "name": "@spider-ui/test-helpers",
-  "private": true,
-  "version": "0.2.2",
-  "description": "Test helper utilities for Spider UI components.",
+  "name": "@spider-ui/global-event-registry",
+  "version": "0.2.4",
+  "description": "Context utility for tracking global events in Spider UI elements.",
   "author": "George Treviranus <hello@geotrev.com>",
-  "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/test#readme",
+  "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/global-event-registry#readme",
   "license": "MIT",
-  "main": "lib/test-helpers.cjs.js",
-  "module": "lib/test-helpers.es.js",
+  "main": "lib/global-event-registry.cjs.js",
+  "module": "lib/global-event-registry.es.js",
+  "type": "module",
   "scripts": {
     "test:watch": "BABEL_ENV=test jest --watch",
     "build": "BABEL_ENV=build rollup -c node:@spider-ui/rollup-config-build",
@@ -20,20 +20,23 @@
     "@rollup/plugin-babel": "^5.2.0",
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
-    "@spider-ui/rollup-config-build": "^0.2.2",
-    "@spider-ui/sass": "^0.2.2",
+    "@spider-ui/rollup-config-build": "^0.2.4",
+    "@spider-ui/test-helpers": "^0.2.4",
+    "babel-jest": "^26.3.0",
+    "jest": "^26.4.0",
     "rollup": "^2.26.4",
     "rollup-plugin-terser": "^7.0.0"
   },
   "directories": {
-    "lib": "lib",
     "dist": "dist",
+    "lib": "lib",
     "src": "src",
     "test": "__tests__"
   },
   "files": [
     "lib/*.{js,map}",
-    "dist/*.{js,map}"
+    "dist/*.{js,map}",
+    "src/*.js"
   ],
   "repository": {
     "type": "git",
@@ -41,5 +44,9 @@
   },
   "bugs": {
     "url": "https://github.com/geotrev/spider-ui/issues"
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "96966d9ed89fede23e55a8907cf91c257b015e38"
 }

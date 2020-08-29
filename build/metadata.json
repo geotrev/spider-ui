@@ -1,0 +1,31 @@
+[
+  {
+    "name": "upgraded-element",
+    "dir": "node_modules/upgraded-element",
+    "version": "0.4.0",
+    "external": true,
+    "sri": {
+      "bundle": "sha256-G/tIiIcqSiKFeq2X7DlA6laZGBuVCdig96KCAOIT6ks=",
+      "bundleMin": "sha256-waCWKicYMCJic4tBKdkV54qhuGsq8J9JWQY+QmFVjj8="
+    }
+  },
+  {
+    "name": "@spider-ui/global-event-registry",
+    "dir": "packages/global-event-registry",
+    "version": "0.2.4",
+    "external": true,
+    "sri": {
+      "bundle": "sha256-Vxh2iNMf6A5b25uuK4Bk8MlJa1tffME8Tj3NBlqc6YA=",
+      "bundleMin": "sha256-B2kclYuCujvm8L12W0NP58MzFNXazYJJSxIkqDww4Yc="
+    }
+  },
+  {
+    "name": "@spider-ui/tooltip",
+    "dir": "packages/tooltip",
+    "version": "0.2.4",
+    "sri": {
+      "bundle": "sha256-Igp6lFGnHt4EFfRtn4snGvSW+cNZimD2IG6l9AA7PrQ=",
+      "bundleMin": "sha256-JIkYGoGzcTBPRn7YkAkX2X94PKfJKoAUDYeK8jYpdWs="
+    }
+  }
+]

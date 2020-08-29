@@ -1,12 +1,11 @@
 {
-  "name": "@spider-ui/rollup-config-demo",
+  "name": "@spider-ui/sass",
   "private": true,
-  "version": "0.2.2",
-  "description": "Rollup config for demoing a Spider UI component",
+  "version": "0.2.3-alpha.0",
+  "description": "Base styles for Spider UI elements.",
   "author": "George Treviranus <hello@geotrev.com>",
-  "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/rollup-config-demo#readme",
+  "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/sass#readme",
   "license": "MIT",
-  "main": "rollup.config.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/geotrev/spider-ui.git"

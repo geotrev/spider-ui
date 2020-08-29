@@ -20,7 +20,7 @@
     "import/resolver": {
       "node": {
         "extensions": [".js"],
-        "paths": ["elements/", "utilities/"],
+        "paths": ["packages/", "utilities/"],
         "moduleDirectory": ["node_modules", "**/node_modules"]
       }
     },

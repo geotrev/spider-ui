@@ -22,7 +22,7 @@ export const packagePlugins = (packagePath, watchMode) => {
   if (watchMode) {
     scssOptions.watch = [
       getPath(packagePath, "src"),
-      getPath(packagePath, "../../utils/sass"),
+      getPath(packagePath, "../../utilities/sass"),
     ]
   }
 
