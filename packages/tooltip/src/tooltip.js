@@ -44,9 +44,6 @@ class SpiderTooltip extends UpgradedElement {
 
   constructor() {
     super()
-    this.trigger = null
-    this.content = null
-    this.timeout = null
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.handleKeydown = this.handleKeydown.bind(this)
@@ -55,26 +52,25 @@ class SpiderTooltip extends UpgradedElement {
 
   elementDidMount() {
     // set nodes
-    this.trigger = this.querySelector(Slots.TRIGGER)
-    this.content = this.querySelector(Slots.CONTENT)
+    const trigger = this.querySelector(Slots.TRIGGER)
+    const content = this.querySelector(Slots.CONTENT)
 
     // set attributes
-    this.trigger.setAttribute(Attributes.ARIA_DESCRIBEDBY, this.elementId)
-    this.content.id = this.elementId
-    this.content.setAttribute(Attributes.ROLE, "tooltip")
+    trigger.setAttribute(Attributes.ARIA_DESCRIBEDBY, this.elementId)
+    content.id = this.elementId
+    content.setAttribute(Attributes.ROLE, "tooltip")
 
     this.addOpenListeners()
     this.addCloseListeners()
   }
 
   elementWillUnmount() {
-    this.trigger = null
-    this.content = null
-    this.timeout = null
     this.handleOpen = null
     this.handleClose = null
     this.handleKeydown = null
     this.removeTimeout = null
+
+    globalEventRegistry.unregister(this.elementId)
   }
 
   elementDidUpdate() {
@@ -104,55 +100,48 @@ class SpiderTooltip extends UpgradedElement {
     this.delayOff = parseInt(delayOff || delay) || TIMEOUT_DELAY
   }
 
-  listen(type, target, handler) {
-    target.addEventListener(type, handler)
-  }
-
-  sleep(type, target, handler) {
-    target.removeEventListener(type, handler)
-  }
-
   addOpenListeners() {
-    this.listen("focus", this.trigger, this.handleOpen)
-    this.listen("focus", this.content, this.handleOpen)
-    this.listen("mouseover", this.trigger, this.handleOpen)
-    this.listen("mouseover", this.content, this.handleOpen)
+    this.addEventListener("focusin", this.handleOpen)
+    this.addEventListener("focusin", this.handleOpen)
+    this.addEventListener("mouseover", this.handleOpen)
+    this.addEventListener("mouseover", this.handleOpen)
   }
 
   addCloseListeners() {
-    this.listen("blur", this.trigger, this.handleClose)
-    this.listen("blur", this.content, this.handleClose)
-    this.listen("mouseout", this.trigger, this.handleClose)
-    this.listen("mouseout", this.content, this.handleClose)
+    this.addEventListener("focusout", this.handleClose)
+    this.addEventListener("focusout", this.handleClose)
+    this.addEventListener("mouseout", this.handleClose)
+    this.addEventListener("mouseout", this.handleClose)
   }
 
   addOpenCancelListeners() {
-    this.listen("mouseout", this.trigger, this.removeTimeout)
-    this.listen("blur", this.trigger, this.removeTimeout)
-    this.listen("mouseout", this.content, this.removeTimeout)
+    this.addEventListener("mouseout", this.removeTimeout)
+    this.addEventListener("focusout", this.removeTimeout)
+    this.addEventListener("mouseout", this.removeTimeout)
   }
 
   addCloseCancelListeners() {
-    this.listen("mouseover", this.trigger, this.removeTimeout)
-    this.listen("focus", this.trigger, this.removeTimeout)
-    this.listen("mouseover", this.content, this.removeTimeout)
+    this.addEventListener("mouseover", this.removeTimeout)
+    this.addEventListener("focusin", this.removeTimeout)
+    this.addEventListener("mouseover", this.removeTimeout)
   }
 
   removeOpenCancelListeners() {
-    this.sleep("mouseout", this.trigger, this.removeTimeout)
-    this.sleep("blur", this.trigger, this.removeTimeout)
-    this.sleep("mouseout", this.content, this.removeTimeout)
+    this.removeEventListener("mouseout", this.removeTimeout)
+    this.removeEventListener("focusout", this.removeTimeout)
+    this.removeEventListener("mouseout", this.removeTimeout)
   }
 
   removeCloseCancelListeners() {
-    this.sleep("mouseover", this.trigger, this.removeTimeout)
-    this.sleep("focus", this.trigger, this.removeTimeout)
-    this.sleep("mouseover", this.content, this.removeTimeout)
+    this.removeEventListener("mouseover", this.removeTimeout)
+    this.removeEventListener("focusin", this.removeTimeout)
+    this.removeEventListener("mouseover", this.removeTimeout)
   }
 
   handleKeydown(event) {
     if (this.isVisible && event.key === ESCAPE_KEY) {
       this.removeTimeout()
+      this.removeCloseCancelListeners()
       this.isVisible = false
     }
   }
@@ -193,8 +182,10 @@ class SpiderTooltip extends UpgradedElement {
   }
 
   alignTooltip(dimension) {
-    const triggerSize = this.getSize(this.trigger, dimension)
-    const tooltipSize = this.getSize(this.content, dimension)
+    const trigger = this.querySelector(Slots.TRIGGER)
+    const content = this.querySelector(Slots.CONTENT)
+    const triggerSize = this.getSize(trigger, dimension)
+    const tooltipSize = this.getSize(content, dimension)
     const triggerIsBigger = triggerSize > tooltipSize
 
     const offset = triggerIsBigger
@@ -202,9 +193,9 @@ class SpiderTooltip extends UpgradedElement {
       : (tooltipSize - triggerSize) / -2
 
     if (dimension === "height") {
-      this.content.style.top = `${offset}px`
+      content.style.top = `${offset}px`
     } else {
-      this.content.style.left = `${offset}px`
+      content.style.left = `${offset}px`
     }
   }
 

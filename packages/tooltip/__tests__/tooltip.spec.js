@@ -98,70 +98,83 @@ describe("@spider-ui/tooltip", () => {
     })
   })
 
-  describe("show/hide: trigger interaction", () => {
-    afterEach(unmount)
-    let fixture, trigger, root
+  const eventTypes = {
+    focus: ["focusin", "focusout"],
+    mouse: ["mouseover", "mouseout"],
+  }
 
-    beforeEach(() => {
-      fixture = mountFixture(tagName, slotContent)
-      trigger = fixture.querySelector(Slots.TRIGGER)
-      root = queryRoot(fixture, ".tooltip")
-      events.mouseover(trigger)
+  Object.keys(eventTypes).forEach((method) => {
+    const [enter, exit] = eventTypes[method]
+
+    describe("show/hide: trigger interaction", () => {
+      describe(`${enter}/${exit}`, () => {
+        afterEach(unmount)
+        let fixture, trigger, root
+
+        beforeEach(() => {
+          fixture = mountFixture(tagName, slotContent)
+          trigger = fixture.querySelector(Slots.TRIGGER)
+          root = queryRoot(fixture, ".tooltip")
+          events[enter](trigger)
+        })
+
+        it(`shows a tooltip content on trigger enter`, () => {
+          jest.advanceTimersByTime(TIMEOUT_DELAY)
+          expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
+        })
+
+        it("cancels showing a tooltip if trigger exited before timeout completes", () => {
+          events[exit](trigger)
+          jest.advanceTimersByTime(TIMEOUT_DELAY)
+          expect(root.classList.contains(ClassNames.HIDDEN)).toBe(true)
+        })
+
+        it("hides a visible tooltip on trigger exit", () => {
+          jest.advanceTimersByTime(TIMEOUT_DELAY)
+          events[exit](trigger)
+          jest.advanceTimersByTime(TIMEOUT_DELAY)
+          expect(root.classList.contains(ClassNames.HIDDEN)).toBe(true)
+        })
+
+        it("cancels hiding a tooltip if trigger re-entered", () => {
+          jest.advanceTimersByTime(TIMEOUT_DELAY)
+          events[exit](trigger)
+          events[enter](trigger)
+          jest.advanceTimersByTime(TIMEOUT_DELAY)
+          expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
+        })
+      })
     })
 
-    it("shows a tooltip content on trigger mouseover", () => {
-      jest.advanceTimersByTime(TIMEOUT_DELAY)
-      expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
-    })
+    describe("show/hide: content interaction", () => {
+      describe(`${enter}/${exit}`, () => {
+        afterEach(unmount)
+        let fixture, trigger, content, root
 
-    it("cancels showing a tooltip if trigger unhovered", () => {
-      events.mouseout(trigger)
-      jest.advanceTimersByTime(TIMEOUT_DELAY)
-      expect(root.classList.contains(ClassNames.HIDDEN)).toBe(true)
-    })
+        beforeEach(() => {
+          fixture = mountFixture(tagName, slotContent)
+          trigger = fixture.querySelector(Slots.TRIGGER)
+          content = fixture.querySelector(Slots.CONTENT)
+          root = queryRoot(fixture, ".tooltip")
+          events[enter](trigger)
+        })
 
-    it("hides a visible tooltip on trigger mouseout", () => {
-      jest.advanceTimersByTime(TIMEOUT_DELAY)
-      events.mouseout(trigger)
-      jest.advanceTimersByTime(TIMEOUT_DELAY)
-      expect(root.classList.contains(ClassNames.HIDDEN)).toBe(true)
-    })
+        it("keeps tooltip visible on content enter", () => {
+          events[exit](trigger)
+          events[enter](content)
+          jest.advanceTimersByTime(TIMEOUT_DELAY)
+          expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
+        })
 
-    it("cancels hiding a tooltip if trigger rehovered", () => {
-      jest.advanceTimersByTime(TIMEOUT_DELAY)
-      events.mouseout(trigger)
-      events.mouseover(trigger)
-      jest.advanceTimersByTime(TIMEOUT_DELAY)
-      expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
-    })
-  })
-
-  describe("show/hide: content interaction", () => {
-    afterEach(unmount)
-    let fixture, trigger, content, root
-
-    beforeEach(() => {
-      fixture = mountFixture(tagName, slotContent)
-      trigger = fixture.querySelector(Slots.TRIGGER)
-      content = fixture.querySelector(Slots.CONTENT)
-      root = queryRoot(fixture, ".tooltip")
-      events.mouseover(trigger)
-    })
-
-    it("keeps tooltip visible on content mouseover", () => {
-      events.mouseout(trigger)
-      events.mouseover(content)
-      jest.advanceTimersByTime(TIMEOUT_DELAY)
-      expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
-    })
-
-    it("cancels hiding a tooltip if content rehovered", () => {
-      events.mouseout(trigger)
-      events.mouseover(content)
-      events.mouseout(content)
-      events.mouseover(content)
-      jest.advanceTimersByTime(TIMEOUT_DELAY)
-      expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
+        it("cancels hiding a tooltip if content re-entered", () => {
+          events[exit](trigger)
+          events[enter](content)
+          events[exit](content)
+          events[enter](content)
+          jest.advanceTimersByTime(TIMEOUT_DELAY)
+          expect(root.classList.contains(ClassNames.VISIBLE)).toBe(true)
+        })
+      })
     })
   })
 
