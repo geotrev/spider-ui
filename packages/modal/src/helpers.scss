@@ -1,4 +1,12 @@
 @forward "@spider-ui/sass/helpers";
 @use "@spider-ui/sass/helpers" as *;
 
-// modal variables
+$modal-overlay-color: rgba(0, 0, 0, 0.5);
+$modal-transition-duration: 300ms;
+$modal-transition-ease: $global-ease;
+
+$modal-dialog-bg-color: $color-white;
+$modal-dialog-border-radius: $global-border-radius;
+$modal-dialog-max-width: px-to-em(450px);
+$modal-dialog-min-height: px-to-em(250px);
+$modal-dialog-margin: $global-space auto;

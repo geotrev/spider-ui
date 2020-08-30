@@ -6,7 +6,7 @@ export const ClassNames = {
 
 export const Slots = {
   TRIGGER: "[slot='trigger']",
-  CONTENT: "[slot='content']",
+  CONTENT: "[slot='dialog']",
 }
 
 export const ESCAPE_KEY = "Escape"

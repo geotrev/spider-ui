@@ -1,8 +1,10 @@
-$global-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,
-  Cantarell, "Helvetica Neue", sans-serif !default;
-$global-font-serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida,
-  "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif !default;
-$global-font-monospace: Consolas, "Lucida Console", Monaco, "Courier New", Courier, monospace !default;
+$global-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !default;
+$global-font-serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif",
+  Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia,
+  serif !default;
+$global-font-monospace: Consolas, "Lucida Console", Monaco, "Courier New",
+  Courier, monospace !default;
 $global-font-weight-normal: normal !default;
 $global-font-weight-bold: bold !default;
 $global-font-style-normal: normal !default;
@@ -26,7 +28,3 @@ $color-gray900: #dedede !default;
 $color-white: white !default;
 
 $z-index-modal: 2000 !default;
-$z-index-dropdown-menu: 1998 !default;
-$z-index-dropdown-menu-in-modal: 2001 !default;
-$z-index-tooltip: 1999 !default;
-$z-index-tooltip-in-modal: 2002 !default;
