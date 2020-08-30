@@ -13,14 +13,6 @@ const metadata = getJSON("build/metadata.json")
 const peers = {}
 metadata.forEach((data) => data.external && (peers[data.name] = data))
 
-// const upgradedElement = metadata.filter(
-//   (data) => data.name === "upgraded-element"
-// )[0]
-
-// const globalEventRegistry = metadata.filter((data) =>
-//   data.name.includes("global-event-registry")
-// )[0]
-
 // Spider elements
 const spiderElements = metadata.filter(
   (data) => data.name !== "upgraded-element"
@@ -44,18 +36,16 @@ const Patterns = {
  * - public/index.html
  */
 spiderElements.forEach((pkg) => {
-  const { name, dir, sri, version } = pkg
-
-  logger.step(`\nUpdating package files for: ${name}`)
+  logger.step(`\nUpdating package files for: ${pkg.name}`)
 
   Object.keys(Files).forEach((fileKey) => {
     const fileTarget = Files[fileKey]
-    const filePath = `${dir}/${fileTarget}`
+    const filePath = `${pkg.dir}/${fileTarget}`
 
     if (fs.existsSync(filePath) !== false) {
       logger.step(`--> Updating ${filePath}`)
 
-      const fileContent = getFileContent(dir, fileTarget)
+      const fileContent = getFileContent(pkg.dir, fileTarget)
       const fileScriptTags = fileContent
         .match(Patterns.SCRIPT)
         .filter((tag) => tag.includes("cdn.jsdelivr.net"))
@@ -63,17 +53,17 @@ spiderElements.forEach((pkg) => {
       const nextScriptTags = fileScriptTags.map((tag) => {
         const isMin = tag.includes(".min.js")
         const oldHash = tag.match(Patterns.SRI)[0]
-        const nextHash = isMin ? sri.bundleMin : sri.bundle
+        const nextHash = isMin ? pkg.sri.bundleMin : pkg.sri.bundle
         const oldVersion = tag.match(Patterns.VERSION)[0]
-        const externals = Object.keys(peers).filter((peerName) =>
+        const possiblePeer = Object.keys(peers).filter((peerName) =>
           tag.includes(peerName)
         )
-        const externalName = externals.length ? externals[0] : null
+        const peerName = possiblePeer.length ? possiblePeer[0] : null
 
         // If known externals were encountered, update them
 
-        if (externalName) {
-          const peer = peers[externalName]
+        if (peerName) {
+          const peer = peers[peerName]
           return tag
             .replace(Patterns.SRI, isMin ? peer.sri.bundleMin : peer.sri.bundle)
             .replace(Patterns.VERSION, `@${peer.version}/`)
@@ -83,13 +73,13 @@ spiderElements.forEach((pkg) => {
 
         let updaters = []
 
-        if (![sri.bundleMin, sri.bundle].includes(oldHash)) {
+        if (![pkg.sri.bundleMin, pkg.sri.bundle].includes(oldHash)) {
           updaters.push((tagString) => tagString.replace(oldHash, nextHash))
         }
 
-        if (version !== oldVersion) {
+        if (pkg.version !== oldVersion) {
           updaters.push((tagString) =>
-            tagString.replace(oldVersion, `@${version}/`)
+            tagString.replace(oldVersion, `@${pkg.version}/`)
           )
         }
 
@@ -105,7 +95,7 @@ spiderElements.forEach((pkg) => {
       fileScriptTags.forEach((oldTag, i) => {
         nextFileContent = nextFileContent.replace(oldTag, nextScriptTags[i])
       })
-      writeFileContent(dir, fileTarget, nextFileContent)
+      writeFileContent(pkg.dir, fileTarget, nextFileContent)
     } else {
       logger.step(`--> File not found: ${filePath}. Skipping.`)
     }

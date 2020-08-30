@@ -13,17 +13,27 @@ export const createKeyboardEvent = (type, key, shiftKey = false) => {
   })
 }
 
+export const createEvent = (type) => {
+  return new Event(type, { bubbles: true })
+}
+
 export const pressEscape = (target) => {
   const event = createKeyboardEvent("keydown", "Escape")
   return target ? target.dispatchEvent(event) : document.dispatchEvent(event)
 }
 
 export const mouseover = (target) => {
-  const event = createMouseEvent("mouseover")
-  return target.dispatchEvent(event)
+  return target.dispatchEvent(createMouseEvent("mouseover"))
 }
 
 export const mouseout = (target) => {
-  const event = createMouseEvent("mouseout")
-  return target.dispatchEvent(event)
+  return target.dispatchEvent(createMouseEvent("mouseout"))
+}
+
+export const focusin = (target) => {
+  return target.dispatchEvent(createEvent("focusin"))
+}
+
+export const focusout = (target) => {
+  return target.dispatchEvent(createEvent("focusout"))
 }
