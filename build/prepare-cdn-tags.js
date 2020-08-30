@@ -11,11 +11,11 @@ const metadata = getJSON("build/metadata.json")
 // External dependencies
 
 const peers = {}
-metadata.forEach((data) => data.external && (peers[data.name] = data))
+metadata.forEach((data) => data.peer && (peers[data.name] = data))
 
 // Spider elements
-const spiderElements = metadata.filter(
-  (data) => data.name !== "upgraded-element"
+const spiderElements = metadata.filter((data) =>
+  data.name.includes("@spider-ui")
 )
 
 // Enums
@@ -34,18 +34,22 @@ const Patterns = {
  * Get and update scripts tags in each spider package:
  * - README.md
  * - public/index.html
+ *
+ * The HTML file is a demo file, and may have script tags
+ * from peer dependencies, such as upgraded-element.
+ * In this case, we'll detect that via `metadata[i].peer`.
  */
 spiderElements.forEach((pkg) => {
   logger.step(`\nUpdating package files for: ${pkg.name}`)
 
   Object.keys(Files).forEach((fileKey) => {
     const fileTarget = Files[fileKey]
-    const filePath = `${pkg.dir}/${fileTarget}`
+    const filePath = `${pkg.root}/${fileTarget}`
 
     if (fs.existsSync(filePath) !== false) {
       logger.step(`--> Updating ${filePath}`)
 
-      const fileContent = getFileContent(pkg.dir, fileTarget)
+      const fileContent = getFileContent(pkg.root, fileTarget)
       const fileScriptTags = fileContent
         .match(Patterns.SCRIPT)
         .filter((tag) => tag.includes("cdn.jsdelivr.net"))
@@ -54,13 +58,13 @@ spiderElements.forEach((pkg) => {
         const isMin = tag.includes(".min.js")
         const oldHash = tag.match(Patterns.SRI)[0]
         const nextHash = isMin ? pkg.sri.bundleMin : pkg.sri.bundle
-        const oldVersion = tag.match(Patterns.VERSION)[0]
+        const oldVersion = tag.match(Patterns.VERSION)[0].slice(1, -1)
         const possiblePeer = Object.keys(peers).filter((peerName) =>
           tag.includes(peerName)
         )
         const peerName = possiblePeer.length ? possiblePeer[0] : null
 
-        // If known externals were encountered, update them
+        // If known peers were encountered, update them
 
         if (peerName) {
           const peer = peers[peerName]
@@ -83,19 +87,19 @@ spiderElements.forEach((pkg) => {
           )
         }
 
-        if (updaters.length) {
-          return updaters.reduce(
-            (updatedTag, updater) => (updatedTag = updater(updatedTag)),
-            tag
-          )
-        }
+        return updaters.reduce(
+          (updatedTag, updater) => (updatedTag = updater(updatedTag)),
+          tag
+        )
       })
 
       let nextFileContent = fileContent
       fileScriptTags.forEach((oldTag, i) => {
+        if (nextScriptTags[i] === oldTag) return
         nextFileContent = nextFileContent.replace(oldTag, nextScriptTags[i])
       })
-      writeFileContent(pkg.dir, fileTarget, nextFileContent)
+
+      writeFileContent(pkg.root, fileTarget, nextFileContent)
     } else {
       logger.step(`--> File not found: ${filePath}. Skipping.`)
     }

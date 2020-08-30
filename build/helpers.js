@@ -4,18 +4,12 @@ import path from "path"
 import fs from "fs"
 
 export const FILE_FORMAT = "utf-8"
-export const UPGRADED_ELEMENT_NAME = "upgraded-element"
 
 export const getJSON = (target) =>
   JSON.parse(fs.readFileSync(path.resolve(process.cwd(), target)))
 
 export const getFileContent = (basePath, filePath) => {
   const targetPath = path.resolve(basePath, filePath)
-  return fs.readFileSync(targetPath, FILE_FORMAT)
-}
-
-export const getRootFileContent = (filePath) => {
-  const targetPath = path.resolve(process.cwd(), filePath)
   return fs.readFileSync(targetPath, FILE_FORMAT)
 }
 

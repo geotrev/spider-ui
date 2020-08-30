@@ -1,9 +1,9 @@
 [
   {
     "name": "upgraded-element",
-    "dir": "node_modules/upgraded-element",
+    "root": "node_modules/upgraded-element",
     "version": "0.4.0",
-    "external": true,
+    "peer": true,
     "sri": {
       "bundle": "sha256-G/tIiIcqSiKFeq2X7DlA6laZGBuVCdig96KCAOIT6ks=",
       "bundleMin": "sha256-waCWKicYMCJic4tBKdkV54qhuGsq8J9JWQY+QmFVjj8="
@@ -11,9 +11,9 @@
   },
   {
     "name": "@spider-ui/global-event-registry",
-    "dir": "packages/global-event-registry",
+    "root": "packages/global-event-registry",
     "version": "0.2.5",
-    "external": true,
+    "peer": true,
     "sri": {
       "bundle": "sha256-Vxh2iNMf6A5b25uuK4Bk8MlJa1tffME8Tj3NBlqc6YA=",
       "bundleMin": "sha256-B2kclYuCujvm8L12W0NP58MzFNXazYJJSxIkqDww4Yc="
@@ -21,7 +21,7 @@
   },
   {
     "name": "@spider-ui/tooltip",
-    "dir": "packages/tooltip",
+    "root": "packages/tooltip",
     "version": "0.2.5",
     "sri": {
       "bundle": "sha256-6LMYmsLKQxTccPLpT72MpHf9yXsmYmE1MZjd0PaiDBI=",

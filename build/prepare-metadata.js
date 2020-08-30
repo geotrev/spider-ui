@@ -19,7 +19,7 @@ function getSHA(data) {
 }
 
 const updatedMetadata = metadata.map((pkg) => {
-  const { name, dir, version: prevVersion, sri: prevSri } = pkg
+  const { name, root, version: prevVersion, sri: prevSri } = pkg
 
   // if true, we're dealing with a spider-ui package
   let nameSuffix
@@ -34,11 +34,11 @@ const updatedMetadata = metadata.map((pkg) => {
 
   const bundlePath = path.resolve(
     process.cwd(),
-    `${dir}/dist/${nameSuffix || name}.js`
+    `${root}/dist/${nameSuffix || name}.js`
   )
   const bundleMinPath = path.resolve(
     process.cwd(),
-    `${dir}/dist/${nameSuffix || name}.min.js`
+    `${root}/dist/${nameSuffix || name}.min.js`
   )
   const bundleContent = fs.readFileSync(bundlePath, "utf-8")
   const bundleMinContent = fs.readFileSync(bundleMinPath, "utf-8")
@@ -64,7 +64,7 @@ const updatedMetadata = metadata.map((pkg) => {
 
   // Update version
 
-  const pkgVersion = getJSON(`${dir}/package.json`).version
+  const pkgVersion = getJSON(`${root}/package.json`).version
   let version = prevVersion
 
   if (pkgVersion !== prevVersion) {
