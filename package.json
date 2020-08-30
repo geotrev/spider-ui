@@ -12,10 +12,9 @@
     "scss:lint": "stylelint '**/*.scss'",
     "scss:lint:check": "stylelint-config-prettier-check",
     "lint": "npm run scss:lint && npm run js:lint",
-    "node:prepare-metadata": " node build/prepare-metadata.js",
-    "node:prepare-cdn-tags": "node build/prepare-cdn-tags.js",
-    "git:update-origin": "git add . && git commit -m 'adds new hashes' && git push && git push --tags",
-    "prepublishOnly": "npm run node:prepare-metadata && npm run node:prepare-cdn-tags && npm run git:update-origin"
+    "node:prepare-scripts": "node build/prepare-metadata.js && node build/prepare-cdn-tags.js",
+    "git:update-origin": "git add . && git commit -m 'version %s - update metadata & cdn tags' && git push && git push --tags",
+    "prepublishOnly": "node:prepare-scripts && npm run git:update-origin"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
