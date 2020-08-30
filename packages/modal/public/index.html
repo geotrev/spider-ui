@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>@spider-ui/modal</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <style>
+      html {
+        font-family: sans-serif;
+      }
+
+      spider-modal:not(:defined) {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- BEGIN TEST CASES -->
+
+    <h2>@spider-ui/modal</h2>
+
+    <h3>default</h3>
+    <!-- Add component here -->
+
+    <h3>Remove a node (should not print errors in console)</h3>
+    <button id="remover">Remove an element</button>
+
+    <!-- END TEST CASES -->
+    <script src="bundle.js"></script>
+    <script>
+      const element = document.querySelector("spider-modal")
+      const removeBtn = document.querySelector("#remover")
+      removeBtn.onclick = () => element.parentNode.removeChild(element)
+    </script>
+
+    <!--
+      DIST CDN TEST:
+      - COMMENT OUT BUNDLE.JS
+      - UNCOMMENT BELOW SCRIPTS
+    -->
+
+    <!-- <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/upgraded-element@0.4.0/dist/upgraded-element.min.js"
+      integrity="sha256-waCWKicYMCJic4tBKdkV54qhuGsq8J9JWQY+QmFVjj8="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@spider-ui/global-event-registry@0.2.5/dist/global-event-registry.min.js"
+      integrity="sha256-B2kclYuCujvm8L12W0NP58MzFNXazYJJSxIkqDww4Yc="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@spider-ui/modal@0.2.5/dist/modal.min.js"
+      integrity="sha256-4eCeGYBbcfBB/bLzVuDg8NFDE53W1Do+J7TWsGStx2M="
+      crossorigin="anonymous"
+    ></script> -->
+  </body>
+</html>

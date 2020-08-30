@@ -1,0 +1,11 @@
+@use "@spider-ui/sass";
+@use "helpers" as *;
+
+.modal {
+  position: relative;
+  display: inline-block;
+}
+
+::slotted([slot="content"]) {
+  // base dialog styling
+}
