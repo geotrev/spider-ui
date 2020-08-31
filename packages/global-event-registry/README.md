@@ -1,6 +1,8 @@
 # `@spider-ui/global-event-registry`
 
-This is a utility for tracking and managing global DOM events. If you are working with popover elements like tooltips, modals, dropdowns, and the like, then you might need to know about this package. Read on!
+`globalEventRegistry` adds a thin layer around `window.addEventListener` and `window.removeEventListener` that controls which handler should be called next based on a [stack strategy](https://en.wikibooks.org/wiki/Data_Structures/Stacks_and_Queues#stacks).
+
+If you are working with popover elements like tooltips, modals, dropdowns, and the like, then you might need to know about this package. Read on!
 
 - [Problem](#problem)
 - [Solution](#solution)
@@ -9,8 +11,8 @@ This is a utility for tracking and managing global DOM events. If you are workin
   - [NPM](#npm)
   - [CDN](#cdn)
 - [Data Store](#data-store)
-  - [Stack](#stack)
-  - [Registry](#registry)
+  - [Event Stack](#event-stack)
+  - [Event Registry](#event-registry)
 
 ## Problem
 
@@ -20,32 +22,34 @@ So what happens if you have a dropdown open inside of a modal? Pressing escape c
 
 ## Solution
 
-To better manage global events (e.g., multiple elements registering the same type of event with identical trigger conditions), this utility implements a [global data store](#data-store) and a simple [API](#usage) to manage the events.
+The simplest way to discern between global events is to implement a basic event bus that relies on some form of global state to check which event handler is allowed to be called. The most direct data structure to think of is a Stack, which has a last in, first out approach.
 
-While this tool is used in Spider UI elements, it can easily be used in your own application for keeping global state in sync. Read more at the end of this README.
+For example, if I set three handlers that can be triggered, with varying conditions (some the same as another), I can use a single listener that checks which callback entry was entered last, call it, and simply pass along the event object.
+
+That's exactly what this utility does!
 
 ## Usage
 
-There are two methods to interact with, `register` and `unregster`. Additionally, you can peek into the [data store](#data-store) for debugging purposes.
+There are two methods to interact with, `register` and `unregister`. Additionally, you can peek into the [global data store](#debugging) for debugging purposes.
 
 ### register(configObject)
 
-Registers a new global event to the page.
+Registers a new event to the page. All events created this way will set `useCapture`.
 
 Parameters:
 
 - `configObject` (type: `Object`, required) - The configuration for your event. This is used to track your event in the registry.
+  - `config.types` (type: `Array`, required): Event types that can trigger your given handler. E.g., `"click"`, `"keydown"`, etc...
   - `config.id` (type: `String`, required): A unique identifier for the global event. Used to unregister your event.
-  - `config.callback` (type: `Function`, required): Your global event handler. Only triggered if your event is next in the registry stack.
-  - `config.events` (type: `Array`, required): Event types that can trigger your global event. E.g., `"click"`, `"keydown"`, etc...
+  - `config.handler` (type: `Function`, required): The event handler. Only triggered if your event is next in the registry stack.
 
 Example:
 
 ```js
 globalEventRegistry.register({
-  events: ["focusout", "click"],
-  id: "id-123",
-  callback: (event) => {
+  types: ["focusout", "click"],
+  id: "something-neat-123",
+  handler: (event) => {
     /**
      * If `event.type` is `focusout` or `click` AND this entry
      * is next in the stack, this event will trigger
@@ -56,15 +60,37 @@ globalEventRegistry.register({
 
 ### unregister(id)
 
+Removes your registered event from the page.
+
 Parameters:
 
-- `id` (type: `String`, required): The `config.id` of your previously registered global event.
+- `id` (type: `String`, required): The `config.id` of your previously registered event.
 
-Removes your global event from the page.
+The only parameter is the `id` you previously used to register your event. `unregister` will always remove your event no matter where it is in the stack, but it will check the most recent entry first.
 
-The only parameter is the `id` you previously used to register the event with. `unregister` will always remove your event no matter where it is in the stack, but it will check the most recent entry first.
+Extending from the previous example, we'll add a simple conditional in the `handler`:
 
-It's recommended to trigger `unregister` as part of your registered callback to ensure you aren't unregistering outside of the global event [stack](#stack) context.
+```js
+globalEventRegistry.register({
+  types: ["focusout", "click"],
+  id: "something-neat-123",
+  handler: (event) => {
+    if (event.key === "Escape") {
+      globalEventRegistry.unregister("something-neat-123")
+    }
+  },
+})
+```
+
+It's generally best to call `unregister` in your handler to ensure you're removing from the stack at the correct time.
+
+### Debugging
+
+The stack of registered events can be accessed using `window.__SPIDER_UI_GLOBAL_EVENT_REGISTRY__`.
+
+Your events are represented by the same object you used to `register` with.
+
+You can also check the `types` property on the stack to see which event types are active
 
 ## Install
 
@@ -109,59 +135,3 @@ If you don't want to use npm, you can grab the source from jsdelivr CDN (or any 
 ```
 
 Then you're good to go!
-
-## Data Store
-
-As mentioned in the beginning, this utility keeps track of global events with a global data store. There are two main parts:
-
-1. A stack, which describes the order of events (and their data) registered to the page; and
-2. A registry, which handles creating and removing global event listeners from the page.
-
-### Stack
-
-The Stack is essentially an array of objects describing the order of registered global events. You can see its data (read-only) from `window.__GLOBAL_EVENT_REGISTRY__`.
-
-Like the data structure, registered entries are handled in a last in, first out approach.
-
-Let's look at a simple example. Let's say there's currently a modal dialog open on the page. The stack would likely resemble this:
-
-```
-[
-  {
-    events: ["keydown"],
-    id: "cool-modal",
-    callback: Handler,
-  },
-  {
-    events: ["keydown", "click"],
-    id: "cool-dropdown",
-    callback: Handler,
-  },
-]
-```
-
-Since the dropdown is the last entry in the stack, only its callback can be triggered, even if other entries have the registered the same event type.
-
-Additionally, if other entries in the stack were to have some other event types, such as "focus", they would be ignored since the last entry doesn't include that event type (despite the listener being registered).
-
-### Registry
-
-The Registry is a property whose value is an object, viewable from `window.__GLOBAL_EVENT_REGISTRY__.registry`.
-
-All the Registry will do is keep track of how many events are registered by entries in the Stack.
-
-Using the previous Stack above as an example, the value of the Registry would be:
-
-```
-{
-  keydown: 2,
-  click: 1
-}
-```
-
-The general flow of the Registry is this:
-
-1. When a new global event is **added**, increment the counter of those events by 1. If the event didn't exist previously, set the counter to 1.
-2. When an event is **removed**, decrement its counter by 1. If its counter was already 1, that means we're removing the last entry in the stack with that event type, so delete the event counter's entry.
-
-And that's it.
