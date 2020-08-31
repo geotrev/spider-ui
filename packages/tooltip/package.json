@@ -1,7 +1,7 @@
 {
   "name": "@spider-ui/tooltip",
   "version": "0.2.5",
-  "description": "Bare tooltip web component.",
+  "description": "Bare tooltip web element.",
   "scripts": {
     "test": "BABEL_ENV=test jest",
     "test:watch": "BABEL_ENV=test jest --watch",
@@ -50,6 +50,7 @@
     "css",
     "sass",
     "component",
+    "element",
     "web component",
     "html",
     "web",
