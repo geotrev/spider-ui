@@ -27,10 +27,10 @@ To use the element, use the `spider-tooltip` tag, and pass in your slotted eleme
 
 ### npm
 
-Install the package and its peer dependency:
+Install the package and its peer dependencies:
 
 ```sh
-$ npm i @spider-ui/tooltip upgraded-element
+$ npm i @spider-ui/tooltip @spider-ui/global-event-registry upgraded-element
 ```
 
 Then import the element in your JavaScript:
@@ -41,7 +41,7 @@ import "@spider-ui/tooltip"
 
 ### Bundle
 
-If you don't want to use npm, you can grab the source from jsdelivr CDN.
+If you don't want to use npm, you can grab the source from jsdelivr CDN. Similar to npm, you'll need to add script links to [`@spider-ui/global-event-registry`](https://github.com/geotrev/spider-ui/tree/develop/packages/global-event-registry#install) and [`upgraded-element`](https://github.com/geotrev/upgraded-element#install) before tooltip.
 
 ```html
 <!-- Use the unminified bundle in development -->
@@ -60,8 +60,6 @@ If you don't want to use npm, you can grab the source from jsdelivr CDN.
   crossorigin="anonymous"
 ></script>
 ```
-
-_NOTE: Make sure to include a script link to [`upgraded-element`]() before `spider-tooltip`!_
 
 Then you're good to go!
 

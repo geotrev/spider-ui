@@ -6,12 +6,24 @@ All elements use [`upgraded-element`](https://github.com/geotrev/upgraded-elemen
 
 Components planned:
 
-- [x] [Tooltip](components/tooltip)
-- [ ] Modal (branch: elements/modal)
-- [ ] Popover
+- [x] [Tooltip](packages/tooltip/)
 - [ ] Collapse
+- [ ] Tabs
+- [ ] Toggle
+- [ ] Progress Bar
+- [ ] Button Group
+- [ ] Breadcrumbs
+
+Other components which could be useful in the future, but aren't explicitly planned for at the moment:
+
+- [ ] Modal
+- [ ] Popover
 - [ ] Toast / Notification
-- TBD if more seem appealing...
+- [ ] Badge
+- [ ] Card
+- [ ] Carousel
+- [ ] Navigation Bar
+- [ ] Pagination
 
 **ToC:**
 
@@ -33,7 +45,7 @@ In addition to the above, Spider UI's foremost goals also include:
 - Accessible by default
 - Configuration through attributes, aka the HTML standard
 - Everything is stylable with slots
-- Zero JavaScript required (except the bundle itself)
+- Zero JavaScript required (except the bundles and any secondary dependencies)
 
 ## Contribute
 
