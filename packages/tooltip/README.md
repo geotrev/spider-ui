@@ -43,6 +43,8 @@ import "@spider-ui/tooltip"
 
 If you don't want to use npm, you can grab the source from jsdelivr CDN.
 
+_NOTE: Make sure to include a script link to [`upgraded-element`](https://github.com/geotrev/upgraded-element) before these!_
+
 ```html
 <!-- Use the unminified bundle in development -->
 <script
@@ -60,8 +62,6 @@ If you don't want to use npm, you can grab the source from jsdelivr CDN.
   crossorigin="anonymous"
 ></script>
 ```
-
-_NOTE: Make sure to include a script link to [`upgraded-element`]() before `spider-tooltip`!_
 
 Then you're good to go!
 
@@ -129,10 +129,10 @@ Unfortunately, however, this won't work in IE 11.
 
 ## Slots
 
-### trigger
+### `'trigger'`
 
 The trigger element for the tooltip. This can be any element, but it's recommended to be a focusable element (e.g., a `button`) for better accessibility.
 
-### content
+### `'content'`
 
 The content of the tooltip. It's recommended to use a basic `div` or `span` as the slotted element.

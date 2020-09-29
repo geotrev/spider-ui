@@ -10,9 +10,6 @@ If you are working with popover elements like tooltips, modals, dropdowns, and t
 - [Install](#install)
   - [NPM](#npm)
   - [CDN](#cdn)
-- [Data Store](#data-store)
-  - [Event Stack](#event-stack)
-  - [Event Registry](#event-registry)
 
 ## Problem
 
