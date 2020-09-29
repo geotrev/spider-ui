@@ -4,9 +4,14 @@ Build applications with modern interaction patterns in regular ol' HTML. Spider 
 
 All elements use [`upgraded-element`](https://github.com/geotrev/upgraded-element) as their base class, which is also the only dependency of the library.
 
-TODO:
+Components planned:
 
-- [ ] update package version on CDN script links in readme/demo files.
+- [x] [Tooltip](components/tooltip)
+- [ ] Modal (branch: elements/modal)
+- [ ] Popover
+- [ ] Collapse
+- [ ] Toast / Notification
+- TBD if more seem appealing...
 
 ## Contribute
 
