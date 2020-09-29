@@ -9,6 +9,6 @@ export function step(msg, newLine) {
   if (newLine) console.log("\n")
 }
 
-export function finish(msg) {
+export function finish() {
   console.log(`\nDone ✨\n`)
 }
