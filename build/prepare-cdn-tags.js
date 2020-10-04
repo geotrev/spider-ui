@@ -58,7 +58,7 @@ spiderElements.forEach((pkg) => {
         const isMin = tag.includes(".min.js")
         const oldHash = tag.match(Patterns.SRI)[0]
         const nextHash = isMin ? pkg.sri.bundleMin : pkg.sri.bundle
-        const oldVersion = tag.match(Patterns.VERSION)[0].slice(1, -1)
+        const oldVersion = tag.match(Patterns.VERSION)[0]
         const possiblePeer = Object.keys(peers).filter((peerName) =>
           tag.includes(peerName)
         )
