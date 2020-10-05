@@ -5,6 +5,7 @@ export const mountStringifiedHTML = (htmlString) => {
   temp.innerHTML = htmlString.trim()
 
   const fixture = temp.content.firstElementChild
+  fixture.dispatchEvent = jest.fn()
   document.body.appendChild(fixture)
   fixtures.push(fixture)
 

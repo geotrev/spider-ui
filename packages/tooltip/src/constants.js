@@ -36,3 +36,4 @@ export const Slots = {
 
 export const TIMEOUT_DELAY = 300
 export const ESCAPE_KEY = "Escape"
+export const TOOLTIP_TYPE = "tooltip"

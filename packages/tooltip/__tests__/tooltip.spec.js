@@ -4,15 +4,22 @@ import {
   queryRoot,
   events,
 } from "@spider-ui/test-helpers"
+import { createDispatch } from "@spider-ui/dispatch"
 import {
   Slots,
   Attributes,
   Positions,
   ClassNames,
   TIMEOUT_DELAY,
+  TOOLTIP_TYPE,
   Modes,
 } from "../src/constants"
 import "../src"
+
+jest.mock("@spider-ui/dispatch", () => ({
+  __esModule: true,
+  createDispatch: jest.fn(),
+}))
 
 const tagName = "spider-tooltip"
 const slotContent = `
@@ -20,8 +27,8 @@ const slotContent = `
   <div slot="content">Test content</div>
 `
 
-describe("@spider-ui/tooltip", () => {
-  beforeEach(jest.useFakeTimers)
+describe("<spider-tooltip>", () => {
+  beforeAll(jest.useFakeTimers)
   afterEach(unmount)
 
   describe("default configuration", () => {
@@ -261,6 +268,32 @@ describe("@spider-ui/tooltip", () => {
         jest.advanceTimersByTime(TIMEOUT_DELAY)
         expect(root.classList.contains(ClassNames.HIDDEN)).toBe(true)
       })
+    })
+  })
+
+  describe("dispatches", () => {
+    let fixture, trigger
+
+    beforeEach(() => {
+      fixture = mountFixture(tagName, slotContent)
+      trigger = fixture.querySelector(Slots.TRIGGER)
+      events.mouseover(trigger)
+      jest.advanceTimersByTime(TIMEOUT_DELAY)
+    })
+
+    it("calls createDispatch with correct detail on open", () => {
+      expect(createDispatch).toBeCalledWith(TOOLTIP_TYPE, { visible: true })
+    })
+
+    it("calls createDispatch with correct detail on close", () => {
+      events.mouseout(trigger)
+      jest.advanceTimersByTime(TIMEOUT_DELAY)
+      expect(createDispatch).toBeCalledWith(TOOLTIP_TYPE, { visible: false })
+    })
+
+    it("calls createDispatch with correct detail on escape close", () => {
+      events.pressEscape()
+      expect(createDispatch).toBeCalledWith(TOOLTIP_TYPE, { visible: false })
     })
   })
 })

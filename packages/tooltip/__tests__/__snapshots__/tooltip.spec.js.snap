@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`@spider-ui/tooltip default configuration renders default state 1`] = `
+exports[`<spider-tooltip> default configuration renders default state 1`] = `
 <div
   class="tooltip hidden block-start dark "
 >

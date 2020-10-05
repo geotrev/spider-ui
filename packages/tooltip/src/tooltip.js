@@ -1,5 +1,6 @@
 import { UpgradedElement, register } from "upgraded-element"
 import { globalEventRegistry } from "@spider-ui/global-event-registry"
+import { createDispatch } from "@spider-ui/dispatch"
 import {
   Attributes,
   Positions,
@@ -8,6 +9,7 @@ import {
   Slots,
   TIMEOUT_DELAY,
   ESCAPE_KEY,
+  TOOLTIP_TYPE,
 } from "./constants"
 import styles from "./styles.scss"
 
@@ -144,6 +146,7 @@ class SpiderTooltip extends UpgradedElement {
       this.removeTimeout()
       this.removeCloseCancelListeners()
       this.isVisible = false
+      this.dispatchEvent(createDispatch(TOOLTIP_TYPE, { visible: false }))
     }
   }
 
@@ -156,13 +159,14 @@ class SpiderTooltip extends UpgradedElement {
 
   handleOpen() {
     if (this.isVisible) return
-    const context = this
+    const _this = this
 
     this.timeout = setTimeout(() => {
-      if (!context.isConnected) return
-      this.removeOpenCancelListeners()
-      this.timeout = null
-      this.isVisible = true
+      if (!_this.isConnected) return
+      _this.removeOpenCancelListeners()
+      _this.timeout = null
+      _this.isVisible = true
+      _this.dispatchEvent(createDispatch(TOOLTIP_TYPE, { visible: true }))
     }, this.delayOn)
 
     this.addOpenCancelListeners()
@@ -170,13 +174,14 @@ class SpiderTooltip extends UpgradedElement {
 
   handleClose() {
     if (!this.isVisible) return
-    const context = this
+    const _this = this
 
     this.timeout = setTimeout(() => {
-      if (!context.isConnected) return
-      this.removeCloseCancelListeners()
-      this.timeout = null
-      this.isVisible = false
+      if (!_this.isConnected) return
+      _this.removeCloseCancelListeners()
+      _this.timeout = null
+      _this.isVisible = false
+      _this.dispatchEvent(createDispatch(TOOLTIP_TYPE, { visible: false }))
     }, this.delayOff)
 
     this.addCloseCancelListeners()
