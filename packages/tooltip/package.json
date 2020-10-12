@@ -19,7 +19,7 @@
   "type": "module",
   "peerDependencies": {
     "@spider-ui/global-event-registry": ">= 0.2.3",
-    "upgraded-element": ">= 0.4.0"
+    "upgraded-element": ">= 0.4.3"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
@@ -42,7 +42,7 @@
     "rollup-plugin-serve": "^1.0.3",
     "rollup-plugin-terser": "^7.0.0",
     "sass": "^1.26.10",
-    "upgraded-element": "^0.4.2"
+    "upgraded-element": "^0.4.3"
   },
   "keywords": [
     "style",
