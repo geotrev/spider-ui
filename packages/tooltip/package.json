@@ -1,6 +1,6 @@
 {
   "name": "@spider-ui/tooltip",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Bare tooltip web element.",
   "scripts": {
     "test": "BABEL_ENV=test jest",
@@ -27,7 +27,7 @@
     "@rollup/plugin-babel": "^5.2.0",
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
-    "@spider-ui/global-event-registry": "^0.2.6",
+    "@spider-ui/global-event-registry": "^0.2.7",
     "@spider-ui/rollup-config-build": "^0.2.6",
     "@spider-ui/rollup-config-demo": "^0.2.6",
     "@spider-ui/sass": "^0.2.6",
