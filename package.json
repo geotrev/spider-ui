@@ -12,7 +12,7 @@
     "scss:lint": "stylelint '**/*.scss'",
     "scss:lint:check": "stylelint-config-prettier-check",
     "lint": "npm run scss:lint && npm run js:lint",
-    "git:update-origin": "git add . && git commit -m 'version %s - update metadata & cdn tags' && git push && git push --tags",
+    "git:update-origin": "git add . && git commit -m 'version bump - update metadata & cdn tags' && git push && git push --tags",
     "prepublishOnly": "paopu && npm run git:update-origin"
   },
   "devDependencies": {
