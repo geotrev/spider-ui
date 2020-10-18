@@ -1,6 +1,6 @@
 # `@spider-ui/global-event-registry`
 
-![minified + gzip size](https://badgen.net/bundlephobia/minzip/@spider-ui/global-event-registry) ![npm version](https://badgen.net/npm/v/@spider-ui/global-event-registry) ![dependencies](https://badgen.net/david/dep/geotrev/spider-ui/packages/global-event-registry) ![devDependencies](https://badgen.net/david/dev/geotrev/spider-ui/packages/global-event-registry)
+![CircleCI status (master)](https://badgen.net/circleci/github/geotrev/spider-ui/master) ![minified + gzip size](https://badgen.net/bundlephobia/minzip/@spider-ui/global-event-registry) ![npm version](https://badgen.net/npm/v/@spider-ui/global-event-registry) ![dependencies](https://badgen.net/david/dep/geotrev/spider-ui/packages/global-event-registry) ![devDependencies](https://badgen.net/david/dev/geotrev/spider-ui/packages/global-event-registry)
 
 Typically, adding multiple event listeners to an element in the DOM means each handler is called every time the event is triggered. This can be problematic for things "stacking" visually in the DOM, though, because one key press shouldn't always dismiss all layers.
 
