@@ -2,7 +2,10 @@
   "upgraded-element": {
     "module": true,
     "resources": ["dist/upgraded-element.min.js"],
-    "targets": ["packages/tooltip/public/index.html"]
+    "targets": [
+      "packages/tooltip/public/index.html",
+      "packages/tooltip/README.md"
+    ]
   },
   "@spider-ui/global-event-registry": {
     "resourceBasePath": "packages/global-event-registry",
@@ -12,6 +15,7 @@
     ],
     "targets": [
       "packages/global-event-registry/README.md",
+      "packages/tooltip/README.md",
       "packages/tooltip/public/index.html"
     ]
   },
