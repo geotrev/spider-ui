@@ -3,7 +3,7 @@
 
 // Convert a left-to-right properties to a compatible right-to-left equivalent.
 
-@mixin create-flow-property($property, $value) {
+@mixin to-logical-property($property, $value) {
   $rtl-property: $property;
   $rtl-value: $value;
 
@@ -59,11 +59,11 @@ $arrow-border-position: $global-arrow-size * -2;
   position: absolute;
 }
 
-@mixin create-up-arrow($edge-offset, $fill-color, $border-color) {
+@mixin up-arrow($edge-offset, $fill-color, $border-color) {
   &::after {
     @include create-arrow-base-styles;
-    @include create-flow-property("left", $edge-offset);
-    @include create-flow-property("right", auto);
+    @include to-logical-property("left", $edge-offset);
+    @include to-logical-property("right", auto);
     top: $arrow-fill-position;
     bottom: auto;
     border-bottom: $global-arrow-size solid $fill-color;
@@ -71,19 +71,19 @@ $arrow-border-position: $global-arrow-size * -2;
 
   &::before {
     @include create-arrow-base-styles;
-    @include create-flow-property("left", $edge-offset);
-    @include create-flow-property("right", auto);
+    @include to-logical-property("left", $edge-offset);
+    @include to-logical-property("right", auto);
     top: $arrow-border-position;
     bottom: auto;
     border-bottom: $global-arrow-size solid $border-color;
   }
 }
 
-@mixin create-down-arrow($edge-offset, $fill-color, $border-color) {
+@mixin down-arrow($edge-offset, $fill-color, $border-color) {
   &::after {
     @include create-arrow-base-styles;
-    @include create-flow-property("left", $edge-offset);
-    @include create-flow-property("right", auto);
+    @include to-logical-property("left", $edge-offset);
+    @include to-logical-property("right", auto);
     bottom: $arrow-fill-position;
     top: auto;
     border-top: $global-arrow-size solid $fill-color;
@@ -91,61 +91,61 @@ $arrow-border-position: $global-arrow-size * -2;
 
   &::before {
     @include create-arrow-base-styles;
-    @include create-flow-property("left", $edge-offset);
-    @include create-flow-property("right", auto);
+    @include to-logical-property("left", $edge-offset);
+    @include to-logical-property("right", auto);
     bottom: $arrow-border-position;
     top: auto;
     border-top: $global-arrow-size solid $border-color;
   }
 }
 
-@mixin create-end-arrow($edge-offset, $fill-color, $border-color) {
+@mixin end-arrow($edge-offset, $fill-color, $border-color) {
   &::after {
     @include create-arrow-base-styles;
-    @include create-flow-property(
+    @include to-logical-property(
       "border-left",
       $global-arrow-size solid $fill-color
     );
-    @include create-flow-property("right", $arrow-fill-position);
-    @include create-flow-property("left", auto);
+    @include to-logical-property("right", $arrow-fill-position);
+    @include to-logical-property("left", auto);
     top: $edge-offset;
     bottom: auto;
   }
 
   &::before {
     @include create-arrow-base-styles;
-    @include create-flow-property(
+    @include to-logical-property(
       "border-left",
       $global-arrow-size solid $border-color
     );
-    @include create-flow-property("right", $arrow-border-position);
-    @include create-flow-property("left", auto);
+    @include to-logical-property("right", $arrow-border-position);
+    @include to-logical-property("left", auto);
     top: $edge-offset;
     bottom: auto;
   }
 }
 
-@mixin create-start-arrow($edge-offset, $fill-color, $border-color) {
+@mixin start-arrow($edge-offset, $fill-color, $border-color) {
   &::after {
     @include create-arrow-base-styles;
-    @include create-flow-property(
+    @include to-logical-property(
       "border-right",
       $global-arrow-size solid $fill-color
     );
-    @include create-flow-property("left", $arrow-fill-position);
-    @include create-flow-property("right", auto);
+    @include to-logical-property("left", $arrow-fill-position);
+    @include to-logical-property("right", auto);
     top: $edge-offset;
     bottom: auto;
   }
 
   &::before {
     @include create-arrow-base-styles;
-    @include create-flow-property(
+    @include to-logical-property(
       "border-right",
       $global-arrow-size solid $border-color
     );
-    @include create-flow-property("left", $arrow-border-position);
-    @include create-flow-property("right", auto);
+    @include to-logical-property("left", $arrow-border-position);
+    @include to-logical-property("right", auto);
     top: $edge-offset;
     bottom: auto;
   }

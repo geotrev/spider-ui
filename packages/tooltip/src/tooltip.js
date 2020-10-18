@@ -26,20 +26,21 @@ class SpiderTooltip extends UpgradedElement {
   }
 
   get classNames() {
+    const getValues = (obj) => Object.keys(obj).map((key) => obj[key])
     const showArrow = this.hasAttribute(Attributes.SHOW_ARROW)
     const positionValue = this.getAttribute(Attributes.POSITION)
     const modeValue = this.getAttribute(Attributes.MODE)
+    const positionValues = getValues(Positions)
+    const modesValues = getValues(Modes)
 
-    const position = Object.values(Positions).includes(positionValue)
+    const position = positionValues.includes(positionValue)
       ? positionValue
       : Positions.BLOCK_START
-    const mode = Object.values(Modes).includes(modeValue)
-      ? modeValue
-      : Modes.DARK
-    const hasArrow = showArrow ? ClassNames.ARROW : ""
-    const isVisible = this.isVisible ? ClassNames.VISIBLE : ClassNames.HIDDEN
+    const mode = modesValues.includes(modeValue) ? modeValue : Modes.DARK
+    const arrow = showArrow ? ClassNames.ARROW : ""
+    const visible = this.isVisible ? ClassNames.VISIBLE : ClassNames.HIDDEN
 
-    return { position, mode, hasArrow, isVisible }
+    return { position, mode, arrow, visible }
   }
 
   constructor() {
@@ -82,9 +83,9 @@ class SpiderTooltip extends UpgradedElement {
       }
 
       globalEventRegistry.register({
-        events: ["keydown"],
+        types: ["keydown"],
         id: this.elementId,
-        callback: this.handleKeydown,
+        handler: this.handleKeydown,
       })
     } else {
       globalEventRegistry.unregister(this.elementId)
@@ -209,11 +210,11 @@ class SpiderTooltip extends UpgradedElement {
   }
 
   render() {
-    const { position, mode, hasArrow, isVisible } = this.classNames
+    const { position, mode, arrow, visible } = this.classNames
     this.setDelay()
 
     return `
-      <div class="tooltip ${isVisible} ${position} ${mode} ${hasArrow}">
+      <div class="tooltip ${visible} ${position} ${mode} ${arrow}">
         <slot name="trigger"></slot>
         <slot name="content"></slot>
       </div>

@@ -1,8 +1,8 @@
 {
   "name": "@spider-ui/rollup-config-demo",
   "private": true,
-  "version": "0.2.5",
-  "description": "Rollup config for demoing a Spider UI component",
+  "version": "0.2.6",
+  "description": "Rollup config for demoing a Spider UI element",
   "author": "George Treviranus <hello@geotrev.com>",
   "homepage": "https://github.com/geotrev/spider-ui/tree/master/packages/rollup-config-demo#readme",
   "license": "MIT",

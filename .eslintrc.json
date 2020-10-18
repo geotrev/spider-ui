@@ -4,14 +4,20 @@
     "node": true,
     "commonjs": true,
     "es6": true,
-    "jest": true
+    "jest/globals": true
   },
   "parser": "babel-eslint",
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "extends": ["eslint:recommended", "prettier", "prettier/babel"],
+  "plugins": ["jest"],
+  "extends": [
+    "eslint:recommended",
+    "prettier",
+    "prettier/babel",
+    "plugin:jest/recommended"
+  ],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -20,10 +26,13 @@
     "import/resolver": {
       "node": {
         "extensions": [".js"],
-        "paths": ["packages/", "utilities/"],
-        "moduleDirectory": ["node_modules", "**/node_modules"]
+        "paths": ["src/"],
+        "moduleDirectory": ["node_modules/"]
       }
     },
-    "import/ignore": [".scss"]
+    "import/ignore": [".(scss)$"]
+  },
+  "rules": {
+    "no-console": 2
   }
 }

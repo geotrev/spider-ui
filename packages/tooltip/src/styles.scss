@@ -16,7 +16,6 @@
   word-wrap: break-word;
   white-space: nowrap;
   text-align: center;
-  z-index: $z-index-tooltip;
 
   // modes
 
@@ -50,8 +49,8 @@
   }
 
   .inline-end & {
-    @include create-flow-property("left", 100%);
-    @include create-flow-property("margin-left", $global-arrow-size);
+    @include to-logical-property("left", 100%);
+    @include to-logical-property("margin-left", $global-arrow-size);
     margin-top: 0;
     margin-bottom: 0;
     bottom: auto;
@@ -59,9 +58,9 @@
   }
 
   .inline-start & {
-    @include create-flow-property("right", 100%);
-    @include create-flow-property("left", auto);
-    @include create-flow-property("margin-right", $global-arrow-size);
+    @include to-logical-property("right", 100%);
+    @include to-logical-property("left", auto);
+    @include to-logical-property("margin-right", $global-arrow-size);
     margin-top: 0;
     margin-bottom: 0;
     bottom: auto;
@@ -77,7 +76,7 @@
   // dark mode arrow
 
   .dark.block-start.arrow & {
-    @include create-down-arrow(
+    @include down-arrow(
       $tooltip-arrow-offset,
       $tooltip-arrow-background-color--dark,
       $tooltip-arrow-border-color--dark
@@ -85,7 +84,7 @@
   }
 
   .dark.inline-end.arrow & {
-    @include create-start-arrow(
+    @include start-arrow(
       $tooltip-arrow-offset,
       $tooltip-arrow-background-color--dark,
       $tooltip-arrow-border-color--dark
@@ -93,7 +92,7 @@
   }
 
   .dark.inline-start.arrow & {
-    @include create-end-arrow(
+    @include end-arrow(
       $tooltip-arrow-offset,
       $tooltip-arrow-background-color--dark,
       $tooltip-arrow-border-color--dark
@@ -101,7 +100,7 @@
   }
 
   .dark.block-end.arrow & {
-    @include create-up-arrow(
+    @include up-arrow(
       $tooltip-arrow-offset,
       $tooltip-arrow-background-color--dark,
       $tooltip-arrow-border-color--dark
@@ -111,7 +110,7 @@
   // light mode arrow
 
   .light.block-start.arrow & {
-    @include create-down-arrow(
+    @include down-arrow(
       $tooltip-arrow-offset,
       $tooltip-arrow-background-color--light,
       $tooltip-arrow-border-color--light
@@ -119,7 +118,7 @@
   }
 
   .light.inline-end.arrow & {
-    @include create-start-arrow(
+    @include start-arrow(
       $tooltip-arrow-offset,
       $tooltip-arrow-background-color--light,
       $tooltip-arrow-border-color--light
@@ -127,7 +126,7 @@
   }
 
   .light.inline-start.arrow & {
-    @include create-end-arrow(
+    @include end-arrow(
       $tooltip-arrow-offset,
       $tooltip-arrow-background-color--light,
       $tooltip-arrow-border-color--light
@@ -135,7 +134,7 @@
   }
 
   .light.block-end.arrow & {
-    @include create-up-arrow(
+    @include up-arrow(
       $tooltip-arrow-offset,
       $tooltip-arrow-background-color--light,
       $tooltip-arrow-border-color--light

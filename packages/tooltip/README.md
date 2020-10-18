@@ -12,7 +12,7 @@ Create an accessible tooltip on an any element. The tooltip will show on focus o
 
 ## Usage
 
-To use the element, use the `spider-tooltip` tag, and pass in your slotted elements:
+Use the element like so:
 
 ```html
 <spider-tooltip>
@@ -21,16 +21,18 @@ To use the element, use the `spider-tooltip` tag, and pass in your slotted eleme
 </spider-tooltip>
 ```
 
+Read more about its [attributes](#attributes) and [slots](#slots) below.
+
 ## Install
 
 `@spider-ui/tooltip` requires minimal set up with either npm or the distribution code.
 
-### npm
+### NPM
 
-Install the package and its peer dependency:
+Install the package and its peer dependencies:
 
 ```sh
-$ npm i @spider-ui/tooltip upgraded-element
+$ npm i @spider-ui/tooltip @spider-ui/global-event-registry upgraded-element
 ```
 
 Then import the element in your JavaScript:
@@ -41,33 +43,41 @@ import "@spider-ui/tooltip"
 
 ### Bundle
 
-If you don't want to use npm, you can grab the source from jsdelivr CDN.
+If you don't want to use npm, you can grab the source from jsdelivr CDN. Make sure the peer dependents are added before the element script:
 
 ```html
-<!-- Use the unminified bundle in development -->
+<!-- Utility Script -->
 <script
   type="text/javascript"
-  src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@0.2.5/dist/tooltip.js"
-  integrity="sha256-6LMYmsLKQxTccPLpT72MpHf9yXsmYmE1MZjd0PaiDBI="
+  src="https://cdn.jsdelivr.net/npm/upgraded-element@0.4.3/dist/upgraded-element.min.js"
+  integrity="sha256-M+QI2BA3OVos8+cu/I6VpedoCT2nH7Ik0B2C/r2Yf5c="
   crossorigin="anonymous"
 ></script>
 
-<!-- Or use the minified/uglified bundle in production -->
+<!-- Utility script -->
 <script
   type="text/javascript"
-  src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@0.2.5/dist/tooltip.min.js"
-  integrity="sha256-4eCeGYBbcfBB/bLzVuDg8NFDE53W1Do+J7TWsGStx2M="
+  src="https://cdn.jsdelivr.net/npm/@spider-ui/global-event-registry@0.2.7/dist/global-event-registry.min.js"
+  integrity="sha256-sW4QIKz3duPUoyhz1zZGOLDCMunEp30h3KgdsIpuJAY="
+  crossorigin="anonymous"
+></script>
+
+<!-- The element script -->
+<script
+  type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@0.2.7/dist/tooltip.min.js"
+  integrity="sha256-tV1z5exT+o2BkfsYdhUInd8bzkVghuuYaRK/7iqqwaY="
   crossorigin="anonymous"
 ></script>
 ```
 
-_NOTE: Make sure to include a script link to [`upgraded-element`]() before `spider-tooltip`!_
-
 Then you're good to go!
+
+You can optionally replace the `.min.js` extension of the element script with `.js` to use the unminified/uglified variant for better debugging.
 
 ## Controlling Visibility
 
-Because slotted elements aren't hidden in the DOM on first render, you may see your tooltip's unstyled content on page load. You can fix around this by adding the following to your app's stylesheet:
+Because slotted elements aren't hidden in the DOM on first render, you may see your element's unstyled content on page load. You can prevent this by adding the following to your app's stylesheet:
 
 ```css
 spider-tooltip:not(:defined) {
@@ -97,7 +107,7 @@ Unfortunately, however, this won't work in IE 11.
 
 ### `mode`
 
-> Configures the base visual theme of the tooltip.<br/><br/>Default: `"dark"`.<br/><br/>Accepted Values: `"dark"` | `"light"`.
+> Configures the base visual theme of the tooltip.<br/><br/>Default: `"dark"`.<br/>Accepted Values: `"dark"` | `"light"`
 
 ```html
 <spider-tooltip mode="light">...</spider-tooltip>
@@ -121,7 +131,7 @@ Unfortunately, however, this won't work in IE 11.
 
 ### `delay`
 
-> Configures both the delay-on and delay-off delay durations of the tooltip. Use `delay-on` and `delay-off` to override the show and hide delay durations, respectively.<br/><br/>Default: `"300"`.
+> Configures both the delay-on and delay-off delay durations of the tooltip. Use `delay-on` and `delay-off` to override the show and hide delay durations, respectively.<br/><br/>Default: `"300"`
 
 ```html
 <spider-tooltip delay="500">...</spider-tooltip>

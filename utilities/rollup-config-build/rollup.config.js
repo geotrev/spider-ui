@@ -12,10 +12,10 @@ const packagePath = process.cwd()
 
 // Get the folder name, e.g. `tooltip`
 const pathParts = getPath(packagePath).split("/")
-const COMPONENT_NAME = pathParts[pathParts.length - 1]
+const ELEMENT_NAME = pathParts[pathParts.length - 1]
 
 // Configures the global namespace, e.g. `window['spider-global-event-registry']`
-const name = `spider-${COMPONENT_NAME}`
+const name = `spider-${ELEMENT_NAME}`
 
 // Input
 const input = getPath(packagePath, "src/index.js")
@@ -37,7 +37,7 @@ const terserConfig = terser({
 // Shared output
 const baseOutput = (format) => ({
   format,
-  banner: createBanner(packagePath, COMPONENT_NAME),
+  banner: createBanner(packagePath, ELEMENT_NAME),
   name,
   sourcemap: true,
 })
@@ -45,7 +45,7 @@ const baseOutput = (format) => ({
 // Module outputs
 const moduleOutputs = [FORMAT_ES, FORMAT_CJS].map((format) => ({
   ...baseOutput(format),
-  file: getPath(packagePath, `lib/${COMPONENT_NAME}.${format}.js`),
+  file: getPath(packagePath, `lib/${ELEMENT_NAME}.${format}.js`),
   plugins: process.env.BABEL_ENV === "publish" ? [terserConfig] : undefined,
 }))
 
@@ -54,8 +54,8 @@ let output = [...moduleOutputs]
 // Only create dist outputs for modules in `packages/*`
 if (packagePath.includes("packages/")) {
   const distOutputFiles = [
-    `dist/${COMPONENT_NAME}.js`,
-    `dist/${COMPONENT_NAME}.min.js`,
+    `dist/${ELEMENT_NAME}.js`,
+    `dist/${ELEMENT_NAME}.min.js`,
   ]
 
   const distOutputs = distOutputFiles.map((filePath) => ({

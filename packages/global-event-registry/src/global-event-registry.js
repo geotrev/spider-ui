@@ -1,113 +1,112 @@
-const initContext = Symbol("#initContext")
-const forEachReverse = Symbol("#forEachReverse")
-const contextExists = Symbol("#contextExists")
-const eventsReducer = Symbol("#eventsReducer")
-const isValidContext = Symbol("#isValidContext")
+const init = Symbol("#init")
+const findReverse = Symbol("#findReverse")
+const entryExists = Symbol("#entryExists")
+const typesReducer = Symbol("#typesReducer")
+const isValidEntry = Symbol("#isValidEntry")
 const handleEvent = Symbol("#handleEvent")
-const STORE_KEY = "__GLOBAL_EVENT_REGISTRY__"
+const STATE_KEY = "__SPIDER_UI_GLOBAL_EVENT_REGISTRY__"
 
 /**
  * This utility is an event bus to track
  */
 class GlobalEventRegistry {
   constructor() {
-    this[initContext]()
+    this[init]()
     this[handleEvent] = this[handleEvent].bind(this)
   }
 
   // public
 
-  register(context = {}) {
-    if (!this[isValidContext](context)) return
-    this[eventsReducer]("register", context.events)
-    this.context.push(context)
+  register(entryConfig = {}) {
+    if (!this[isValidEntry](entryConfig)) return
+    this[typesReducer]("register", entryConfig.types)
+    this.entries.push(entryConfig)
   }
 
   unregister(targetId) {
-    if (!this.context.length) return
+    if (!this.entries.length) return
     if (typeof targetId !== "string") return
 
-    const activeContext = this.context[this.context.length - 1]
+    const activeEntry = this.entries[this.entries.length - 1]
 
-    if (activeContext.id === targetId) {
-      const context = this.context.pop()
-      this[eventsReducer]("unregister", context.events)
+    if (activeEntry.id === targetId) {
+      const entry = this.entries.pop()
+      this[typesReducer]("unregister", entry.types)
     } else {
-      this[forEachReverse](this.context, (context, index) => {
-        if (context.id === targetId) {
-          this.context.splice(index, 1)
-          this[eventsReducer]("unregister", context.events)
-          return false
+      this[findReverse](this.entries, (entry, index) => {
+        if (entry.id === targetId) {
+          this.entries.splice(index, 1)
+          this[typesReducer]("unregister", entry.types)
+          return true
         }
       })
     }
   }
 
-  get context() {
-    return window.__GLOBAL_EVENT_REGISTRY__
+  get entries() {
+    return window[STATE_KEY]
   }
 
-  get registry() {
-    return window.__GLOBAL_EVENT_REGISTRY__.registry
+  get types() {
+    return window[STATE_KEY].types
   }
 
   // private
 
-  [initContext]() {
-    if (STORE_KEY in window) return
+  [init]() {
+    if (STATE_KEY in window) return
 
-    const context = []
-    const registry = {}
-    context.registry = registry
+    const value = []
+    const types = {}
+    value.types = types
 
     // Add it to the window. This will ensure duplicates
     // never create multiple stores.
-    Object.defineProperty(window, STORE_KEY, {
-      value: context,
-    })
+    Object.defineProperty(window, STATE_KEY, { value })
   }
 
-  [forEachReverse](array, callback) {
+  [findReverse](array, callback) {
     if (!Array.isArray(array) || !array.length) return
-    for (let index = array.length - 1; index >= 0; index--) {
-      const result = callback(array[index], index)
+    for (let i = array.length - 1; i >= 0; i--) {
+      const result = callback(array[i], i)
       if (result === true) break
     }
   }
 
-  [contextExists](id) {
+  [entryExists](id) {
     let exists = false
 
-    this[forEachReverse](this.context, (context) => {
-      if (context.id !== id) return
-      return true
+    this[findReverse](this.entries, (entry) => {
+      if (entry.id !== id) return
+      exists = true
+      return exists
     })
 
     return exists
   }
 
-  [eventsReducer](type, events) {
-    switch (type) {
+  [typesReducer](reducerType, eventTypes) {
+    switch (reducerType) {
       case "register": {
-        events.forEach((eventType) => {
-          const eventCount = this.registry[eventType]
+        eventTypes.forEach((type) => {
+          const eventCount = this.types[type]
           if (!eventCount) {
-            window.addEventListener(eventType, this[handleEvent], true)
-            this.registry[eventType] = 1
+            window.addEventListener(type, this[handleEvent], true)
+            this.types[type] = 1
           } else {
-            this.registry[eventType] = eventCount + 1
+            this.types[type] = eventCount + 1
           }
         })
         break
       }
       case "unregister": {
-        events.forEach((eventType) => {
-          const eventCount = this.registry[eventType]
+        eventTypes.forEach((type) => {
+          const eventCount = this.types[type]
           if (eventCount === 1) {
-            delete this.registry[eventType]
-            window.removeEventListener(eventType, this[handleEvent], true)
+            delete this.types[type]
+            window.removeEventListener(type, this[handleEvent], true)
           } else {
-            this.registry[eventType] = eventCount - 1
+            this.types[type] = eventCount - 1
           }
         })
         break
@@ -118,23 +117,23 @@ class GlobalEventRegistry {
     }
   }
 
-  [isValidContext](context) {
+  [isValidEntry](entry) {
     return (
-      Object.keys(context).length &&
-      Array.isArray(context.events) &&
-      context.events.length &&
-      typeof context.callback === "function" &&
-      typeof context.id === "string" &&
-      !this[contextExists](context.id)
+      Object.keys(entry).length &&
+      Array.isArray(entry.types) &&
+      entry.types.length &&
+      typeof entry.handler === "function" &&
+      typeof entry.id === "string" &&
+      !this[entryExists](entry.id)
     )
   }
 
   [handleEvent](event) {
-    if (!this.context.length || !this.registry) return
-    const activeContext = this.context[this.context.length - 1]
+    if (!this.entries.length || !Object.keys(this.types).length) return
+    const activeEntry = this.entries[this.entries.length - 1]
 
-    if (activeContext.events.includes(event.type)) {
-      activeContext.callback(event)
+    if (activeEntry.types.indexOf(event.type) > -1) {
+      activeEntry.handler(event)
     }
   }
 }

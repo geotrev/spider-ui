@@ -75,7 +75,7 @@ describe("@spider-ui/tooltip", () => {
       expect(root.classList.contains(Modes.LIGHT)).toBe(true)
     })
 
-    describe("show-arrow", () => {
+    it("shows an arrow", () => {
       const fixture = mountFixture(tagName, slotContent, {
         "show-arrow": undefined,
       })
