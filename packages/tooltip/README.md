@@ -1,5 +1,7 @@
 # `@spider-ui/tooltip`
 
+![minified + gzip size](https://badgen.net/bundlephobia/minzip/@spider-ui/tooltip) ![npm version](https://badgen.net/npm/v/@spider-ui/tooltip) ![dependencies](https://badgen.net/david/dep/geotrev/spider-ui/tree/master/packages/tooltip) ![devDependencies](https://badgen.net/david/dev/geotrev/spider-ui/tree/master/packages/tooltip)
+
 Create an accessible tooltip on an any element. The tooltip will show on focus or hover.
 
 - [Usage](#usage)
