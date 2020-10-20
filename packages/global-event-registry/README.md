@@ -18,7 +18,7 @@ As a result, `globalEventRegistry` was born. It adds a thin layer around `window
 
 ## Usage
 
-There are two methods to interact with, `register` and `unregister`. Additionally, you can peek into the [global data store](#debugging) for debugging purposes.
+There are two methods you can use: `register` and `unregister`. Additionally, you can peek into the [global data store](#debugging) for debugging purposes.
 
 ### register(config)
 
@@ -78,7 +78,7 @@ The stack of registered events can be accessed using `window.__SPIDER_UI_GLOBAL_
 
 Your events are represented by the same object you used to `register` with.
 
-You can also check the `types` property on the stack to see which event types are active
+You can also check the `window.__SPIDER_UI_GLOBAL_EVENT_REGISTRY__.types` to see which event types are active (each will entry will be a key/value pair: the type and number of registered events for that type, respectively).
 
 ## Install
 
@@ -103,7 +103,7 @@ import { globalEventRegistry } from "@spider-ui/global-event-registry"
 If you don't want to use npm, you can grab the source from jsdelivr CDN (or any CDN which distributes NPM package code, such as nopkg).
 
 ```html
-<!-- Use the unminified bundle in development -->
+<!-- development -->
 <script
   defer
   type="text/javascript"
@@ -112,7 +112,7 @@ If you don't want to use npm, you can grab the source from jsdelivr CDN (or any 
   crossorigin="anonymous"
 ></script>
 
-<!-- Or use the minified/uglified bundle in production -->
+<!-- production (minified + uglified) -->
 <script
   defer
   type="text/javascript"
