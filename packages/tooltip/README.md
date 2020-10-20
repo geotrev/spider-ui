@@ -62,7 +62,7 @@ Make sure its peer dependents are included:
 <script
   type="text/javascript"
   src="https://cdn.jsdelivr.net/npm/@spider-ui/global-event-registry@0.2.7/dist/global-event-registry.min.js"
-  integrity="sha256-sW4QIKz3duPUoyhz1zZGOLDCMunEp30h3KgdsIpuJAY="
+  integrity="sha256-mf3cxRCQLVIXWtbfH9RfrdirieOY8pKmLvYGZbUWzMc="
   crossorigin="anonymous"
 ></script>
 ```
