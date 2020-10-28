@@ -1,5 +1,7 @@
 # `@spider-ui/tooltip`
 
+![CircleCI status (master)](https://badgen.net/circleci/github/geotrev/spider-ui/master) ![minified + gzip size](https://badgen.net/bundlephobia/minzip/@spider-ui/tooltip) ![npm version](https://badgen.net/npm/v/@spider-ui/tooltip) ![dependencies](https://badgen.net/david/dep/geotrev/spider-ui/packages/tooltip) ![devDependencies](https://badgen.net/david/dev/geotrev/spider-ui/packages/tooltip)
+
 Create an accessible tooltip on an any element. The tooltip will show on focus or hover.
 
 - [Usage](#usage)
@@ -43,7 +45,9 @@ import "@spider-ui/tooltip"
 
 ### Bundle
 
-If you don't want to use npm, you can grab the source from jsdelivr CDN. Make sure the peer dependents are added before the element script:
+If you don't want to use npm, you can grab the source from jsdelivr CDN.
+
+Make sure its peer dependents are included:
 
 ```html
 <!-- Utility Script -->
@@ -58,11 +62,23 @@ If you don't want to use npm, you can grab the source from jsdelivr CDN. Make su
 <script
   type="text/javascript"
   src="https://cdn.jsdelivr.net/npm/@spider-ui/global-event-registry@0.2.7/dist/global-event-registry.min.js"
-  integrity="sha256-sW4QIKz3duPUoyhz1zZGOLDCMunEp30h3KgdsIpuJAY="
+  integrity="sha256-mf3cxRCQLVIXWtbfH9RfrdirieOY8pKmLvYGZbUWzMc="
+  crossorigin="anonymous"
+></script>
+```
+
+Then load one of either the developer or production bundles:
+
+```html
+<!-- development -->
+<script
+  type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@0.2.7/dist/tooltip.js"
+  integrity="sha256-0zfwh3NHZMAu+HbXEKttDolp/L+odlcPs2Z5CNCbK0o="
   crossorigin="anonymous"
 ></script>
 
-<!-- The element script -->
+<!-- production (minified + uglified) -->
 <script
   type="text/javascript"
   src="https://cdn.jsdelivr.net/npm/@spider-ui/tooltip@0.2.7/dist/tooltip.min.js"

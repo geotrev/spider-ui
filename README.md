@@ -1,6 +1,6 @@
 # Spider UI 🕷 🕸
 
-![CircleCI status (master)](https://badgen.net/circleci/github/geotrev/spider-ui/master)
+![CircleCI status (master)](https://badgen.net/circleci/github/geotrev/spider-ui/master) ![devDependencies](https://badgen.net/david/dev/geotrev/spider-ui)
 
 Build applications with modern interaction patterns in regular ol' HTML. Spider elements enable you to import a single JavaScript file, and use a custom element anywhere. No other JavaScript required.
 
